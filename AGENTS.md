@@ -3,10 +3,12 @@
 ## Antes de editar
 
 1. Leia `PROJECT_STATE.md`.
-2. Consulte `docs/ARCHITECTURE.md` para escolher o módulo.
-3. Use branch criada da `main` atual para mudanças relevantes.
-4. Para decisões de sistema, consulte `docs/MASTER_PROMPT.md`.
-5. Para cânone/lore, consulte `docs/lore/LORE_BIBLE.txt`.
+2. Leia `docs/CONTEXT_GUIDE.md`.
+3. Consulte `docs/ARCHITECTURE.md` para escolher o módulo.
+4. Use branch criada da `main` atual para mudanças relevantes.
+5. Para documentos grandes, **pesquise primeiro por assunto e leia só a seção necessária**.
+6. Para decisões de sistema, busque termos relevantes em `docs/MASTER_PROMPT.md` / `docs/PROJECT_BIBLE.txt`.
+7. Para cânone/lore, busque o nome/tema específico em `docs/lore/LORE_BIBLE.txt`.
 
 ## Regras
 
@@ -14,6 +16,8 @@
 - Engine: Unity 6000.6.0f1; C#; 2D top-down ortogonal; Built-in pipeline.
 - Preserve `.meta`, GUIDs, cenas, saves e assets aprovados.
 - Não recrie sistemas existentes sem inspecionar o código.
+- `MASTER_PROMPT`, `PROJECT_BIBLE`, `HISTORY` e `LORE_BIBLE` são bases pesquisáveis: não ler por inteiro por padrão.
+- Adquira contexto sob demanda: buscar → ler trecho → implementar; expandir somente se faltar informação ou houver conflito.
 - Runtime não depende de `Assets/Editor`.
 - Use `Core / Player / World / UI / Visual / Bootstrap`.
 - Crie módulos novos somente quando houver implementação real.
