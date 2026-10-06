@@ -27,7 +27,9 @@
 - missão de três ervas;
 - recompensa única de 25 moedas;
 - save local;
-- cena real, Packages e ProjectSettings preservados.
+- cena real, Packages e ProjectSettings preservados;
+- vila de Grünwald reformulada (2026-10-06): casas de frente e de costas ao longo das ruas, jardim noroeste, quintais, praça com poço, três bancas, bancos, mural, barris e canteiros, e fumaça saindo da chaminé da ferraria;
+- ronda de Konrad ampliada (10 pontos com pausa própria): praça, bancas, rua sul e quintal oeste.
 
 ## ORGANIZAÇÃO ATUAL
 
@@ -46,10 +48,11 @@ A regressão .NET deve permanecer verde. Como esta limpeza move um asset Unity p
 
 ## ATUAL
 
-Limpeza estrutural do repositório: remoção de arte/layouts não utilizados, eliminação da pasta solitária `Assets/Art/`, simplificação da documentação e da ferramenta de atlas.
+Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga).
 
 ## PRÓXIMO
 
+0. abrir no Unity, deixar importar `town-extra.png` e conferir o mapa; ajustar posições em `TownLayout.cs` se algo ficar sobreposto;
 1. sincronizar a `main` com a pasta local;
 2. aguardar o Unity reimportar/recompilar;
 3. executar `Vadronia > Verificar demo`;
@@ -62,5 +65,6 @@ Limpeza estrutural do repositório: remoção de arte/layouts não utilizados, e
 - um NPC;
 - sem combate;
 - sem interiores;
+- casas em diagonal exigem arte nova (o atlas só tem fachadas de frente; "de costas" foi derivado dela);
 - não gerar build Windows sem pedido explícito;
 - não voltar a usar o repositório antigo `MarcosPaulodaSilva/Projeto-R` como implementação ativa.
