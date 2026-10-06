@@ -1,0 +1,90 @@
+name: Temporary binary migration
+
+on:
+  push:
+    branches:
+      - chatgpt/migrate-project-r
+    paths:
+      - ".github/workflows/migrate-binaries.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v7
+        with:
+          ref: chatgpt/migrate-project-r
+          fetch-depth: 1
+
+      - name: Download and verify binaries from old repository
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          download_checked() {
+            source_url="$1"
+            target_path="$2"
+            expected_size="$3"
+
+            mkdir -p "$(dirname "$target_path")"
+            curl --fail --location --retry 4 --retry-delay 2 "$source_url" --output "$target_path"
+
+            actual_size="$(wc -c < "$target_path" | tr -d ' ')"
+            if [ "$actual_size" != "$expected_size" ]; then
+              echo "Size mismatch for $target_path: expected $expected_size, got $actual_size"
+              exit 1
+            fi
+          }
+
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/castelo-morigan/castelo-morigan_referencia_01_img-1-out.-2026,-01_19_48.png' 'docs/references/sprites/castelo-morigan/castelo-morigan_referencia_01_img-1-out.-2026,-01_19_48.png' '725611'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/castelo-morigan/castelo-morigan_referencia_02_img-1-out.-2026,-01_19_53.png' 'docs/references/sprites/castelo-morigan/castelo-morigan_referencia_02_img-1-out.-2026,-01_19_53.png' '722506'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/castelo-morigan/castelo-morigan_referencia_03_img-1-out.-2026,-01_19_59.png' 'docs/references/sprites/castelo-morigan/castelo-morigan_referencia_03_img-1-out.-2026,-01_19_59.png' '746011'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/castelo-morigan/castelo-morigan_referencia_04_img-1-out.-2026,-01_20_08.png' 'docs/references/sprites/castelo-morigan/castelo-morigan_referencia_04_img-1-out.-2026,-01_20_08.png' '719925'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/castelo-morigan/castelo-morigan_referencia_05_img-1-out.-2026,-01_20_16.png' 'docs/references/sprites/castelo-morigan/castelo-morigan_referencia_05_img-1-out.-2026,-01_20_16.png' '718279'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_01_img-1-out.-2026,-01_19_37.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_01_img-1-out.-2026,-01_19_37.png' '650601'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_02_img-3-out.-2026,-16_28_32.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_02_img-3-out.-2026,-16_28_32.png' '1592933'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_03_img-3-out.-2026,-16_31_30.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_03_img-3-out.-2026,-16_31_30.png' '1369861'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_04_img-3-out.-2026,-16_36_26.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_04_img-3-out.-2026,-16_36_26.png' '1642149'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_05_img-3-out.-2026,-16_36_36.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_05_img-3-out.-2026,-16_36_36.png' '1668000'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_06_img-3-out.-2026,-16_46_01.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_06_img-3-out.-2026,-16_46_01.png' '2359869'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_07_img-3-out.-2026,-16_57_23.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_07_img-3-out.-2026,-16_57_23.png' '961325'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_08_img-3-out.-2026,-16_59_39.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_08_img-3-out.-2026,-16_59_39.png' '882674'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_09_img-3-out.-2026,-17_00_14.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_09_img-3-out.-2026,-17_00_14.png' '979314'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_10_img-3-out.-2026,-17_01_07.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_10_img-3-out.-2026,-17_01_07.png' '981760'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_11_img-3-out.-2026,-17_02_28.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_11_img-3-out.-2026,-17_02_28.png' '968952'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_12_img-3-out.-2026,-17_05_07.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_12_img-3-out.-2026,-17_05_07.png' '925488'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_13_img-3-out.-2026,-17_11_56.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_13_img-3-out.-2026,-17_11_56.png' '1109843'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_14_img-3-out.-2026,-17_22_00.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_14_img-3-out.-2026,-17_22_00.png' '1337514'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_15_img-3-out.-2026,-17_24_18.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_15_img-3-out.-2026,-17_24_18.png' '1073155'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_16_img-3-out.-2026,-17_31_05.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_16_img-3-out.-2026,-17_31_05.png' '1016954'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_17_img-3-out.-2026,-17_31_14.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_17_img-3-out.-2026,-17_31_14.png' '1231516'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_18_img-3-out.-2026,-17_37_46.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_18_img-3-out.-2026,-17_37_46.png' '918185'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_19_img-3-out.-2026,-17_37_52.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_19_img-3-out.-2026,-17_37_52.png' '862697'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_20_img-3-out.-2026,-17_42_22.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_20_img-3-out.-2026,-17_42_22.png' '1675806'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/npcs-vila/npc_vila_personagem_21_img-3-out.-2026,-17_45_07.png' 'docs/references/sprites/npcs-vila/npc_vila_personagem_21_img-3-out.-2026,-17_45_07.png' '1211829'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/player/player_protagonista_referencia_01_img-3-out.-2026,-16_16_09.png' 'docs/references/sprites/player/player_protagonista_referencia_01_img-3-out.-2026,-16_16_09.png' '659981'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/player/player_protagonista_referencia_02_img-3-out.-2026,-16_16_29.png' 'docs/references/sprites/player/player_protagonista_referencia_02_img-3-out.-2026,-16_16_29.png' '616807'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/player/player_protagonista_referencia_03_img-3-out.-2026,-16_16_40.png' 'docs/references/sprites/player/player_protagonista_referencia_03_img-3-out.-2026,-16_16_40.png' '693661'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/player/player_protagonista_referencia_04_img-3-out.-2026,-16_17_59.png' 'docs/references/sprites/player/player_protagonista_referencia_04_img-3-out.-2026,-16_17_59.png' '711669'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/docs/references/sprites/player/player_protagonista_referencia_05_img-3-out.-2026,-16_38_31.png' 'docs/references/sprites/player/player_protagonista_referencia_05_img-3-out.-2026,-16_38_31.png' '813299'
+          download_checked 'https://raw.githubusercontent.com/MarcosPaulodaSilva/Projeto-R/main/assets/videos/gemini_generated_video_7a1daa7c.mp4' 'docs/media/videos/gemini_generated_video_7a1daa7c.mp4' '4014421'
+
+      - name: Commit migrated binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/references/sprites docs/media/videos/gemini_generated_video_7a1daa7c.mp4
+
+          if git diff --cached --quiet; then
+            echo "No binary changes needed."
+            exit 0
+          fi
+
+          git commit -m "assets: complete binary migration [skip ci]"
+          git push origin HEAD:chatgpt/migrate-project-r
