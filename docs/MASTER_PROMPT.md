@@ -162,7 +162,7 @@ Regra do “continue”: dentro do escopo já autorizado, escolha a melhoria de 
 
 ## 8. Controles, Player e câmera
 
-- Controles atuais (`docs/PLAYTEST.md`): **RDFG** para movimento (`R` cima, `F` baixo, `D` esquerda, `G` direita), com setas como alternativa; Z corre, Espaço esquiva, T interage, Esc pausa, F1 oculta interface e F5 salva. **W, S, X e 2 não funcionam no teclado de Marcos e não podem ser controles obrigatórios.** Não reintroduza WASD por padrão e não altere o mapeamento sem pedido explícito de Marcos.
+- Controles atuais (`docs/PLAYTEST.md`): **RDFG** para movimento (`R` cima, `F` baixo, `D` esquerda, `G` direita), com setas como alternativa; Z corre, Espaço esquiva, T interage, clique esquerdo executa o combo de espada, Esc pausa, F1 oculta interface e F5 salva. **W, S, X e 2 não funcionam no teclado de Marcos e não podem ser controles obrigatórios.** Não reintroduza WASD por padrão e não altere o mapeamento sem pedido explícito de Marcos.
 - Abstraia **ações de gameplay**, não teclas físicas (Input System ou camada própria), para permitir remapeamento e gamepad. Gamepad faz parte da visão: analógico esquerdo move 360°, direito mira; UI essencial utilizável sem mouse.
 - Player: movimento, colisão, mira, facing, HP, fôlego/stamina, mana quando aplicável, ataque, block, parry, esquiva, interação, inventário, equipamento, atributos, progressão, morte.
 - Movimento responsivo e previsível. Testar paredes, cantos, árvores, poço, entidades, esquiva, knockback e transições. Nunca atravessar sólido por bug.
