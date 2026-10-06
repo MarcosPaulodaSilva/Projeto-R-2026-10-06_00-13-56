@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "project": "Projeto R",
+  "repository": "MarcosPaulodaSilva/Projeto-R",
+  "target_directory": "assets/music",
+  "files": [
+    {
+      "filename": "Castle_Music_Legacy_in_the_Stone_Walls.mp4",
+      "size_bytes": 10118818,
+      "sha256": "eb9d2ce2434629114b9a102569c2f32e503348435d3d36a8ddd4afce4efffbcd",
+      "context": "Castelo / áreas reais; exploração e ambientação em castelos e espaços ligados à realeza de Vadrônia, priorizando momentos sem combate."
+    },
+    {
+      "filename": "Dungeon_Music_Crowns_in_the_Cold_Mist.mp4",
+      "size_bytes": 7931814,
+      "sha256": "140c8534cf58a2efdd42d1e40b5df3be5c28899dfa75c3cd6fba0794eb5e0006",
+      "context": "Dungeons; trilha-base para exploração de masmorras e áreas de tensão antes do confronto principal."
+    },
+    {
+      "filename": "Boss_Fight_Music_Iron_Weeps_for_Stone.mp4",
+      "size_bytes": 9754250,
+      "sha256": "6bbb3d0f0b03493e5a7a9d17cdc8d5d8e2a8011c28c8e7c480aad2717a57e9fa",
+      "context": "Batalhas contra bosses; confrontos de chefe e combate de alta intensidade."
+    },
+    {
+      "filename": "Tema_Project_Music_Beyond_the_Castle_Threshold.mp4",
+      "size_bytes": 10624308,
+      "sha256": "287546cb5c4791a60bf44119661b953cda415b6e7675300071a5ec73d51b9429",
+      "context": "Tema principal do Projeto R; identidade geral do projeto, apresentação/tela principal e momentos especiais."
+    },
+    {
+      "filename": "Vilage_Music_Sunlight_on_the_Thatch.mp4",
+      "size_bytes": 10690020,
+      "sha256": "1fd83617cd84d43d02d32fee26fc15521c0737bffa965b9a02f21fd797ed7395",
+      "context": "Vilarejos; ambientação tranquila para o vilarejo inicial e outros vilarejos fora de situações de ameaça."
+    },
+    {
+      "filename": "CIty_Music_Morning_at_the_Citadel_Gates.mp4",
+      "size_bytes": 11323246,
+      "sha256": "8b39e53cd51671ed2c51b6fe4258117d9345b7a195b2779a2059b3d16c249427",
+      "context": "Cidades; ambientação urbana para cidades e áreas próximas a cidadelas/portões, com foco em exploração e rotina civil."
+    }
+  ]
+}

@@ -27,7 +27,7 @@ for label, file, xs, ys in [
     parts.append(f'        internal static readonly Rect[] {label} =\n        {{\n'+ '\n'.join(rects)+'\n        };')
     parts.append(f'        internal static readonly Vector2[] {label}Pivots =\n        {{\n'+ '\n'.join(pivots)+'\n        };')
 parts.append('    }\n}\n')
-(root/'Assets/Scripts/WalkAtlasLayout.cs').write_text('\n'.join(parts))
+(root/'Assets/Scripts/Visual/WalkAtlasLayout.cs').write_text('\n'.join(parts))
 im = Image.open(root/'Assets/Resources/Vadronia/town.png')
 alpha = im.getchannel('A').point(lambda a: 255 if a >= 50 else 0)
 regions = [(0,0,338,510),(340,0,778,510),(780,0,1174,510),(1175,0,1536,510),
@@ -37,5 +37,5 @@ for region in regions:
     b=alpha.crop(region).getbbox();assert b
     x,y=region[0]+b[0],region[1]+b[1];w,h=b[2]-b[0],b[3]-b[1]
     rects.append(f'            new Rect({x}, {im.height-y-h}, {w}, {h}),')
-(root/'Assets/Scripts/TownAtlasLayout.cs').write_text('using UnityEngine;\nnamespace Vadronia\n{\n    internal static class TownAtlasLayout\n    {\n        internal static readonly Rect[] Frames =\n        {\n'+'\n'.join(rects)+'\n        };\n    }\n}\n')
+(root/'Assets/Scripts/Visual/TownAtlasLayout.cs').write_text('using UnityEngine;\nnamespace Vadronia\n{\n    internal static class TownAtlasLayout\n    {\n        internal static readonly Rect[] Frames =\n        {\n'+'\n'.join(rects)+'\n        };\n    }\n}\n')
 print('Measured 32 walk frames and 8 scenery sprites; no image pixels changed.')

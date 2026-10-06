@@ -1,3 +1,5 @@
+.local-backups/
+
 # Unity .gitignore Template
 # Source: https://github.com/github/gitignore/blob/main/Unity.gitignore
 # Last synced: 2026-07-02
@@ -52,6 +54,7 @@
 ExportedObj/
 .consulo/
 *.csproj
+!Tests/Regression.csproj
 *.unityproj
 *.sln
 *.slnx
@@ -112,3 +115,9 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Local IDE / OS noise
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

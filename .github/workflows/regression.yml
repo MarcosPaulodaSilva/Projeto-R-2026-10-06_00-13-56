@@ -1,0 +1,35 @@
+name: Logic Regression
+
+on:
+  pull_request:
+    paths:
+      - "Assets/Scripts/Core/**"
+      - "Assets/Scripts/World/TownLayout.cs"
+      - "Assets/Editor/Checks/CoreChecks.cs"
+      - "Tests/**"
+      - ".github/workflows/regression.yml"
+  push:
+    branches: [main]
+    paths:
+      - "Assets/Scripts/Core/**"
+      - "Assets/Scripts/World/TownLayout.cs"
+      - "Assets/Editor/Checks/CoreChecks.cs"
+      - "Tests/**"
+      - ".github/workflows/regression.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+      - name: Run pure logic regression
+        run: dotnet run --project Tests/Regression.csproj

@@ -1,0 +1,1353 @@
+BÍBLIA COMPLETA DO PROJETO R
+
+Pré-produção Unity — Estado consolidado pós-auditoria
+
+Documento de referência integral do Projeto R, reunindo a visão do jogo,
+mundo, narrativa, sistemas, regras de design, arquitetura técnica e
+decisões de produção definidas antes da passagem para os Prompts Mestres
+e para a implementação assistida por agentes.
+
+IMPORTANTE SOBRE A FONTE Este documento consolida o material do arquivo
+de histórico fornecido e o contexto do Projeto R construído nas
+conversas. Quando uma decisão antiga foi posteriormente substituída, a
+decisão mais recente é tratada como vigente e a mudança é registrada na
+seção de evolução. Mistérios deliberadamente não resolvidos continuam
+não resolvidos. Este documento não deve ser usado como autorização para
+inventar respostas canônicas para lacunas propositais.
+
+====================================================================== 1.
+IDENTIDADE DO PROJETO
+======================================================================
+
+Projeto R é um RPG de ação 2D em perspectiva top-down ortogonal, ambientado em
+um mundo medieval-fantástico composto por três reinos principais:
+Vadronia, Migriard e Vitehria. A proposta mistura exploração de
+overworld, combate em tempo real, progressão de personagem,
+equipamentos, companions autônomos, dungeons procedurais construídas a
+partir de módulos artesanais, relações com NPCs, vida cotidiana nas
+cidades e vilarejos, política narrativa e uma progressão social em que o
+protagonista começa como uma pessoa comum e pode, dependendo das
+escolhas, tornar-se uma figura de enorme importância.
+
+O jogo não parte da ideia de que o protagonista é um “escolhido”. O
+mundo existia antes dele, possui conflitos, famílias, tradições,
+instituições e mistérios independentes. O jogador entra em um mundo já
+em movimento e conquista importância por ações concretas.
+
+Os principais pilares são: - exploração de um mundo que parece vivo e
+independente do jogador; - combate responsivo, estratégico e legível; -
+dungeons rejogáveis com estrutura procedural controlada; - companions
+úteis e autônomos; - progressão por XP, atributos, equipamentos, loot e
+builds; - relações que respondem a ações e contexto, e não apenas a uma
+barra; - ciclo de dia e noite com consequências de gameplay; - cidades e
+vilarejos com rotinas, comércio e sensação de vida; - política e
+ascensão social como conteúdo narrativo, não como grand strategy; -
+forte preocupação com performance e escopo.
+
+A filosofia geral aprovada na auditoria é que a melhor versão do jogo
+não é a que possui mais sistemas, e sim a que faz os sistemas escolhidos
+conversarem bem entre si. Dia/noite deve conversar com NPCs e luz.
+Dungeons devem conversar com loot e morte. Equipamentos devem conversar
+com builds e companions. Relações devem conversar com quests e política.
+Reinos devem conversar com progressão social. Streaming deve sustentar o
+mundo inteiro.
+
+======================================================================
+2. FORMATO, PLATAFORMA E APRESENTAÇÃO
+======================================================================
+
+A implementação original auditada foi planejada em Unity para Windows,
+com suporte a teclado/mouse e controle desde o início.
+
+A perspectiva atual é top-down ortogonal. A câmera acompanha o jogador e não gira livremente o mapa.
+Ela acompanha o jogador suavemente e utiliza look-ahead influenciado
+pela direção da mira.
+
+A identidade visual é pixel art medieval-fantástica. A intenção não é um
+mundo permanentemente cinza ou opressivo. Vadronia pode ser bonita,
+colorida e acolhedora durante o dia. Migriard pode ser clara e majestosa
+apesar do gelo. Vitehria é visualmente mais escura, mas suas pessoas não
+são uma caricatura sombria.
+
+A noite é importante visual e mecanicamente. Fontes de luz em casas,
+postes, lanternas, braseiros e acampamentos devem comunicar segurança e
+civilização.
+
+A arte final não deve bloquear o desenvolvimento inicial. A auditoria
+tornou obrigatória a utilização de arte temporária/placeholders durante
+a construção dos sistemas. O pipeline visual definitivo vem depois de
+gameplay e integração funcionarem.
+
+Equipamentos visualmente modulares são desejáveis, mas não se promete
+que cada luva, bota ou pequeno item tenha uma representação única se o
+custo artístico for desproporcional.
+
+======================================================================
+3. ESCOPO DO MUNDO
+======================================================================
+
+Existem exatamente três reinos principais: 1. Vadronia 2. Migriard 3.
+Vitehria
+
+Nenhum é vassalo de outro. Nenhum é oficialmente “o mais poderoso”. Não
+existe, no cânone consolidado, uma quarta potência secreta, império
+mundial ou organização que controle os três por trás das cortinas.
+
+Cada reino possui exatamente: - 1 capital; - 1 cidade grande
+secundária; - 2 vilarejos pequenos.
+
+Total global: - 3 capitais; - 3 cidades grandes secundárias; - 6
+vilarejos; - 12 assentamentos principais.
+
+Podem existir castelos, fortalezas, fazendas, casas isoladas, postos de
+estrada, ruínas, cemitérios, acampamentos, dungeons e pequenos pontos de
+interesse. Esses lugares não devem crescer silenciosamente até se
+tornarem novos hubs equivalentes a cidades.
+
+A escala percebida pode ser muito maior que a área realmente jogável.
+Capitais podem ter dezenas de fachadas sem dezenas de interiores.
+Vilarejos podem parecer ter 20 ou 30 casas e disponibilizar apenas os
+interiores relevantes. Castelos não precisam de cinquenta quartos.
+Guildas não precisam de cem membros nomeados. Famílias nobres não
+precisam de árvores genealógicas de quatro gerações.
+
+O objetivo é construir a ilusão de um mundo grande com conteúdo
+controlado e de alta qualidade.
+
+======================================================================
+4. RELAÇÕES ENTRE OS REINOS
+======================================================================
+
+Os três reinos mantêm relações diplomáticas. No início da campanha não
+existe uma guerra gigantesca dominando o jogo.
+
+Há comércio, viajantes, aventureiros, mercadores e membros de guildas
+atravessando fronteiras.
+
+Vadronia e Migriard possuem relações historicamente boas. Migriard
+comercializa determinados produtos e equipamentos, enquanto rotas
+vadronianas ajudam no acesso a regiões mais temperadas.
+
+Vadronia e Vitehria possuem relações corretas, porém mais cautelosas.
+Existe comércio e intercâmbio, mas a postura reservada de Vitehria e
+diferenças culturais geram distância.
+
+Migriard e Vitehria possuem respeito mútuo significativo. Ambos entendem
+o que significa viver em regiões naturais difíceis, embora tenham
+culturas diferentes.
+
+Essas relações são tendências políticas, não opiniões obrigatórias de
+todos os habitantes. Um mercador pode gostar de estrangeiros, um nobre
+pode desconfiar deles, um soldado pode ter lutado ao lado deles e um
+aldeão pode nunca ter visto alguém de outro reino.
+
+As transições geográficas devem comunicar a mudança de reino antes mesmo
+de uma placa ou título aparecer. Ao aproximar-se de Migriard,
+temperatura, vegetação, neve, arquitetura e população mudam
+gradualmente. Ao entrar em Vitehria, as grandes florestas e a atmosfera
+passam a dominar.
+
+======================================================================
+5. VADRONIA — IDENTIDADE
+======================================================================
+
+Vadronia é um reino de tradição, comunidade, disciplina militar e
+mistérios históricos.
+
+Assentamentos: - Capital: Vadronia - Cidade grande: Eisenbruck -
+Vilarejos: Grünwald e Nebelheim
+
+Família real: Casa Morigan. Grandes Casas: Falkenberg, Eichenwald e
+Silberhain. Instituição de aventureiros: Guilda de Vadronia.
+
+Sua paisagem reúne montanhas enormes, vales verdes, rios frios, pontes,
+florestas, estradas antigas e ruínas incompreensíveis.
+
+O reino não deve ser tratado como um “reino sombrio”. Sua civilização é
+viva, relativamente calorosa e comunitária. O contraste surge quando o
+jogador se afasta das áreas habitadas e encontra vestígios de um passado
+que ninguém consegue explicar.
+
+======================================================================
+6. A CIVILIZAÇÃO ANTIGA DE VADRONIA
+======================================================================
+
+Uma civilização extremamente antiga existiu no território antes da
+sociedade atual. Seu verdadeiro nome se perdeu.
+
+Restaram ruínas, inscrições, símbolos, estruturas e histórias
+contraditórias.
+
+Regras canônicas: - a civilização permanece sem nome definitivo; - sua
+língua nunca será plenamente traduzida; - sua história nunca será
+completamente revelada; - não haverá uma solução conveniente que
+explique tudo; - relatos orais podem se contradizer; - estudiosos podem
+formular teorias, sem que o jogo declare uma delas como verdade
+absoluta; - nem toda ruína é uma dungeon; - nem todo mistério do jogo
+precisa estar ligado a essa civilização.
+
+Esse desconhecido é parte da identidade de Vadronia. O mistério não é
+uma pendência de roteiro que um agente deve “resolver”.
+
+======================================================================
+7. CASA MORIGAN E A SITUAÇÃO DE VADRONIA
+======================================================================
+
+A Casa Morigan governa Vadronia.
+
+Heinrich Morigan foi o rei. Morreu aos 57 anos, aproximadamente dois
+anos antes do início da história, após sofrer uma condição/maldição de
+natureza mágica e incurável.
+
+A origem, o responsável e o motivo permanecem desconhecidos. Rumores,
+pistas e interpretações podem existir, mas não existe obrigação de
+revelar uma resposta definitiva. Nenhum agente deve inventar
+automaticamente um assassino ou uma conspiração final.
+
+Beatrice Morigan, 45 anos, é a viúva de Heinrich e governa o reino. É
+humilde, carismática, inteligente, madura, bondosa, forte e presente na
+vida dos filhos. A perda do marido a afetou profundamente, mas isso não
+significa incapacidade automática para governar.
+
+Henry Morigan, 23 anos, é o primogênito. É introvertido, inteligente,
+orgulhoso, gentil e cavalheiresco. Representa uma continuidade mais
+administrativa e tradicional.
+
+Julian Morigan, 19 anos, é o segundo filho e gêmeo mais velho de Kian. É
+corajoso, impulsivo, estressado/temperamental em alguns momentos,
+bondoso e atento. Tem ligação maior com a identidade militar do reino.
+
+Kian Morigan, 19 anos, gêmeo de Julian, é tímido, carinhoso, ansioso,
+dependente e criativo. Não disputa ativamente a coroa.
+
+Nicasia Morigan é a filha mais jovem. No material pré-auditoria ela e o
+protagonista começam aos 17 anos; em versões posteriores do projeto essa
+idade foi revista para 18. Para preservar a cronologia deste documento,
+a auditoria Unity é registrada como 17, e a revisão posterior deve ser
+tratada como uma atualização externa a esta fase. Nicasia é resiliente,
+empática, proativa, organizada, amorosa, responsável, sensível, honesta,
+observadora e pode apresentar pessimismo e ciúme moderado. Seu
+aniversário de lore é 7 de novembro.
+
+Vadronia funciona normalmente apesar da fragilidade política. Mercados,
+guardas, guilda, estradas e comunidades continuam ativos. Não existe
+guerra civil no início.
+
+A disputa sucessória efetiva é Henry versus Julian. Nenhum dos dois deve
+ser transformado artificialmente em vilão para facilitar a ascensão do
+protagonista.
+
+======================================================================
+8. GRANDES CASAS DE VADRONIA
+======================================================================
+
+Casa Falkenberg: Ligada a defesa, fortalezas, tradição militar,
+disciplina, coragem, serviço e liderança. Pode inicialmente ter maior
+afinidade com Julian.
+
+Casa Eichenwald: Ligada a agricultura, florestas, abastecimento,
+comércio, estabilidade, prosperidade e administração. Pode inicialmente
+ter maior afinidade com Henry.
+
+Casa Silberhain: Ligada a administração, arquivos, conhecimento, estudos
+históricos, prudência e investigação das ruínas. Tende a uma postura
+política mais cautelosa.
+
+Nenhuma das três é “a casa boa” ou “a casa má”.
+
+As Casas influenciam a sucessão, mas não podem simplesmente apresentar
+qualquer candidato externo. A sucessão normal pertence à família
+Morigan.
+
+Na eventual rota de ascensão do protagonista em Vadronia, ele escolhe
+UMA das três Casas como principal apoio político. Não precisa maximizar
+as três.
+
+======================================================================
+9. ROTA REAL DE VADRONIA
+======================================================================
+
+A ascensão do protagonista à realeza não pode ocorrer por um simples
+medidor de relacionamento.
+
+A rota exige combinação de: - relação legítima com Nicasia quando os
+envolvidos forem adultos; - aprovação de Beatrice; - reconhecimento
+popular; - grandes serviços prestados a Vadronia; - apoio político de
+uma das três Grandes Casas; - resolução coerente da disputa Henry ×
+Julian.
+
+Não se deve matar, vilanizar ou fazer Henry/Julian abdicarem
+artificialmente apenas para abrir espaço.
+
+A rota é a mais politicamente complexa dos três reinos.
+
+======================================================================
+10. MIGRIARD — IDENTIDADE
+======================================================================
+
+Migriard é o reino das montanhas nevadas, lagos congelados, coníferas,
+tempestades e longos invernos.
+
+Assentamentos: - Capital: Migriard - Cidade grande: Eisenfjord -
+Vilarejos: Skallvik e Weissental
+
+Família real: Casa Haldren. Grandes Casas: Bjornsen, Falkr e Eisenmark.
+Instituição: Guilda de Migriard.
+
+A identidade cultural gira em torno de resistência, honra, hospitalidade
+e responsabilidade comunitária.
+
+A natureza é severa, mas o reino não é uma caricatura de sofrimento.
+Comunidades sobreviveram aprendendo a cooperar. Hospitalidade possui
+valor cultural profundo porque, em regiões difíceis, oferecer abrigo
+pode significar sobrevivência.
+
+A arquitetura pode utilizar pedra, madeira pesada, telhados inclinados,
+chaminés e interiores visualmente acolhedores.
+
+======================================================================
+11. CASA HALDREN E ROTA DE MIGRIARD
+======================================================================
+
+Eirik Haldren, 52 — rei. Astrid Haldren, 48 — rainha. Sigrid Haldren, 24
+— primogênita e herdeira. Leif Haldren, 20 — segundo filho. Freya
+Haldren, 17 — caçula.
+
+A sucessão de Migriard é estável. Sigrid será rainha. O projeto
+deliberadamente não cria outra crise sucessória para repetir Vadronia.
+
+Sigrid é a rota real definida para Migriard. A legitimidade dela não é
+substituída pelo protagonista.
+
+Na estrutura pré-auditoria, o protagonista começava menor de idade;
+portanto, qualquer aproximação inicial era social, institucional ou de
+aventura. Conteúdo romântico só poderia existir quando todos os
+envolvidos fossem adultos.
+
+Caso a rota seja concluída, o protagonista pode tornar-se rei-consorte,
+enquanto Sigrid permanece a rainha legítima.
+
+Isso exige relação construída, respeito da família Haldren,
+reconhecimento em Migriard e histórico significativo de serviços ao
+reino.
+
+As Grandes Casas podem reagir à ascensão social, mas Migriard não copia
+a obrigação de escolher uma única Casa como em Vadronia.
+
+======================================================================
+12. VITEHRIA — IDENTIDADE
+======================================================================
+
+Vitehria é o reino visualmente mais sombrio dos três, sem ser maligno,
+amaldiçoado ou composto por pessoas miseráveis.
+
+Assentamentos: - Capital: Vitehria - Cidade grande: Drakenwald -
+Vilarejos: Rabenheim e Dornhagen
+
+Família real: Casa Nachtwald. Grandes Casas: Rabenmark, Dornwald e
+Eisenhart. Instituição: Guilda de Vitehria.
+
+O território é dominado pelos Pinheirais Negros: florestas imensas de
+coníferas de troncos escuros e copas densas. As árvores não precisam ser
+literalmente negras. A densidade e a pouca luz produzem a impressão de
+uma floresta quase preta à distância.
+
+A paisagem inclui montanhas rochosas, vales estreitos, lagos profundos,
+névoa, clareiras, cachoeiras, campos de flores resistentes à sombra e
+estradas cercadas por pinheiros gigantescos.
+
+Mesmo durante o dia, certas regiões recebem pouca luz.
+
+A ideia cultural central é: Vitehria aprendeu a conviver com uma
+natureza inquietante sem acreditar que precisa dominá-la.
+
+======================================================================
+13. ASSENTAMENTOS DE VITEHRIA
+======================================================================
+
+A capital Vitehria fica entre uma cadeia montanhosa e um grande lago
+escuro, parcialmente cercada pela floresta.
+
+Sua arquitetura utiliza pedra cinza-escura, madeira envelhecida e
+telhados inclinados. Isso não significa que tudo seja preto. Existem
+tecidos, bandeiras, mercados, flores, pessoas com roupas normais e vida
+urbana.
+
+À noite, a identidade se intensifica: lanternas, janelas iluminadas,
+braseiros, guardas e névoa contrastam com as silhuetas dos pinheiros
+além das muralhas. A iluminação quente da civilização contra o exterior
+frio e escuro é uma imagem central.
+
+Drakenwald cresceu junto a uma das principais estradas dos Pinheirais
+Negros como parada segura para viajantes. Possui muralhas fortes,
+hospedarias, comércio e presença relevante da Guilda. É um bom ponto de
+partida para dungeons e regiões perigosas.
+
+Rabenheim fica próximo a lagos e florestas densas. É pequeno, tranquilo
+e relativamente isolado, com pescadores, caçadores, famílias e viajantes
+ocasionais.
+
+Dornhagen fica mais próximo das montanhas e de estradas antigas. É mais
+defensivo, cercado por paliçadas e com pequena guarnição.
+
+======================================================================
+14. CASA NACHTWALD
+======================================================================
+
+Brasão: cervo prateado diante de três pinheiros escuros. Cores: preto,
+vinho profundo e prata. O cervo representa orientação na floresta; os
+pinheiros representam Vitehria.
+
+Alaric Nachtwald, 50 — rei. Calmo, observador, reservado, culto e
+paciente. Fala pouco, pensa antes de decidir e é visto como previsível e
+justo.
+
+Helena Nachtwald, 46 — rainha. Mais comunicativa, elegante, pragmática,
+perspicaz e protetora. Possui influência significativa na corte.
+
+Viktor Nachtwald, 22 — primogênito e herdeiro. Sério, disciplinado,
+responsável e preparado desde criança para governar. Não existe crise
+sucessória equivalente à de Vadronia.
+
+Elara Nachtwald, 18 — segunda filha. Curiosa, independente, inteligente,
+irônica e observadora. Possui interesse especial pelas regiões naturais
+de Vitehria e conhecimento incomum sobre as florestas.
+
+Emilia Nachtwald, 17 — caçula. Sociável, gentil, determinada,
+espirituosa e interessada na vida das pessoas comuns.
+
+======================================================================
+15. GRANDES CASAS E POLÍTICA DE VITEHRIA
+======================================================================
+
+Casa Rabenmark: Brasão de corvo prateado sobre torre. Historicamente
+ligada a administração, comunicação entre territórios e estradas. Possui
+grande influência política.
+
+Casa Dornwald: Brasão de cervo entre galhos espinhosos. Ligada a regiões
+florestais, caçadores, guardas territoriais e comunidades menores. Seus
+membros conhecem profundamente áreas selvagens.
+
+Casa Eisenhart: Brasão de torre prateada sobre campo escuro. Família de
+tradição militar, responsável por fortalezas e parte das defesas. Seus
+soldados são conhecidos por disciplina defensiva.
+
+Nenhuma é automaticamente maligna.
+
+A tensão política central é “isolamento versus abertura”.
+
+Parte da nobreza deseja ampliar comércio e relações exteriores. Outra
+teme que dependência excessiva de estrangeiros prejudique tradições e
+autonomia. Nenhuma posição deve ser apresentada como obviamente correta.
+
+A política existe para sustentar NPCs, quests e relações, e não para
+criar um simulador político gigante.
+
+======================================================================
+16. CULTURA, FAUNA E DUNGEONS DE VITEHRIA
+======================================================================
+
+Os vitehrianos não são pessoas permanentemente tristes. Fazem festas,
+comem, bebem, trabalham, brincam, discutem, casam e têm famílias.
+
+A cultura possui uma relação particular com silêncio, noite e floresta.
+Histórias ao redor de fogueiras são comuns.
+
+Regras tradicionais incluem: - não abandonar estradas durante neblina; -
+não viajar sozinho em certas regiões; - não apagar uma fogueira sem
+necessidade; - ajudar viajantes encontrados na estrada.
+
+Algumas são superstição; outras têm motivos concretos. O jogo não
+precisa dizer quais são quais.
+
+A fauna deve evitar cair apenas em lobos, morcegos e aranhas gigantes.
+Podem existir criaturas com silhuetas incomuns, camuflagem arbórea,
+atração por luz, predadores que evitam estradas e seres que parecem
+plantas. Criatura estranha não significa inimigo; parte da fauna deve
+ser passiva.
+
+Conceitos de dungeons: - Mosteiro da Floresta Silenciosa; - Cripta das
+Raízes; - Fortaleza Sem Luz; - O Lago Afundado.
+
+São direções, não obrigação de produzir todas.
+
+A rota real de Vitehria foi consolidada em torno de Elara. Viktor
+continua herdeiro legítimo. O protagonista não o substitui simplesmente
+por casar-se com Elara. Qualquer mudança sucessória deve surgir de
+desenvolvimento legítimo da narrativa e das decisões políticas, sem
+remover Viktor artificialmente.
+
+======================================================================
+17. O PROTAGONISTA E A AGÊNCIA
+======================================================================
+
+O protagonista é criado pelo jogador e começa sem destino grandioso
+obrigatório.
+
+A filosofia é: - o mundo não depende dele para existir; - ele não é
+predestinado; - sua importância é conquistada; - feitos concretos geram
+reconhecimento; - relações políticas e sociais precisam ser justificadas
+pela trajetória.
+
+A campanha principal não obriga casamento. Um jogador interessado
+principalmente em combate, exploração, loot, dungeons e companions deve
+poder aproveitar o jogo normalmente.
+
+A rota de realeza é uma grande trajetória opcional de progressão
+social/política.
+
+O jogador não pode ser rei dos três reinos simultaneamente. Em um
+estágio avançado, a trajetória se consolida em um caminho.
+
+Possíveis encerramentos: - Vadronia: ascensão extraordinária pela rota
+de Nicasia e resolução da sucessão; - Migriard: rei-consorte ao lado da
+Rainha Sigrid; - Vitehria: rota de Elara ligada à transformação política
+e sucessória legítima do reino.
+
+Depois do encerramento correspondente: sequência especial, créditos e
+continuação no mesmo save.
+
+======================================================================
+18. OVERWORLD
+======================================================================
+
+O overworld deve transmitir continuidade, mas não pode ser uma Scene
+gigantesca com todos os objetos ativos.
+
+A arquitetura oficial da auditoria exige streaming regional/chunks e
+simulação em níveis de detalhe.
+
+Próximo do jogador: - simulação completa; - NPCs e criaturas fisicamente
+presentes; - combate, colisão e navegação ativos.
+
+Mais distante: - simulação reduzida.
+
+Regiões distantes: - principalmente estado de dados.
+
+NPCs distantes não precisam caminhar fisicamente durante horas para
+chegar em casa. O sistema pode calcular onde deveriam estar a partir de
+horário, rotina e estado persistente.
+
+Essa arquitetura deve nascer no vertical slice e não ser adicionada como
+remendo tardio.
+
+======================================================================
+19. DIA, NOITE E AMEAÇA NOTURNA
+======================================================================
+
+O ciclo gradual de dia/noite é um pilar.
+
+Estados percebidos incluem amanhecer, dia, entardecer, noite e
+madrugada.
+
+Consequências: - NPCs alteram rotinas; - comércio abre e fecha; - civis
+retornam para casas; - guardas podem assumir rotinas diferentes; -
+janelas, postes, lanternas e braseiros acendem; - a escuridão se torna
+mecanicamente significativa.
+
+Existe uma criatura/sombra negra noturna muito forte associada à
+escuridão. A luz comunica segurança.
+
+A auditoria corrigiu um risco: toda noite não deve virar perseguição
+constante. A ameaça precisa criar tensão e valor para a luz sem tornar a
+exploração noturna irritante.
+
+======================================================================
+20. CONTROLES E CÂMERA
+======================================================================
+
+Plataforma original: Windows.
+
+Teclado/mouse: - WASD para movimento na especificação auditada; - mouse
+para mira independente.
+
+Gamepad: - analógico esquerdo move em 360°; - analógico direito mira/faz
+facing em 360°; - mira também influencia o look-ahead da câmera.
+
+A câmera: - top-down ortogonal; - follow suave; - look-ahead; - não gira o
+mundo.
+
+A UI essencial deve funcionar com controle. Não se permite criar
+interface obrigatória exclusiva para mouse.
+
+Observação histórica: em protótipos posteriores alguns mapeamentos de
+teclado foram alterados por limitações do teclado do usuário. Isso é uma
+evolução de implementação e não muda o princípio de abstrair ações de
+gameplay de teclas físicas.
+
+======================================================================
+21. COMBATE
+======================================================================
+
+O combate é de ação em tempo real, responsivo e moderadamente
+estratégico.
+
+Elementos aprovados: - movimento e mira independentes; - ataques com
+compromisso moderado; - stamina; - esquiva; - bloqueio; - parry; - mana
+para magia; - cooldowns quando apropriado; - input buffering; - cancel
+windows controlados; - telegraphs claros; - feedback legível.
+
+Bloqueio e parry compartilham a mesma intenção de comando: segurar
+protege; acionar no timing adequado produz parry.
+
+Bloquear consome stamina conforme o impacto. Pode haver guard break.
+
+Parry bem executado reduz/evita o custo e abre brevemente o inimigo.
+
+Magia utiliza mana e pode usar cooldown.
+
+A arquitetura deve separar: - dados do ataque; - lógica de combate; -
+apresentação/animação.
+
+Hit frames e janelas de gameplay não podem depender cegamente da duração
+de AnimationClips.
+
+A profundidade deve vir de decisões, armas, posicionamento e recursos,
+não de uma quantidade enorme de botões.
+
+======================================================================
+22. INIMIGOS, ELITES E BOSSES
+======================================================================
+
+A preferência é por poucos inimigos bons por ecossistema em vez de
+dezenas de variantes fracas.
+
+Inimigos normais: - poucos comportamentos fortes e legíveis.
+
+Elites: - combinações mais sofisticadas; - funcionam como mini-chefes; -
+podem proteger transições, tesouros ou áreas importantes; - não devem
+ser apenas recolorações com HP maior.
+
+Bosses: - maior investimento; - padrões próprios; - fases ou mudanças
+comportamentais; - arena e apresentação adequadas; - telegraphs justos.
+
+Dificuldade deve vir de padrões, posicionamento, composição de grupos e
+tomada de decisão, não apenas de multiplicadores gigantes de HP e dano.
+
+Não deve haver leitura injusta de input.
+
+======================================================================
+23. COMPANIONS
+======================================================================
+
+O jogador pode ter até três companions ativos, formando grupo de até
+quatro personagens com o protagonista.
+
+Companions são autônomos em combate e aventura. O jogador recruta,
+equipa e administra, mas não os microgerencia por comandos constantes.
+
+A IA precisa ser estruturada em camadas: percepção → decisão → execução
+→ navegação → recuperação.
+
+A IA não deve executar raciocínio pesado todo frame.
+
+Requisitos: - seguir o jogador; - participar de combate; - selecionar
+alvos coerentemente; - usar posição e alcance; - lidar com obstáculos; -
+não bloquear portas; - não iniciar aggro absurdo à distância; - detectar
+quando ficou preso; - recalcular caminho; - teleportar/reposicionar com
+segurança quando necessário; - sobreviver a streaming e transições.
+
+“Player should never need to solve companion AI problems” é um princípio
+importante.
+
+Companions podem possuir papéis como suporte, arqueiro e combatente
+próximo, além de personalidade influenciando sutilmente decisões sem
+torná-los propositalmente incompetentes.
+
+======================================================================
+24. INCAPACITAÇÃO E MORTE DE COMPANIONS
+======================================================================
+
+Máquina de estados: Active → Incapacitated → Recovered ou Dead.
+
+Ao chegar a 0 HP em dungeon, o companion não morre instantaneamente.
+Fica incapacitado por uma janela visível e pode ser salvo.
+
+Se não for recuperado, pode morrer permanentemente.
+
+Regra crítica: permadeath nunca pode ser consequência de bug de
+pathfinding, streaming, carregamento, personagem preso ou falha técnica.
+
+Equipamentos fornecidos pelo jogador precisam ter política explícita de
+recuperação/perda. Não podem simplesmente desaparecer.
+
+======================================================================
+25. ECONOMIA DOS COMPANIONS
+======================================================================
+
+Companions podem possuir salário recorrente e carteira simplificada.
+
+Relações fortes podem gerar comportamentos como: - ocasionalmente pagar
+uma estadia; - comprar algo útil; - oferecer presentes.
+
+Isso serve para personalidade e vínculo, não para virar simulador
+financeiro.
+
+Não é necessário simular cada compra do companion fora da tela, e
+companions não podem ser explorados como fonte infinita de dinheiro.
+
+======================================================================
+26. INVENTÁRIO, EQUIPAMENTOS E BUILDS
+======================================================================
+
+O jogo possui inventário, equipamentos e status.
+
+Não existem classes rígidas obrigatórias. O equipamento define grande
+parte do estilo.
+
+Arquétipos de arma incluem: - espada e escudo; - espada grande; -
+lança; - adaga/assassino; - arco; - cajados, grimórios ou varinhas; -
+outras armas podem existir se justificadas.
+
+Slots planejados incluem arma principal, secundária/escudo e peças de
+armadura, além de amuleto/talismãs conforme a configuração final.
+
+Equipamentos devem mudar comportamento e possibilidades, não apenas
+números.
+
+Misturas de estilos são permitidas.
+
+Sets podem conceder bônus progressivos, evitando tudo-ou-nada.
+
+Talismãs complementam builds.
+
+======================================================================
+27. LOOT E RARIDADES
+======================================================================
+
+Raridades formam uma progressão do comum ao lendário, com categorias
+intermediárias como incomum, raro, muito raro/épico conforme a taxonomia
+final.
+
+Loot pools podem ser regionais, de dungeon, inimigo ou boss.
+
+Itens lendários podem modificar sistemas existentes de maneira especial,
+mas não devem exigir uma nova infraestrutura gigantesca para cada item.
+
+A geração e definição de itens devem ser data-driven.
+
+O jogo deve evitar uma enxurrada de micro-upgrades irrelevantes.
+Progressão de equipamento precisa ser percebida em faixas
+significativas.
+
+======================================================================
+28. XP, LEVEL E ATRIBUTOS
+======================================================================
+
+XP vem de quests, monstros, dungeons, bosses, exploração e eventos
+relevantes.
+
+A progressão inicial pode ser mais rápida e desacelerar gradualmente.
+
+Subir de nível: - melhora baseline do personagem; - concede pontos
+distribuíveis.
+
+Atributos devem permanecer poucos e legíveis, com exemplos como
+Vitalidade, Força, Destreza, Inteligência e possivelmente Vigor.
+
+Não criar dezenas de atributos visíveis, resistências ultraespecíficas
+ou árvores gigantes.
+
+Profundidade deve vir da combinação: atributos + comportamento das
+armas + equipamentos + sinergias.
+
+======================================================================
+29. LEVEL-DOWN
+======================================================================
+
+A morte pode causar perda de XP e, em certos casos, perda de nível.
+
+A auditoria identificou um problema técnico: se pontos são distribuídos
+manualmente, perder nível pode criar estados impossíveis.
+
+Portanto, devem ser registrados separadamente: - pontos obtidos; -
+pontos disponíveis; - pontos investidos.
+
+O resolver de level-down precisa retirar capacidade corretamente, sem
+duplicar atributos ou corromper o personagem.
+
+Equipamento já vestido não deve simplesmente cair do personagem porque o
+nível caiu.
+
+======================================================================
+30. MORTE DO JOGADOR
+======================================================================
+
+Existe um Death Resolution System centralizado.
+
+Overworld: - jogador é resgatado; - retorna a uma cidade/curandeiro
+válido; - perde XP; - pode perder nível.
+
+Dungeon: - mesma base; - pode haver perda limitada e controlada de
+loot/equipamento.
+
+Proteções: - itens essenciais; - itens de quest/progressão; - peças
+críticas da build recebem proteção maior; - punição não deve destruir
+injustamente horas de construção do personagem.
+
+A resolução não deve ser reimplementada de maneira diferente em cada
+dungeon.
+
+======================================================================
+31. DUNGEONS
+======================================================================
+
+Fluxo: entrada física no overworld → interação/confirmação → loading →
+interior → progressão → boss ou morte → recompensa → saída.
+
+Não existe saída voluntária comum após entrar. Preparação antes da
+entrada importa.
+
+As dungeons mudam a cada entrada.
+
+Não devem ser labirintos aleatórios sem direção. A base é: -
+salas/módulos artesanais; - estrutura procedural; - caminhos
+alternativos; - armadilhas; - baús; - elites; - áreas de
+preparação/descanso; - boss final.
+
+Salas de descanso não são checkpoints de respawn. Servem para
+reorganizar, trocar equipamento, usar itens e respirar antes de
+continuar.
+
+A dungeon pode ter tamanhos pequeno, médio e grande, com duração
+ajustada por playtests.
+
+======================================================================
+32. GERAÇÃO PROCEDURAL
+======================================================================
+
+A correção mais importante da auditoria é que a dungeon deve ser gerada
+primeiro como estrutura lógica abstrata.
+
+Primeiro: - caminho principal; - ramificações; - pontos de elite; -
+descanso/preparação; - boss; - acessibilidade.
+
+Depois: - selecionar e encaixar salas físicas; - instanciar arte e
+conteúdo.
+
+Seeds precisam ser reproduzíveis e registradas para debugging.
+
+Seeds impossíveis devem ser rejeitadas.
+
+Isso é mais robusto do que montar salas aleatórias e só depois tentar
+descobrir se a dungeon funciona.
+
+======================================================================
+33. NPCs E VIDA COTIDIANA
+======================================================================
+
+NPCs importantes recebem personalidade própria.
+
+População geral é composta por: - papel/profissão; - personalidade
+leve; - rotina; - relações relevantes; - contexto regional.
+
+Não criar biografia artesanal para centenas de figurantes.
+
+NPCs podem ter casas, trabalho, rotinas e locais preferenciais.
+
+Dia/tarde/noite alteram comportamento.
+
+Em vilarejos, moradores podem se reunir em praça, retornar a casas à
+noite e sair pela manhã.
+
+NPCs podem ter HP e reagir a ameaças quando necessário.
+
+Guardas podem defender civis.
+
+NPCs distantes existem principalmente como dados, não como GameObjects
+caminhando fora da tela.
+
+======================================================================
+34. RELACIONAMENTOS
+======================================================================
+
+Relacionamentos são um sistema importante, mas deliberadamente compacto.
+
+O núcleo pode armazenar: - relação; - confiança/reconhecimento; - feitos
+relevantes; - contextos importantes; - memória seletiva.
+
+O jogador percebe relação através de: - comportamento; - diálogo; -
+disponibilidade; - reações; - quests; - consequências.
+
+Evitar quinze barras visíveis.
+
+Evitar “clicar em elogio repetidamente para ganhar +5”.
+
+NPCs importantes podem lembrar ações, conversas, companions presentes e
+acontecimentos.
+
+A relação com personagens reais precisa depender de feitos e contexto.
+
+======================================================================
+35. QUESTS
+======================================================================
+
+Quests devem justificar sua existência por: - mundo; - personagem; -
+exploração; - progressão; - recompensa; - narrativa.
+
+Evitar preencher o mapa com dezenas de “mate 10 X”.
+
+O journal deve orientar sem transformar todos os NPCs em ícones
+ambulantes.
+
+Categorias internas podem existir, como quests locais, de guilda, de
+reino, de companions, de personagens importantes e de progressão
+principal.
+
+======================================================================
+36. ECONOMIA E SERVIÇOS
+======================================================================
+
+Economia propositalmente simples.
+
+Uma moeda principal.
+
+Serviços: - comprar; - vender; - upgrades pagos; - consumíveis; -
+provisões; - hospedagem; - salários de companions.
+
+Profissões e serviços: - ferreiro; - alquimista; - curandeiro; -
+comerciante; - hospedagem/taverna; - guilda.
+
+Estoques podem variar com o tempo, mantendo itens básicos.
+
+Não existe obrigação de: - mineração; - cortar madeira; - agricultura; -
+crafting gigantesco; - profissões complexas.
+
+O Codex não pode adicionar crafting apenas porque “RPG costuma ter”.
+
+======================================================================
+37. GUILDAS
+======================================================================
+
+Existem: - Guilda de Vadronia; - Guilda de Migriard; - Guilda de
+Vitehria.
+
+Para o jogador, cada uma possui identidade e conteúdo regional.
+
+Tecnicamente, compartilham o mesmo sistema-base.
+
+O mesmo princípio vale para lojas, diálogos contextuais, companions,
+reputação, quests, rotinas e serviços: dados diferentes, arquitetura
+compartilhada.
+
+Reutilização técnica não significa conteúdo espelhado.
+
+Vadronia deve explorar seus mistérios e sucessão. Migriard, comunidade,
+clima e responsabilidade. Vitehria, floresta, isolamento e abertura.
+
+======================================================================
+38. SAVE E PERSISTÊNCIA
+======================================================================
+
+Sistema de save: - manual; - autosaves rotativos; - separados entre si.
+
+Requisitos: - escrita segura/atômica; - versionamento de schema; -
+migração; - proteção contra corrupção; - IDs estáveis.
+
+Persistir: - mundo; - relações; - companions; - equipamentos; -
+quests; - decisões; - progressão; - estados importantes de NPCs; -
+POIs/dungeons quando relevante.
+
+Nunca depender de referências frágeis de Scene/GameObject para
+identidade persistente.
+
+======================================================================
+39. IDs ESTÁVEIS
+======================================================================
+
+Precisam de identificadores únicos e persistentes: - NPCs
+persistentes; - itens importantes; - settlements; - quests; -
+companions; - POIs; - dungeons; - registros de relacionamento.
+
+IDs sustentam save/load, streaming e evolução futura de conteúdo.
+
+======================================================================
+40. PERFORMANCE E HARDWARE
+======================================================================
+
+Alvo extremo original: - PCs Windows muito fracos; - aproximadamente 2
+GB de RAM total; - GPU integrada.
+
+Isso é um alvo de engenharia, não promessa universal.
+
+O sistema operacional já pode consumir grande parte desses recursos.
+
+Objetivos: - 60 FPS normal; - 30 FPS estáveis como fallback extremo.
+
+Gameplay não pode variar com FPS. IA, stamina, timers, parry e física
+devem usar tempo corretamente.
+
+Cada sistema relevante precisa considerar: - CPU; - memória; - GC
+allocations; - entidades ativas; - rendering; - carregamento; -
+overdraw/luzes.
+
+Deve existir stress test com cidade, noite, luzes, companions, NPCs, UI
+e streaming simultâneos.
+
+======================================================================
+41. RESOLUÇÃO
+======================================================================
+
+1080p está confirmado.
+
+“420p” foi registrado explicitamente, mas as dimensões exatas
+correspondentes permaneceram pendentes na auditoria.
+
+Regra: não converter silenciosamente 420p em 480p ou 720p.
+
+Essa era a única pendência pequena explicitamente identificada no
+fechamento da auditoria.
+======================================================================
+42. PERFORMANCE ESPECÍFICA DE VITEHRIA
+======================================================================
+
+Florestas densas são caras.
+
+Vitehria não deve renderizar dez mil árvores individuais ativas.
+
+Usar: - composição por chunks; - agrupamento visual; - camadas de
+profundidade controladas; - sprites reutilizados com variação; -
+culling; - streaming; - névoa controlada.
+
+Princípio: criar a impressão de uma floresta enorme é mais importante do
+que renderizar literalmente uma floresta enorme.
+
+======================================================================
+43. ARQUITETURA UNITY
+======================================================================
+
+Evitar GameManager gigantesco.
+
+Sistemas precisam de: - responsabilidades claras; - dados separados do
+runtime; - dependências explícitas; - interfaces/contratos estáveis.
+
+ScriptableObjects são adequados para definições e configuração, mas não
+devem virar depósito indiscriminado de estado mutável de save.
+
+Comunicação direta via interfaces é preferível quando há relação clara.
+
+Não transformar tudo em event bus global.
+
+Eventos são adequados quando existe desacoplamento real um-para-muitos.
+
+======================================================================
+44. POOLING E ADDRESSABLES
+======================================================================
+
+Pooling é seletivo.
+
+Bons candidatos: - projéteis; - efeitos; - entidades frequentemente
+criadas/destruídas.
+
+Não colocar tudo em pool por dogma, pois pooling também custa memória.
+
+Addressables não são obrigatórios.
+
+Devem ser adotados apenas se resolverem problema concreto. Não construir
+arquitetura enorme apenas porque é prática comum.
+
+======================================================================
+45. TESTES
+======================================================================
+
+Três níveis:
+
+1.  Testes de lógica Para sistemas determinísticos.
+
+2.  Testes de integração Para save, dungeon, morte, relationships e
+    sistemas interdependentes.
+
+3.  Stress tests Automatizados ou semi-automatizados para performance e
+    integração em cenários pesados.
+
+Procedural precisa registrar seed para reproduzir bugs.
+
+======================================================================
+46. DEBUG E TELEMETRIA LOCAL
+======================================================================
+
+Ferramentas de desenvolvimento são requisito.
+
+Devem permitir, conforme necessário: - alterar hora; - teleportar entre
+regiões; - iniciar dungeon por seed; - conceder item; - conceder XP; -
+simular relação; - recrutar companion; - provocar estados de morte; -
+visualizar IA.
+
+Overlay local pode mostrar: - FPS; - memória aproximada; -
+região/chunk; - entidades ativas; - companions; - NPCs simulados; -
+estado do streaming; - seed atual.
+
+Não é necessário construir infraestrutura online de telemetria.
+
+======================================================================
+47. SEPARAÇÃO DE CÓDIGO E CONTEÚDO
+======================================================================
+
+Adicionar uma espada, NPC ou dungeon não deve normalmente exigir alterar
+código central.
+
+Conteúdo deve ser majoritariamente data-driven.
+
+Sistemas compartilhados são reutilizados entre reinos.
+
+Isso reduz duplicação, bugs e custo de expansão.
+
+======================================================================
+48. ORDEM DE DESENVOLVIMENTO
+======================================================================
+
+Não construir três reinos completos de uma vez.
+
+Primeiro: vertical slice pequeno.
+
+O vertical slice deve integrar: - trecho de overworld; - pequeno
+assentamento; - ciclo dia/noite; - player; - movimento/mira/câmera; -
+combate; - alguns NPCs; - companion; - inimigos; - dungeon curta; -
+loot; - morte; - save/load; - UI essencial.
+
+Somente depois de integração e performance aceitáveis o conteúdo deve
+expandir.
+
+======================================================================
+49. DEFINITION OF DONE
+======================================================================
+
+Uma feature não está pronta apenas porque “funciona”.
+
+Precisa: - funcionar; - integrar com sistemas relevantes; -
+salvar/carregar quando necessário; - aceitar teclado/controle quando
+aplicável; - tratar erros; - não destruir performance; - possuir
+teste/debug apropriado.
+
+======================================================================
+50. AUTORIDADE DE DESIGN
+======================================================================
+
+Agentes de implementação não podem alterar pilares por conta própria.
+
+Não podem decidir unilateralmente: - adicionar crafting complexo; -
+mudar permadeath; - remover noite; - tornar companions controláveis; -
+alterar sucessão; - criar classes rígidas; - substituir sistemas
+centrais.
+
+Podem propor.
+
+Mudança de visão exige decisão do coordenador/usuário.
+
+======================================================================
+51. ARQUITETURA DE AGENTES/CHATS
+======================================================================
+
+A arquitetura planejada para o Codex era hierárquica.
+
+Áreas: - Coordination/Project Lead; - Architecture; - Gameplay; -
+Player; - Combat; - Companions; - Enemies/AI; - World; - Dungeons; -
+NPCs/Relationships; - UI/UX; - Persistence; - Content/Lore; -
+Art/Animation/VFX; - Audio; - Performance; - QA/Tools.
+
+Cada agente recebe contexto necessário e contratos compartilhados, não
+todo o histórico repetido.
+
+Antes de alterar API pública de outro módulo, deve registrar a
+dependência.
+
+Contratos centrais incluem: - interfaces; - eventos; - IDs; - save
+format; - contratos de integração.
+
+Objetivo: impedir dois inventários, dois sistemas de vida, dois
+gerenciadores de NPC etc.
+
+======================================================================
+52. OWNERSHIP E GIT
+======================================================================
+
+Cada área possui responsabilidade conhecida sobre pastas/arquivos.
+
+Um agente pode consultar outro módulo, mas não reestruturar
+silenciosamente código alheio.
+
+Mudanças cross-system precisam de coordenação.
+
+Git: - mudanças pequenas; - revisáveis; - commits conceituais; - evitar
+reescrever dezenas de arquivos sem necessidade; - antes de refatoração
+ampla, verificar dependências e estado funcional.
+
+======================================================================
+53. NÃO OVERENGINEERING / NÃO UNDERENGINEERING
+======================================================================
+
+Pergunta obrigatória: “Esta abstração resolve um problema real deste
+jogo?”
+
+Não criar: - ECS próprio sem necessidade; - framework enorme de
+dependency injection; - DSL de quests; - banco relacional interno; -
+arquitetura de MMO; - abstrações hipotéticas sem uso.
+
+Ao mesmo tempo, “jogo pequeno” não justifica colocar combate,
+inventário, quests, save e NPCs em meia dúzia de scripts gigantes.
+
+A meta é modularidade suficiente, não arquitetura ornamental.
+
+======================================================================
+54. CRONOLOGIA E EVOLUÇÃO DAS DECISÕES
+======================================================================
+
+A pré-produção cresceu de uma ideia de RPG isométrico
+medieval-fantástico para uma especificação sistêmica extensa.
+
+Decisões importantes consolidadas ao longo do processo:
+
+1.  O mundo foi fechado em três reinos: Vadronia, Migriard e Vitehria.
+
+2.  Para impedir scope creep, cada reino foi limitado a 1 capital, 1
+    cidade grande e 2 vilarejos.
+
+3.  Vadronia tornou-se o reino de tradição, comunidade e mistérios
+    históricos, com a Casa Morigan e a disputa Henry × Julian.
+
+4.  A civilização antiga de Vadronia foi deliberadamente mantida sem
+    explicação definitiva.
+
+5.  A morte de Heinrich também foi mantida sem culpado/resposta
+    obrigatória.
+
+6.  Migriard foi diferenciado por clima severo, resistência, honra e
+    hospitalidade, com Sigrid como herdeira estável.
+
+7.  Vitehria foi criado como o reino visualmente mais sombrio, cercado
+    por Pinheirais Negros, mas sem transformar seus habitantes em
+    pessoas malignas ou deprimidas.
+
+8.  Vitehria recebeu a tensão política “isolamento versus abertura”.
+
+9.  As rotas reais foram diferenciadas: Vadronia = legitimidade
+    excepcional; Migriard = rei-consorte ao lado de Sigrid; Vitehria =
+    rota de Elara e transformação política/sucessória legítima.
+
+10. A campanha deixou de exigir casamento para ser aproveitada/concluída
+    em seus pilares de aventura.
+
+11. A auditoria limitou política a suporte narrativo, rejeitando grand
+    strategy.
+
+12. O overworld recebeu requisito de streaming/chunks + níveis de
+    simulação desde o vertical slice.
+
+13. Combate foi fechado em movimento/mira independentes, stamina,
+    esquiva, block/parry, magia, buffering e cancel windows.
+
+14. Companions foram identificados como um dos maiores riscos técnicos e
+    receberam arquitetura em camadas, stuck detection e recuperação
+    segura.
+
+15. Morte passou a exigir um resolver central.
+
+16. Level-down recebeu correção formal para pontos
+    obtidos/disponíveis/investidos.
+
+17. Dungeons foram fechadas em estrutura lógica primeiro, módulos
+    físicos depois.
+
+18. Save passou a depender de IDs persistentes e schema versionado.
+
+19. Performance tornou-se critério de aceite, não otimização final.
+
+20. Ferramentas de debug, telemetria local e seeds reproduzíveis
+    tornaram-se requisitos.
+
+21. Arte temporária foi tornada obrigatória para não bloquear gameplay.
+
+22. Definition of Done passou a incluir integração, persistência, input,
+    erros, performance e testes.
+
+23. Foi formalizada a autoridade de design para impedir agentes de mudar
+    pilares silenciosamente.
+
+24. Foi criada uma arquitetura hierárquica de agentes com ownership e
+    contratos.
+
+25. A auditoria terminou classificando a pré-produção funcional como
+    pronta para especificação técnica.
+
+======================================================================
+55. DISTINÇÃO DE AUTORIDADE: CANON, REQUISITO, DIREÇÃO, SUGESTÃO
+======================================================================
+
+A auditoria determinou que o futuro Prompt Mestre deve diferenciar:
+
+CANON Não pode ser reinterpretado silenciosamente. Ex.: existência dos
+três reinos, famílias reais definidas, mistérios deliberadamente não
+resolvidos.
+
+REQUISITO Precisa funcionar. Ex.: save persistente, IDs estáveis, input
+de controle, morte resolvida centralmente.
+
+DIREÇÃO Resultado desejado, implementação pode variar. Ex.: cidade
+parecer maior que a área jogável.
+
+SUGESTÃO Pode ser avaliada. Ex.: um conceito específico de dungeon que
+ainda não foi tornado obrigatório.
+
+Essa distinção reduz o risco de um agente transformar uma ideia opcional
+em obrigação ou alterar cânone por conveniência técnica.
+
+======================================================================
+56. PENDÊNCIAS E COISAS QUE NÃO DEVEM SER INVENTADAS
+======================================================================
+
+Pendência técnica explicitamente aberta na auditoria: - dimensões exatas
+correspondentes ao “420p”.
+
+Mistérios que NÃO são pendências: - verdadeiro nome da civilização
+antiga; - tradução total de sua língua; - explicação completa de seu
+desaparecimento; - responsável definitivo pela morte de Heinrich; -
+motivo definitivo da maldição.
+
+Esses vazios são intencionais.
+
+Também não se deve inventar automaticamente: - quarta potência
+mundial; - guerra global inicial; - vilão secreto controlador dos três
+reinos; - crise sucessória em Migriard; - Viktor maligno para liberar a
+rota de Elara; - Henry ou Julian vilão por conveniência; - crafting
+gigantesco; - dezenas de novos hubs; - dezenas de atributos; - simulação
+política nacional diária.
+
+======================================================================
+57. VISÃO FINAL DO PROJETO NO ENCERRAMENTO DA AUDITORIA
+======================================================================
+
+No fechamento da auditoria, Projeto R estava conceitualmente pronto para
+entrar em especificação técnica.
+
+A pré-produção havia definido: - três reinos distintos; - escala
+territorial controlada; - famílias reais; - Grandes Casas; - guildas; -
+relações diplomáticas; - caminhos de ascensão social; - combate; -
+player; - companions; - IA; - morte; - dungeons; - procedural; -
+progressão; - loot; - equipamentos; - economia; - NPCs; -
+relacionamentos; - quests; - save; - câmera; - pixel art; -
+iluminação; - performance; - arquitetura Unity; - testes; - debug; -
+ownership; - integração entre agentes; - processo de desenvolvimento.
+
+A principal conclusão é simples:
+
+Projeto R não deve tentar vencer pela quantidade de sistemas. Deve
+vencer pela integração.
+
+O jogador precisa sentir que o mundo funciona sem ele, mas reage a ele.
+Precisa sentir que uma dungeon tem consequências para sua progressão.
+Precisa confiar que seus companions ajudam em vez de criar problemas.
+Precisa perceber que a noite altera o mundo. Precisa reconhecer cada
+reino antes de ler seu nome. Precisa conquistar importância, não
+recebê-la de uma profecia. Precisa poder explorar e lutar sem ser
+obrigado a seguir uma rota política. E, caso decida buscar poder,
+relações ou uma coroa, o mundo precisa exigir razões convincentes para
+aceitá-lo.
+
+Esse é o estado conceitual consolidado para produção Unity: um Action RPG
+top-down ortogonal de fantasia medieval, ambicioso
+em integração e identidade, mas conscientemente limitado em escopo para
+permanecer produzível, testável e tecnicamente sustentável.
+
+======================================================================
+FIM — BÍBLIA COMPLETA DO PROJETO R / PRÉ-PRODUÇÃO UNITY
+======================================================================

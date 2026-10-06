@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "files": [
+    {
+      "filename": "gemini_generated_video_7a1daa7c.mp4",
+      "size_bytes": 4014421,
+      "sha256": "3985e8effb7ddc14a152bdfa2979aed7ad27c492bc4759b8bc14934a2828f2cb",
+      "duration_seconds": 20.01,
+      "resolution": "1280x720",
+      "context": "Player pixel-art animation/movement reference showing multiple directions and walking poses.",
+      "source": "Arquivo fornecido por Marcos em Downloads em 2026-10-05",
+      "binary_status": "included_in_repository",
+      "validation": "SHA-256 conferido com o arquivo fornecido; decodificação integral de vídeo e áudio com FFmpeg concluída sem erros em 2026-10-05."
+    }
+  ]
+}
