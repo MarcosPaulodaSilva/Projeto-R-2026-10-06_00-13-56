@@ -14,7 +14,9 @@ namespace Vadronia
         public TownWorld(Texture2D scenery)
         {
             root = new GameObject("Grünwald — ruas e praça");
-            var texture = Resources.Load<Texture2D>("Vadronia/terrain-v2");
+            // terrain-v3 = terrain-v2 + paths, back lane and contact shade (Tools/build_terrain.py).
+            var texture = Resources.Load<Texture2D>("Vadronia/terrain-v3");
+            if(texture == null) texture = Resources.Load<Texture2D>("Vadronia/terrain-v2");
             if(texture == null) { texture = PaintGround(); owned.Add(texture); }
             var ground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * .5f, texture.width/28f);
             owned.Add(ground);
@@ -38,12 +40,18 @@ namespace Vadronia
                 renderer.color = new Color(prop.Red, prop.Green, prop.Blue, 1f);
             }
             // A forest border adds depth without adding collision across the plaza patrol.
-            for(int i=0;i<28;i++)
+            // Kinds: 0 carvalho · 1 pinheiro · 2 carvalho dourado · 3 carvalho claro · 4 pinheiro azulado.
+            int[] mix = { 1, 0, 4, 1, 2, 1, 3, 0, 4, 1 };
+            for(int i=0;i<32;i++)
             {
-                int type=i%3==0?4:5;Rect bounds=TownAtlasLayout.Frames[type];
-                var sprite=Sprite.Create(scenery,bounds,new Vector2(.5f,0),bounds.width/(2.2f+(i%4)*.23f));owned.Add(sprite);
-                float x=i<14?-13.8f+(i%2)*.4f:13.8f-(i%2)*.4f;
-                float y=-10.7f+(i%14)*1.65f;
+                int kind=mix[(i*7+i/16)%mix.Length];
+                bool ready=kind<2||extra!=null;
+                if(!ready) kind=kind==4?1:0;
+                var source=kind<2?scenery:extra;
+                Rect bounds=kind<2?TownAtlasLayout.Frames[4+kind]:TownAtlasLayout.Extra[14+kind];
+                var sprite=Sprite.Create(source,bounds,new Vector2(.5f,0),bounds.width/(2.2f+(i%4)*.25f));owned.Add(sprite);
+                float x=i<16?-13.8f+(i%2)*.45f:13.8f-(i%2)*.45f;
+                float y=-10.7f+(i%16)*1.45f;
                 Add("Bosque "+i,sprite,new Vector2(x,y),1,-Mathf.RoundToInt(y*100)*10);
             }
         }

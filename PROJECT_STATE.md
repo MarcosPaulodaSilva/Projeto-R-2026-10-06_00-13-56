@@ -19,7 +19,7 @@
 
 - Grünwald exterior com terreno, cenário e ambientação;
 - player com quadros de animação derivados do vídeo de referência;
-- Konrad usando o atlas original preservado por GUID;
+- Konrad usando o atlas original preservado por GUID; direção estável em diagonais (histerese) e leve respiração/passo por código, já que o atlas só tem 4 quadros de caminhada;
 - caminhada, corrida/fôlego e esquiva;
 - movimento de teclado em **RDFG** (`R` cima, `F` baixo, `D` esquerda, `G` direita), mantendo as setas como alternativa;
 - câmera suave;
@@ -29,7 +29,8 @@
 - recompensa única de 25 moedas;
 - save local;
 - cena real, Packages e ProjectSettings preservados;
-- vila de Grünwald reformulada (2026-10-06): casas de frente e de costas ao longo das ruas, jardim noroeste, quintais, praça com poço, três bancas, bancos, mural, barris e canteiros, e fumaça saindo da chaminé da ferraria;
+- vila de Grünwald reformulada (2026-10-06): casas de frente e de costas, viela dos fundos ao sul com casas voltadas para ela, jardim noroeste, quintais, praça com poço, três bancas, bancos, mural, barris, canteiros, arbustos, pedras e fumaça saindo da chaminé da ferraria;
+- chão `terrain-v3` (gerado por `Tools/build_terrain.py`): caminhos de terra até cada porta visível, viela, pátios pisados e sombra de assentamento sob as casas; bosquetes e borda de floresta com cinco tipos de árvore;
 - ronda de Konrad ampliada (10 pontos com pausa própria): praça, bancas, rua sul e quintal oeste;
 - `village.ogg` e `city.ogg` importados como assets de áudio; **a reprodução ainda não está conectada ao runtime**.
 

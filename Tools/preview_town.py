@@ -41,11 +41,17 @@ def num(token):
 
 def parse_props():
     props = []
-    for m in re.finditer(r'(Town|Extra|Soft)\("([^"]+)",\s*([^)]*)\)(?:\.Tinted\(([^)]*)\))?', LAYOUT):
+    for m in re.finditer(r'\b(Town|Extra|Soft|Deco|Tree)\("([^"]+)",\s*([^)]*)\)(?:\.Tinted\(([^)]*)\))?', LAYOUT):
         kind, name, args, tint = m.groups()
         a = [num(t) for t in args.split(",")]
         p = dict(name=name, tint=tuple(num(t) for t in tint.split(",")) if tint else (1, 1, 1))
-        if kind == "Soft":
+        if kind == "Tree":
+            k = int(a[0])
+            atlas, sprite = (0, 4) if k == 0 else (0, 5) if k == 1 else (1, 14 + k)
+            p.update(atlas=atlas, sprite=sprite, x=a[1], y=a[2], w=a[3], d=.4, flip=bool(a[4]) if len(a) > 4 else False, solid=True, flat=False)
+        elif kind == "Deco":
+            p.update(atlas=1, sprite=int(a[0]), x=a[1], y=a[2], w=a[3], d=0, flip=bool(a[4]) if len(a) > 4 else False, solid=False, flat=False)
+        elif kind == "Soft":
             p.update(atlas=1, sprite=int(a[0]), x=a[1], y=a[2], w=a[3], d=0, flip=bool(a[4]) if len(a) > 4 else False, solid=False, flat=True)
         else:
             p.update(atlas=0 if kind == "Town" else 1, sprite=int(a[0]), x=a[1], y=a[2], w=a[3], d=a[4],
@@ -55,7 +61,7 @@ def parse_props():
 
 
 def footprint(p):
-    tree = p["atlas"] == 0 and p["sprite"] in (4, 5)
+    tree = (p["atlas"] == 0 and p["sprite"] in (4, 5)) or (p["atlas"] == 1 and 16 <= p["sprite"] <= 18)
     if tree:
         return (p["x"] - .22, p["y"], p["x"] + .22, p["y"] + .35)
     k = .38 if p["atlas"] == 0 else .42
@@ -151,7 +157,8 @@ def render(show_blocks=False):
     blocks = [footprint(p) for p in props if p["solid"]]
     patrol = parse_patrol()
     W, H = HALF_W * 2 * PPU, HALF_H * 2 * PPU
-    ground = Image.open(RES / "terrain-v2.png").convert("RGBA").resize((W, H), Image.LANCZOS)
+    terrain = RES / "terrain-v3.png"
+    ground = Image.open(terrain if terrain.exists() else RES / "terrain-v2.png").convert("RGBA").resize((W, H), Image.LANCZOS)
     canvas = Image.new("RGBA", (W, H), (34, 48, 35, 255))
     canvas.alpha_composite(ground)
     # flat decals first, then shadows, then everything sorted far -> near

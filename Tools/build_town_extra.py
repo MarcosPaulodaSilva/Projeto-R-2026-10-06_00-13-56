@@ -19,7 +19,7 @@ SRC = ROOT / "Assets/Resources/Vadronia/town.png"
 OUT = ROOT / "Assets/Resources/Vadronia/town-extra.png"
 
 # Same rectangles as TownAtlasLayout.Frames (Unity: origin bottom-left).
-TOWN = [(15, 525, 310, 456), (349, 524, 427, 467)]
+TOWN = [(15, 525, 310, 456), (349, 524, 427, 467), (19, 39, 394, 445), (442, 39, 315, 455)]
 
 STONE = [(196, 192, 178), (172, 168, 154), (208, 204, 190), (154, 150, 138), (184, 178, 160)]
 MORTAR = (104, 100, 90)
@@ -342,6 +342,48 @@ def dirt_patch():
     return img
 
 
+
+def bush(flowers=False, seed=3):
+    w, h = 84, 62
+    img, s = ss_canvas(w, h)
+    d = ImageDraw.Draw(img)
+    rnd = random.Random(seed)
+    greens = [(52, 118, 48), (66, 140, 56), (84, 160, 64)]
+    blobs = [(22, 38, 20), (42, 30, 24), (62, 38, 20), (32, 46, 18), (52, 46, 18)]
+    for k, col in enumerate(greens):
+        for cx, cy, r in blobs:
+            off = (len(greens) - 1 - k) * 2
+            d.ellipse([(cx - r + off) * s, (cy - r) * s, (cx + r - off) * s, (cy + r - off) * s], fill=col)
+    for _ in range(46):
+        x, y = rnd.randint(8, 76), rnd.randint(10, 52)
+        d.ellipse([(x - 3) * s, (y - 2) * s, (x + 3) * s, (y + 2) * s], fill=shade(rnd.choice(greens), rnd.choice([.8, 1.2])))
+    if flowers:
+        for _ in range(16):
+            x, y = rnd.randint(10, 74), rnd.randint(12, 48)
+            c = rnd.choice([(236, 90, 120), (250, 214, 70), (250, 246, 236), (210, 80, 200)])
+            d.ellipse([(x - 3) * s, (y - 3) * s, (x + 3) * s, (y + 3) * s], fill=c)
+    else:
+        for _ in range(10):
+            x, y = rnd.randint(12, 72), rnd.randint(16, 50)
+            d.ellipse([(x - 3) * s, (y - 3) * s, (x + 3) * s, (y + 3) * s], fill=(196, 48, 44))
+    d.ellipse([6 * s, 52 * s, 78 * s, 62 * s], fill=(30, 70, 34, 160))
+    return finish(img, s)
+
+
+def rocks():
+    w, h = 84, 52
+    img, s = ss_canvas(w, h)
+    d = ImageDraw.Draw(img)
+    for pts, col in [([(4, 44), (10, 24), (28, 14), (44, 22), (48, 44)], (138, 136, 128)),
+                     ([(40, 46), (46, 30), (62, 22), (78, 32), (80, 46)], (122, 120, 114)),
+                     ([(22, 48), (26, 36), (38, 32), (46, 40), (44, 48)], (156, 152, 142))]:
+        d.polygon([(x * s, y * s) for x, y in pts], fill=col)
+        d.polygon([(x * s, y * s) for x, y in pts[:3]], fill=shade(col, 1.18))
+        d.line([(pts[-1][0] * s, pts[-1][1] * s), (pts[0][0] * s, pts[0][1] * s)], fill=shade(col, .7), width=s * 2)
+    d.ellipse([2 * s, 40 * s, 82 * s, 52 * s], fill=(40, 60, 36, 120))
+    return finish(img, s)
+
+
 def tidy(img):
     box = img.getbbox()
     return img.crop(box) if box else img
@@ -354,6 +396,16 @@ def hue_variants():
         "cottage_blue": recolor_roof(cottage, 222, (0, 40), 214, .62, .8),
         "cottage_green": recolor_roof(cottage, 222, (0, 40), 112, .5, .68),
         "inn_red": recolor_roof(inn, 200, (200, 260), 8, 1.9, 1.5),
+    }
+
+
+def tree_variants():
+    oak = town_crop(2)
+    pine = town_crop(3)
+    return {
+        "oak_gold": recolor_roof(oak, oak.height, (60, 170), 46, 1.0, 1.08),
+        "oak_light": recolor_roof(oak, oak.height, (60, 170), 88, .72, 1.22),
+        "pine_blue": recolor_roof(pine, pine.height, (80, 190), 150, .8, .92),
     }
 
 
@@ -374,6 +426,9 @@ def main():
         ("bench", bench()), ("notice_board", notice_board()), ("flowerbed", flowerbed()),
         ("cart", cart()), ("dirt_patch", dirt_patch()),
     ]
+    trees = tree_variants()
+    sprites += [("oak_gold", trees["oak_gold"]), ("oak_light", trees["oak_light"]), ("pine_blue", trees["pine_blue"]),
+                ("bush", bush(False, 3)), ("bush_flowers", bush(True, 8)), ("rocks", rocks())]
     sprites = [(n, tidy(i)) for n, i in sprites]
     # Shelf packing into a 2048-wide sheet, 8px gutters (point filtering, no bleeding).
     sheet_w, gutter = 2048, 8

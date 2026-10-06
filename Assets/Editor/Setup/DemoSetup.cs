@@ -40,7 +40,7 @@ namespace Vadronia.Editor
         public static void ValidateDemo()
         {
             int count = AdventureChecks.Run(message => Debug.Log(message));
-            foreach (string name in new[] { "terrain-v2", "town", "town-extra", "characters-original", "player-video/south", "player-video/southeast", "player-video/east", "player-video/northeast", "player-video/north", "player-video/northwest", "player-video/west" })
+            foreach (string name in new[] { "terrain-v2", "terrain-v3", "town", "town-extra", "characters-original", "player-video/south", "player-video/southeast", "player-video/east", "player-video/northeast", "player-video/north", "player-video/northwest", "player-video/west" })
             {
                 var texture = Resources.Load<Texture2D>("Vadronia/" + name);
                 if (texture == null) throw new System.Exception("Textura ausente: " + name);

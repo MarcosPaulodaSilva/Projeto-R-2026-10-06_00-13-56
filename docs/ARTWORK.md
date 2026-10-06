@@ -4,9 +4,10 @@ Este documento registra apenas o que interessa para a árvore atual. Experimento
 
 ## Assets ativos
 
-- `Assets/Resources/Vadronia/terrain-v2.png`: terreno atual de Grünwald.
+- `Assets/Resources/Vadronia/terrain-v3.png`: terreno atual de Grünwald (v2 + caminhos até as portas, viela, pátios e sombra de assentamento). É **gerado** por `Tools/build_terrain.py` a partir do v2 e do `TownLayout.cs`; se faltar, o jogo usa o v2.
+- `Assets/Resources/Vadronia/terrain-v2.png`: terreno pintado base (duas ruas e praça); fonte do v3.
 - `Assets/Resources/Vadronia/town.png`: atlas do cenário.
-- `Assets/Resources/Vadronia/town-extra.png`: atlas extra da vila (casas de costas, telhados recoloridos, barril, caixotes, feno, cerca, banco, mural, canteiro, carroça, caminho de terra). É **gerado** por `Tools/build_town_extra.py` a partir de `town.png` e de desenho procedural; os quadros ficam em `TownAtlasLayout.Extra`. O jogo funciona sem ele (avisa no Console e omite os adereços extras).
+- `Assets/Resources/Vadronia/town-extra.png`: atlas extra da vila (casas de costas, telhados recoloridos, barril, caixotes, feno, cerca, banco, mural, canteiro, carroça, caminho de terra, carvalho dourado, carvalho claro, pinheiro azulado, arbustos e pedras). É **gerado** por `Tools/build_town_extra.py` a partir de `town.png` e de desenho procedural; os quadros ficam em `TownAtlasLayout.Extra`. O jogo funciona sem ele (avisa no Console e omite os adereços extras).
 - `Tools/preview_town.py`: prévia offline do mapa lida direto de `TownLayout.cs`; também confere spawn, ervas, colisões e a patrulha de Konrad (`--blocks` desenha colisões e rota).
 - `docs/references/grunwald-map-preview-2026-10-06.png`: prévia estática gerada para revisão visual; não é importada pelo Unity.
 - `Assets/Resources/Vadronia/player-video/`: quadros atuais do Player derivados do vídeo de referência.

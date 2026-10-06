@@ -14,7 +14,7 @@ namespace Vadronia
         readonly Sprite[][] frames;
         readonly int[] idleFrames;
         readonly bool fromVideo;
-        float phase;
+        float phase, clock;
         int direction;
         public readonly WalkCycle Cycle = new WalkCycle();
         public FootPoint Position { get; private set; }
@@ -84,8 +84,13 @@ namespace Vadronia
         public void Face(Vector2 delta)
         {
             if (delta.sqrMagnitude < .000001f) return;
-            direction = fromVideo ? EightDirection.Resolve(delta.x, delta.y)
-                : Mathf.Abs(delta.x) > Mathf.Abs(delta.y) ? (delta.x > 0 ? 1 : 3) : (delta.y > 0 ? 2 : 0);
+            if (fromVideo) { direction = EightDirection.Resolve(delta.x, delta.y); return; }
+            // Four-direction atlas: hysteresis keeps the sprite from flickering between side and front/back
+            // while walking along a diagonal.
+            float ax = Mathf.Abs(delta.x), ay = Mathf.Abs(delta.y);
+            bool horizontal = direction == 1 || direction == 3;
+            bool wantHorizontal = horizontal ? ax * 1.25f >= ay : ax > ay * 1.25f;
+            direction = wantHorizontal ? (delta.x > 0 ? 1 : 3) : (delta.y > 0 ? 2 : 0);
         }
 
         public void Place(FootPoint next)
@@ -109,6 +114,14 @@ namespace Vadronia
             renderer.sprite = frames[clip][AnimationFrame];
             renderer.flipX = fromVideo && direction == 7;
             renderer.sortingOrder = -Mathf.RoundToInt(Position.Y * 100) * 10 + 4;
+            if (!fromVideo)
+            {
+                // The atlas has only four walk frames: a small step squash and idle breathing, pivoting on the feet,
+                // give the guard weight without touching the frame data.
+                clock += dt;
+                float squash = Cycle.Moving ? 1f - .03f * Mathf.Abs(Mathf.Cos(phase * Mathf.PI * 4f)) : 1f + .012f * Mathf.Sin(clock * 2.2f);
+                root.transform.localScale = new Vector3(1f, squash, 1f);
+            }
         }
 
         public void Dispose()
