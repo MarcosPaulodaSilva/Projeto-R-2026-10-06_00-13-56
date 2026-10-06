@@ -21,6 +21,7 @@
 - player com quadros de animação derivados do vídeo de referência;
 - Konrad usando o atlas original preservado por GUID;
 - caminhada, corrida/fôlego e esquiva;
+- movimento de teclado em **RDFG** (`R` cima, `F` baixo, `D` esquerda, `G` direita), mantendo as setas como alternativa;
 - câmera suave;
 - HUD em UI Toolkit;
 - interação com NPC;
@@ -49,15 +50,16 @@ A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub
 
 ## ATUAL
 
-Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles.
+Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; a implementação está no repositório, mas precisa do teste físico de teclado de Marcos no Editor.
 
 ## PRÓXIMO
 
 1. sincronizar a `main` com a pasta local;
 2. abrir no Unity e aguardar a importação/recompilação de `town-extra.png` e dos demais assets;
 3. conferir visualmente o mapa e ajustar `TownLayout.cs` somente se houver sobreposição;
-4. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
-5. continuar a próxima mecânica autorizada.
+4. testar fisicamente o movimento: `R` cima, `F` baixo, `D` esquerda e `G` direita;
+5. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
+6. continuar a próxima mecânica autorizada.
 
 ## LIMITES / DECISÕES
 
@@ -66,5 +68,6 @@ Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `to
 - sem combate;
 - sem interiores;
 - casas em diagonal exigem arte nova (o atlas só tem fachadas de frente; "de costas" foi derivado dela);
+- `W`, `S`, `X` e `2` não podem ser usados como controles obrigatórios; o movimento atual é RDFG + setas;
 - não gerar build Windows sem pedido explícito;
 - não voltar a usar o repositório antigo `MarcosPaulodaSilva/Projeto-R` como implementação ativa.

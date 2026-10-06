@@ -558,8 +558,11 @@ exploração noturna irritante.
 
 Plataforma original: Windows.
 
-Teclado/mouse: - WASD para movimento na especificação auditada; - mouse
-para mira independente.
+Teclado/mouse: - especificação histórica auditada usava WASD, mas foi
+SUBSTITUÍDA pela decisão atual de Marcos: RDFG para movimento (R = cima,
+F = baixo, D = esquerda, G = direita), com setas como alternativa; - W, S,
+X e 2 não funcionam no teclado de Marcos e não podem ser controles
+obrigatórios; - mouse para mira independente.
 
 Gamepad: - analógico esquerdo move em 360°; - analógico direito mira/faz
 facing em 360°; - mira também influencia o look-ahead da câmera.

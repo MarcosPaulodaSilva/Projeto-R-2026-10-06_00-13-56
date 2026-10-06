@@ -33,14 +33,17 @@ namespace Vadronia
         public void Halt() { velocity = Vector2.zero; Actor.Place(Actor.Position); Actor.Animate(.1f,false,false); }
         public static Vector2 ReadMovement()
         {
-            return Vector2.ClampMagnitude(new Vector2((Held(KeyCode.D)||Held(KeyCode.RightArrow)?1:0)-(Held(KeyCode.A)||Held(KeyCode.LeftArrow)?1:0),
-                (Held(KeyCode.W)||Held(KeyCode.UpArrow)?1:0)-(Held(KeyCode.S)||Held(KeyCode.DownArrow)?1:0)),1);
+            // RDFG replaces WASD because W/S are unavailable on Marcos's keyboard.
+            // R = up, F = down, D = left, G = right. Arrow keys remain as fallback.
+            return Vector2.ClampMagnitude(new Vector2(
+                (Held(KeyCode.G)||Held(KeyCode.RightArrow)?1:0)-(Held(KeyCode.D)||Held(KeyCode.LeftArrow)?1:0),
+                (Held(KeyCode.R)||Held(KeyCode.UpArrow)?1:0)-(Held(KeyCode.F)||Held(KeyCode.DownArrow)?1:0)),1);
         }
         public static bool Held(KeyCode key)
         {
 #if ENABLE_INPUT_SYSTEM
             var k = Keyboard.current; if(k==null) return false;
-            switch(key) { case KeyCode.W:return k.wKey.isPressed; case KeyCode.A:return k.aKey.isPressed; case KeyCode.S:return k.sKey.isPressed; case KeyCode.D:return k.dKey.isPressed;
+            switch(key) { case KeyCode.R:return k.rKey.isPressed; case KeyCode.D:return k.dKey.isPressed; case KeyCode.F:return k.fKey.isPressed; case KeyCode.G:return k.gKey.isPressed;
             case KeyCode.UpArrow:return k.upArrowKey.isPressed; case KeyCode.DownArrow:return k.downArrowKey.isPressed; case KeyCode.LeftArrow:return k.leftArrowKey.isPressed; case KeyCode.RightArrow:return k.rightArrowKey.isPressed; case KeyCode.LeftShift:return k.leftShiftKey.isPressed; } return false;
 #else
             return Input.GetKey(key);

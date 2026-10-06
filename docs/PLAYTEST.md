@@ -8,7 +8,10 @@ Abra a cena `Assets/Scenes/Vadronia.unity` e pressione Play. Em uma cópia nova,
 
 | Tecla | Ação |
 |---|---|
-| WASD / setas | Caminhar |
+| R / ↑ | Caminhar para cima |
+| F / ↓ | Caminhar para baixo |
+| D / ← | Caminhar para a esquerda |
+| G / → | Caminhar para a direita |
 | Shift | Correr, consumindo fôlego |
 | Espaço | Esquiva com custo e recarga |
 | E | Interagir / continuar diálogo |
@@ -17,6 +20,8 @@ Abra a cena `Assets/Scenes/Vadronia.unity` e pressione Play. Em uma cópia nova,
 | F5 | Salvar progresso |
 
 Converse com Konrad, colha as três porções de ervas e volte para receber 25 moedas. O poço e a estalagem recuperam fôlego; a guilda tem uma placa informativa. O progresso da missão é salvo automaticamente e pode ser salvo com F5. O arquivo fica em `Application.persistentDataPath/grunwald-adventure-v1.json`.
+
+As teclas `W`, `S`, `X` e `2` não devem ser usadas como controles obrigatórios neste projeto, pois não funcionam no teclado de Marcos.
 
 ## Atualização
 
