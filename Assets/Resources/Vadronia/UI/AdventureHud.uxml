@@ -22,7 +22,7 @@
         <ui:VisualElement name="segments" class="segments" picking-mode="Ignore" />
         <ui:Label name="coins" class="subtitle" />
       </ui:VisualElement>
-      <ui:Label text="RDFG / SETAS  mover     Z  correr     ESPAÇO  esquiva&#10;T  interagir     ESC  pausar     F1  ocultar interface     F5  salvar" class="controls" />
+      <ui:Label text="RDFG / SETAS  mover     Z  correr     ESPAÇO  esquiva&#10;T  interagir     CLIQUE ESQ.  combo espada     ESC  pausar     F1  ocultar interface     F5  salvar" class="controls" />
     </ui:VisualElement>
     <ui:VisualElement name="dialog" class="dialog hidden">
       <ui:Label name="speaker" class="dialog-name" />
