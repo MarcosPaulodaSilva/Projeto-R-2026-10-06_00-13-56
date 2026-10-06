@@ -39,4 +39,4 @@ Companions, progressão, equipamentos, dungeons, reputação/relações, consequ
 - Bíblia de design/arquitetura: `/docs/PROJECT_BIBLE.txt`
 - Estado atual: `/PROJECT_STATE.md`
 
-Em caso de conflito, siga a hierarquia registrada em `/PROJECT_STATUS.md` e a decisão explícita mais recente de Marcos.
+Em caso de conflito, siga a hierarquia registrada em `/PROJECT_STATE.md` e a decisão explícita mais recente de Marcos.

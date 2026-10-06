@@ -113,7 +113,7 @@ Cânone que não pode ser reinterpretado silenciosamente:
 Salvo regressão comprovada ou decisão explícita, preserve:
 
 - Grünwald exterior: ruas, praça, casas, estalagem, guilda, ferraria, poço, banca, árvores (prédios são fachadas);
-- Player e Conrad com arte neutra nova; originais preservados;
+- Player com quadros derivados do vídeo de referência; Konrad usa o atlas original ativo; arte experimental não usada fica fora da árvore atual;
 - caminhada procedural: **passos baixos, duas pernas em fases opostas, sem joelho alto**; ciclo ligado à distância percorrida; recorte lateral por geometria (`Sprite.OverrideGeometry` em coordenadas de pixel);
 - colisão nos pés com subpassos; câmera suave com antecipação;
 - corrida com fôlego; esquiva com custo/recarga e colisão;
@@ -160,7 +160,7 @@ Regra do “continue”: dentro do escopo já autorizado, escolha a melhoria de 
 
 ## 8. Controles, Player e câmera
 
-- Controles atuais (`LEIA-ME.md`): WASD/setas caminham, Shift corre, Espaço esquiva, E interage, Esc pausa, F1 oculta interface, F5 salva. **Não altere mapeamentos sem pedido de Marcos.** Há histórico de uso de R/D/F/G por limitação de teclado; qualquer mudança de input deve ser confirmada com Marcos e registrada.
+- Controles atuais (`docs/PLAYTEST.md`): WASD/setas caminham, Shift corre, Espaço esquiva, E interage, Esc pausa, F1 oculta interface, F5 salva. **Não altere mapeamentos sem pedido de Marcos.** Há histórico de uso de R/D/F/G por limitação de teclado; qualquer mudança de input deve ser confirmada com Marcos e registrada.
 - Abstraia **ações de gameplay**, não teclas físicas (Input System ou camada própria), para permitir remapeamento e gamepad. Gamepad faz parte da visão: analógico esquerdo move 360°, direito mira; UI essencial utilizável sem mouse.
 - Player: movimento, colisão, mira, facing, HP, fôlego/stamina, mana quando aplicável, ataque, block, parry, esquiva, interação, inventário, equipamento, atributos, progressão, morte.
 - Movimento responsivo e previsível. Testar paredes, cantos, árvores, poço, entidades, esquiva, knockback e transições. Nunca atravessar sólido por bug.
@@ -257,7 +257,7 @@ Leve para hardware modesto. Alvo de engenharia (não promessa): PCs Windows frac
 
 - Pixel art medieval-fantasy, 2D top-down. Arte temporária/placeholder é válida durante a construção de sistemas; o pipeline visual definitivo vem depois de gameplay e integração.
 - Reference sheets são concept, não spritesheets perfeitas: não copie inconsistências de escala, proporção, grade, densidade de pixel, direção ou footprint.
-- Procedência da arte em `ARTWORK.md`. Preserve os PNGs originais e seus `.meta`.
+- Procedência da arte em `docs/ARTWORK.md`. Preserve os PNGs ativos e seus `.meta`; experimentos aposentados permanecem recuperáveis pelo histórico Git.
 - Caminhada: manter a correção artística de Marcos (passos baixos, alternância real das duas pernas, sem joelho alto).
 - Resolução: **1080p** confirmada. “420p” está registrado mas **sem dimensões definidas**; não converta para 480p ou 720p. Separe resolução interna de saída.
 - Noite legível; luzes de casas/postes/lanternas comunicam segurança; evitar glare.
