@@ -21,6 +21,7 @@
 - player com quadros de animação derivados do vídeo de referência;
 - Konrad usando o atlas original preservado por GUID;
 - caminhada, corrida/fôlego e esquiva;
+- movimento de teclado em **RDFG** (`R` cima, `F` baixo, `D` esquerda, `G` direita), mantendo as setas como alternativa;
 - câmera suave;
 - HUD em UI Toolkit;
 - interação com NPC;
@@ -66,5 +67,6 @@ Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `to
 - sem combate;
 - sem interiores;
 - casas em diagonal exigem arte nova (o atlas só tem fachadas de frente; "de costas" foi derivado dela);
+- `W`, `S`, `X` e `2` não podem ser usados como controles obrigatórios; o movimento atual é RDFG + setas;
 - não gerar build Windows sem pedido explícito;
 - não voltar a usar o repositório antigo `MarcosPaulodaSilva/Projeto-R` como implementação ativa.

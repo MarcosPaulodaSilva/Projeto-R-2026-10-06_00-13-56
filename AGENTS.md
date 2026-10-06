@@ -25,6 +25,7 @@
 - Não afirmar compilação, Play Mode ou validação Unity sem execução real.
 - A regressão .NET não substitui Play Mode.
 - Não gerar executável/pacote Windows sem pedido explícito.
+- Controles obrigatórios não podem usar `W`, `S`, `X` ou `2`; movimento atual: `R` cima, `F` baixo, `D` esquerda, `G` direita, com setas como alternativa.
 - Projeto local atual: `C:/Users/Marcos/Downloads/Projeto R/Projeto R VadroniaDemo`.
 
 Quando o estado do jogo ou da arquitetura mudar, atualize **somente** `PROJECT_STATE.md`; histórico datado vai para `docs/HISTORY.md`.
