@@ -20,14 +20,22 @@ namespace Vadronia
             owned.Add(ground);
             var terrain = Add("Chão", ground, Vector2.zero, 1, -20000);
             terrain.transform.localScale = new Vector3(1,22f/ground.bounds.size.y,1);
+            // Atlas 1 (casas de costas, cercas, barris...) is optional: without it the town still loads.
+            var extra = Resources.Load<Texture2D>("Vadronia/town-extra");
+            if(extra == null) Debug.LogWarning("Resources/Vadronia/town-extra.png não encontrado; adereços extras omitidos.");
             for (int i = 0; i < TownLayout.Props.Length; i++)
             {
                 var prop = TownLayout.Props[i];
-                Rect bounds = TownAtlasLayout.Frames[prop.Sprite];
-                Sprite sprite = Sprite.Create(scenery, bounds, new Vector2(.5f, 0), bounds.width / prop.Width, 0, SpriteMeshType.FullRect);
+                var source = prop.Atlas == 0 ? scenery : extra;
+                if(source == null) continue;
+                Rect bounds = (prop.Atlas == 0 ? TownAtlasLayout.Frames : TownAtlasLayout.Extra)[prop.Sprite];
+                // Flat decals (flower beds, dirt) are centred on the ground; everything else stands on its feet.
+                Sprite sprite = Sprite.Create(source, bounds, prop.Flat ? Vector2.one * .5f : new Vector2(.5f, 0), bounds.width / prop.Width, 0, SpriteMeshType.FullRect);
                 owned.Add(sprite);
-                visuals.Add(root.transform,"Sombra — "+prop.Name,visuals.SoftDisc,new Vector2(prop.X+.3f,prop.Y-.12f),new Vector2(prop.Width*1.15f,prop.Width*.42f),new Color(.07f,.1f,.075f,.7f),-17000);
-                Add(prop.Name, sprite, new Vector2(prop.X, prop.Y), 1, -Mathf.RoundToInt(prop.Y * 100)*10);
+                if(!prop.Flat) visuals.Add(root.transform,"Sombra — "+prop.Name,visuals.SoftDisc,new Vector2(prop.X+.3f,prop.Y-.12f),new Vector2(prop.Width*1.15f,prop.Width*.42f),new Color(.07f,.1f,.075f,.7f),-17000);
+                var renderer = Add(prop.Name, sprite, new Vector2(prop.X, prop.Y), 1, prop.Flat ? -18000 : -Mathf.RoundToInt(prop.Y * 100)*10);
+                renderer.flipX = prop.Flip;
+                renderer.color = new Color(prop.Red, prop.Green, prop.Blue, 1f);
             }
             // A forest border adds depth without adding collision across the plaza patrol.
             for(int i=0;i<28;i++)

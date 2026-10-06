@@ -1,0 +1,17 @@
+{
+  "conversion": "Original AAC audio extracted to OGG Vorbis quality 6; stereo, no remix or normalization.",
+  "tracks": [
+    {
+      "source": "Vilage_Music_Sunlight_on_the_Thatch.mp4",
+      "source_sha256": "1fd83617cd84d43d02d32fee26fc15521c0737bffa965b9a02f21fd797ed7395",
+      "output": "Assets\\Resources\\Vadronia\\Audio\\village.ogg",
+      "sha256": "cf5fc5b341d4e686d252621e53b17faae221b6b9fc70998f53971b6103afbad8"
+    },
+    {
+      "source": "CIty_Music_Morning_at_the_Citadel_Gates.mp4",
+      "source_sha256": "8b39e53cd51671ed2c51b6fe4258117d9345b7a195b2779a2059b3d16c249427",
+      "output": "Assets\\Resources\\Vadronia\\Audio\\city.ogg",
+      "sha256": "4cdb0ce8b775f2393a4fac0b3c3291f0cb856b684df918a0823905da4837f1a9"
+    }
+  ]
+}

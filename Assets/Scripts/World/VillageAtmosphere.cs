@@ -24,7 +24,7 @@ namespace Vadronia
                 seeds[i]=new Vector2((float)random.NextDouble()*28-14,(float)random.NextDouble()*22-11);
                 var leaf=art.Add(root.transform,"Folha ao vento "+i,art.Disc,seeds[i],new Vector2(.045f,.095f),new Color(.69f,.65f,.3f,.7f),15000);leaves.Add(leaf);
             }
-            for(int i=0;i<12;i++) smoke.Add(art.Add(root.transform,"Fumaça da ferraria "+i,art.SoftDisc,new Vector2(8.5f,5.5f),Vector2.one,new Color(.7f,.72f,.67f,.25f),15000));
+            for(int i=0;i<12;i++) smoke.Add(art.Add(root.transform,"Fumaça da ferraria "+i,art.SoftDisc,new Vector2(7.95f,7.4f),Vector2.one,new Color(.7f,.72f,.67f,.25f),15000));
             foreach(var p in new[]{new Vector2(-4.5f,-3.7f),new Vector2(4.5f,-3.7f),new Vector2(-4.6f,3.8f),new Vector2(4.6f,3.8f)})
             {
                 int order=-Mathf.RoundToInt(p.y*100)*10;
@@ -51,7 +51,7 @@ namespace Vadronia
             for(int i=0;i<smoke.Count;i++)
             {
                 float life=Mathf.Repeat(clock*.23f+i/12f,1);
-                smoke[i].transform.localPosition=new Vector3(8.6f+life*.6f+Mathf.Sin(clock+i)*.1f,5.6f+life*2.6f,0);
+                smoke[i].transform.localPosition=new Vector3(8.05f+life*.6f+Mathf.Sin(clock+i)*.1f,7.45f+life*2.6f,0);
                 smoke[i].transform.localScale=Vector3.one*(.25f+life*1.4f);
                 smoke[i].color=new Color(.72f,.73f,.69f,Mathf.Sin(life*Mathf.PI)*.25f);
             }

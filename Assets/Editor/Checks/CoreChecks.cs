@@ -64,6 +64,8 @@ namespace Vadronia
             Check("Spawns livres e percurso inteiro de Conrad", () =>
             {
                 var blocks = TownLayout.Blocks(); var p = TownLayout.Patrol[0]; int target = 1, laps = 0;
+                var visited = new bool[TownLayout.Patrol.Length]; visited[0] = true;
+                Require(TownLayout.PatrolPause.Length == TownLayout.Patrol.Length, "Cada ponto da patrulha precisa de uma pausa");
                 Require(MovementCore.Clear(0, -5, blocks), "Player nasce dentro de obstáculo");
                 for (int i = 0; i < 24000; i++)
                 {
@@ -73,9 +75,11 @@ namespace Vadronia
                     if (distance > 0) p = MovementCore.Move(p, dx / distance * step, dy / distance * step, blocks);
                     Require(MovementCore.Clear(p.X, p.Y, blocks), "Conrad dentro de obstáculo");
                     if (Math.Abs(p.X - t.X) + Math.Abs(p.Y - t.Y) < .02f)
-                    { target = (target + 1) % TownLayout.Patrol.Length; if (target == 1) laps++; }
+                    { visited[target] = true; target = (target + 1) % TownLayout.Patrol.Length; if (target == 1) laps++; }
                 }
-                Require(laps >= 20, "Patrulha presa: " + laps + " voltas");
+                // A ronda cobre praça, ruas e quintais (~42 unidades por volta): cerca de 15 voltas em 400 s sem pausas.
+                Require(laps >= 10, "Patrulha presa: " + laps + " voltas");
+                Require(Array.TrueForAll(visited, v => v), "Patrulha não alcançou todos os pontos");
             }, report, ref count);
             Check("10.000 movimentos aleatórios preservam colisões e limites", () =>
             {

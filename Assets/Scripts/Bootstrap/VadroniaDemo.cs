@@ -44,7 +44,7 @@ namespace Vadronia
             var target=TownLayout.Patrol[waypoint];
             var movement=Vector2.ClampMagnitude(new Vector2(target.X-old.X,target.Y-old.Y),1.35f*dt);
             var next=MovementCore.Move(old,movement.x,movement.y,town.Blocks);conrad.Place(next);conrad.Animate(dt);
-            if(Vector2.Distance(new Vector2(next.X,next.Y),new Vector2(target.X,target.Y))<.02f){waypoint=(waypoint+1)%TownLayout.Patrol.Length;wait=1.8f;}
+            if(Vector2.Distance(new Vector2(next.X,next.Y),new Vector2(target.X,target.Y))<.02f){int reached=waypoint;waypoint=(waypoint+1)%TownLayout.Patrol.Length;wait=TownLayout.PatrolPause[reached];}
             else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Conrad encontrou obstáculo na patrulha.");}
         }
         void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused)cameraRig.Follow(player.Position,motor.Heading,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}
