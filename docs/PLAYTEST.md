@@ -16,12 +16,12 @@ Abra a cena `Assets/Scenes/Vadronia.unity` e pressione Play. Em uma cópia nova,
 | F1 | Ocultar interface |
 | F5 | Salvar progresso |
 
-Converse com Conrad, colha as três porções de ervas e volte para receber 25 moedas. O poço e a estalagem recuperam fôlego; a guilda tem uma placa informativa. O progresso da missão é salvo automaticamente e pode ser salvo com F5. O arquivo fica em `Application.persistentDataPath/grunwald-adventure-v1.json`.
+Converse com Konrad, colha as três porções de ervas e volte para receber 25 moedas. O poço e a estalagem recuperam fôlego; a guilda tem uma placa informativa. O progresso da missão é salvo automaticamente e pode ser salvo com F5. O arquivo fica em `Application.persistentDataPath/grunwald-adventure-v1.json`.
 
 ## Atualização
 
 - Terreno detalhado, vegetação nas bordas, sombras de contato, folhas, fumaça e lanternas.
-- Arte neutra nova para Player e Conrad. Pernas independentes em fases opostas, passos baixos, sem os antigos quadros de joelho alto. Ciclo de 1,8 unidades percorridas; caminhada a 2,4 unidades/s. Recortes laterais de pernas usam geometria para excluir a bota sobreposta.
+- Player usa quadros derivados do vídeo de referência; Konrad mantém o atlas original. A caminhada usa passos baixos e progressão pela distância percorrida.
 - Câmera suave com antecipação e abertura ao correr; interface com fôlego, moedas, objetivo, diálogos e pausa.
 - Corrida, esquiva com colisão, missão de coleta e salvamento local.
 

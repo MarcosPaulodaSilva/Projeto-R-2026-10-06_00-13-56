@@ -20,7 +20,7 @@ namespace Vadronia
             QualitySettings.antiAliasing=0;QualitySettings.anisotropicFiltering=AnisotropicFiltering.Disable;Application.targetFrameRate=60;
             town=new TownWorld(scenery);
             player=new CharacterView("Player",new FootPoint(0,-3.9f),null,characterAtlas,false);
-            conrad=new CharacterView("Conrad",TownLayout.Patrol[0],null,characterAtlas,true);
+            conrad=new CharacterView("Konrad",TownLayout.Patrol[0],null,characterAtlas,true);
             view=new GameObject("Camera — Grünwald").AddComponent<Camera>();view.tag="MainCamera";view.orthographic=true;view.orthographicSize=5.65f;
             view.clearFlags=CameraClearFlags.SolidColor;view.backgroundColor=new Color32(34,48,35,255);view.allowHDR=view.allowMSAA=view.allowDynamicResolution=false;
             cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);
@@ -45,7 +45,7 @@ namespace Vadronia
             var movement=Vector2.ClampMagnitude(new Vector2(target.X-old.X,target.Y-old.Y),1.35f*dt);
             var next=MovementCore.Move(old,movement.x,movement.y,town.Blocks);conrad.Place(next);conrad.Animate(dt);
             if(Vector2.Distance(new Vector2(next.X,next.Y),new Vector2(target.X,target.Y))<.02f){int reached=waypoint;waypoint=(waypoint+1)%TownLayout.Patrol.Length;wait=TownLayout.PatrolPause[reached];}
-            else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Conrad encontrou obstáculo na patrulha.");}
+            else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Konrad encontrou obstáculo na patrulha.");}
         }
         void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused)cameraRig.Follow(player.Position,motor.Heading,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}
         void OnDestroy(){interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}

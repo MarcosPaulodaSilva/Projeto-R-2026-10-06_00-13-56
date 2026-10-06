@@ -43,9 +43,9 @@
 
 ## VALIDAÇÃO
 
-Último registro local anterior a esta limpeza: **20 verificações de lógica + 11 verificações em Play aprovadas**.
+Última validação registrada no Editor local, em 05/10/2026: **20 verificações de lógica + 11 verificações em Play aprovadas**. Essa validação é anterior à reformulação mais recente de Grünwald.
 
-A regressão .NET deve permanecer verde. Como esta limpeza move um asset Unity preservando GUID e remove assets mortos, é necessário fazer um novo pull no PC e validar compilação/Play Mode no Editor antes de chamar a reorganização de validada localmente.
+A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub Actions em 06/10/2026. A reformulação visual ainda precisa ser validada no Unity Editor e em Play Mode no PC depois de sincronizar a `main`.
 
 ## ATUAL
 
@@ -53,11 +53,10 @@ Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `to
 
 ## PRÓXIMO
 
-0. abrir no Unity, deixar importar `town-extra.png` e conferir o mapa; ajustar posições em `TownLayout.cs` se algo ficar sobreposto;
 1. sincronizar a `main` com a pasta local;
-2. aguardar o Unity reimportar/recompilar;
-3. executar `Vadronia > Verificar demo`;
-4. executar `Vadronia > Verificar exploração em Play`;
+2. abrir no Unity e aguardar a importação/recompilação de `town-extra.png` e dos demais assets;
+3. conferir visualmente o mapa e ajustar `TownLayout.cs` somente se houver sobreposição;
+4. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
 5. continuar a próxima mecânica autorizada.
 
 ## LIMITES / DECISÕES
