@@ -8,9 +8,10 @@ namespace Vadronia
         public CharacterView Player => player;
         public CharacterView Conrad => conrad;
         public ExplorerMotor Motor => motor;
+        public PlayerSword Sword => sword;
         public AdventureHud Hud => hud;
         public VillageInteraction Interactions => interactions;
-        CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;
+        CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;PlayerSword sword;
         AdventureCamera cameraRig;AdventureHud hud;VillageInteraction interactions;VillageAtmosphere atmosphere;
         int waypoint=1;float wait;bool warnedPatrol;
         void Start()
@@ -23,7 +24,7 @@ namespace Vadronia
             conrad=new CharacterView("Konrad",TownLayout.Patrol[0],null,characterAtlas,true);
             view=new GameObject("Camera — Grünwald").AddComponent<Camera>();view.tag="MainCamera";view.orthographic=true;view.orthographicSize=5.65f;
             view.clearFlags=CameraClearFlags.SolidColor;view.backgroundColor=new Color32(34,48,35,255);view.allowHDR=view.allowMSAA=view.allowDynamicResolution=false;
-            cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);
+            cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=new PlayerSword(motor,view);
             hud=new AdventureHud();interactions=new VillageInteraction(motor,conrad,hud);atmosphere=new VillageAtmosphere(town,player.Position);
             cameraRig.Follow(player.Position,Vector2.zero,false,0,true);
         }
@@ -34,8 +35,8 @@ namespace Vadronia
             hud.Tick(motor.State,interactions.Hint,Time.unscaledDeltaTime);
             if(hud.Paused){motor.Halt();return;}
             interactions.Tick(dt);
-            if(hud.DialogOpen){motor.Halt();conrad.Place(conrad.Position);conrad.Animate(dt);return;}
-            motor.Tick(dt);TickPatrol(dt);atmosphere.Tick(dt,player,motor.IsSprinting);
+            if(hud.DialogOpen){sword?.Interrupt();motor.Halt();conrad.Place(conrad.Position);conrad.Animate(dt);return;}
+            motor.Tick(dt,sword==null||sword.Combo.CanAct);sword?.Tick(dt);TickPatrol(dt);atmosphere.Tick(dt,player,motor.IsSprinting);
         }
         void TickPatrol(float dt)
         {
@@ -47,8 +48,8 @@ namespace Vadronia
             if(Vector2.Distance(new Vector2(next.X,next.Y),new Vector2(target.X,target.Y))<.02f){int reached=waypoint;waypoint=(waypoint+1)%TownLayout.Patrol.Length;wait=TownLayout.PatrolPause[reached];}
             else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Konrad encontrou obstáculo na patrulha.");}
         }
-        void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused)cameraRig.Follow(player.Position,motor.Heading,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}
-        void OnDestroy(){interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
+        void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
+        void OnDestroy(){interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
         void OnDrawGizmosSelected()
         {
             Gizmos.color=new Color(1,.5f,0,.7f);
