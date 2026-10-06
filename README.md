@@ -8,9 +8,10 @@ A raiz deste repositório já é um projeto Unity completo. No Unity Hub, abra a
 
 1. Leia [PROJECT_STATE.md](PROJECT_STATE.md).
 2. Leia [AGENTS.md](AGENTS.md).
-3. Use [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) para localizar código.
-4. Para testar, siga [docs/PLAYTEST.md](docs/PLAYTEST.md).
-5. Abra `Assets/Scenes/Vadronia.unity` e pressione Play.
+3. Leia [docs/CONTEXT_GUIDE.md](docs/CONTEXT_GUIDE.md) para saber **onde pesquisar sem ler documentos enormes inteiros**.
+4. Use [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) para localizar código.
+5. Para testar, siga [docs/PLAYTEST.md](docs/PLAYTEST.md).
+6. Abra `Assets/Scenes/Vadronia.unity` e pressione Play.
 
 Projeto local atual: `C:/Users/Marcos/Downloads/Projeto R/Projeto R VadroniaDemo`.
 
@@ -37,3 +38,8 @@ AGENTS.md
 - referências/conceitos ficam em `docs/`;
 - um sistema novo só ganha pasta quando houver código real;
 - não manter versões antigas soltas em `Assets/`: o histórico Git já cumpre esse papel.
+
+
+## Contexto para agentes
+
+Para tarefas grandes, não carregar toda a documentação. Primeiro localizar o código e depois pesquisar termos/seções específicas nos documentos grandes. O procedimento oficial está em [docs/CONTEXT_GUIDE.md](docs/CONTEXT_GUIDE.md).

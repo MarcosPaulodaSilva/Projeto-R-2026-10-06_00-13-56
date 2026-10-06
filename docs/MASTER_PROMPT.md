@@ -1,6 +1,8 @@
 # SUPER MASTER PROMPT — PROJETO R / VADRONIA (UNITY)
 
-Documento operacional único para qualquer agente que trabalhe neste repositório Unity. Versão 1 — 05/10/2026.
+Documento operacional de referência para qualquer agente que trabalhe neste repositório Unity. Versão 1 — 05/10/2026.
+
+**Uso obrigatório:** este arquivo é uma base pesquisável. Não é necessário lê-lo inteiro para cada tarefa. Siga `docs/CONTEXT_GUIDE.md`: localize o código, pesquise termos/seções relevantes aqui e leia apenas o trecho necessário.
 
 Consolidado a partir do histórico de design do Projeto R, da Bíblia de pré-produção Unity (`docs/PROJECT_BIBLE.txt`), de `AGENTS.md`, do estado validado e das decisões úteis preservadas de protótipos anteriores. Este documento é a referência operacional única para a implementação Unity.
 
@@ -63,7 +65,7 @@ Nunca diga que compilou, testou, executou ou sincronizou se não fez.
 
 ## 2. Não recomeçar / preservar / linha de versão
 
-Antes de editar: leia `PROJECT_STATE.md` e `docs/HISTORY.md`, examine `Assets/Scripts`, `Assets/Editor`, `Tests/` e `Tools/`, identifique sistemas existentes e preserve o trabalho funcional.
+Antes de editar: leia `PROJECT_STATE.md`, examine os arquivos diretamente ligados à tarefa e use `docs/CONTEXT_GUIDE.md`. **Não leia `docs/HISTORY.md` inteiro por padrão**; pesquise nele apenas quando precisar entender uma decisão passada. Faça o mesmo com este Master, a Bíblia e o lore: pesquise por tema e leia somente as seções necessárias.
 
 Não recrie do zero. Não reescreva por preferência. Não duplique sistemas (um Combat Core, um sistema de NPC, um inventário, um sistema de vida, um sistema de quests).
 
@@ -293,7 +295,7 @@ Antes de um sistema grande: “Qual é a menor implementação que entrega a mai
 
 Quando receber “continue”:
 
-1. leia `AGENTS.md` e `PROJECT_STATE`; 2. leia o contexto necessário; 3. inspecione os arquivos relevantes; 4. escolha a melhoria de maior valor dentro do escopo autorizado; 5. implemente; 6. compile/execute (modo COM Editor) ou marque como não verificado (modo SEM Editor); 7. teste; 8. tente quebrar; 9. corrija; 10. regressão; 11. atualize `PROJECT_STATE`; 12. continue até um ponto natural.
+1. leia `AGENTS.md`, `PROJECT_STATE` e `docs/CONTEXT_GUIDE.md`; 2. inspecione os arquivos relevantes; 3. busque e leia apenas o contexto necessário; 4. escolha a melhoria de maior valor dentro do escopo autorizado; 5. implemente; 6. compile/execute (modo COM Editor) ou marque como não verificado (modo SEM Editor); 7. teste; 8. tente quebrar; 9. corrija; 10. regressão; 11. atualize `PROJECT_STATE`; 12. continue até um ponto natural.
 
 Escolha a tarefa por: impacto em gameplay + integração + risco de bug + reutilização + valor de teste + coerência de escopo.
 
@@ -307,7 +309,7 @@ Relato final curto: **IMPLEMENTADO / VERIFICADO (e como) / NÃO VERIFICADO / PRO
 
 Comece trabalhando, não apenas planejando.
 
-Leia `AGENTS.md` e o `PROJECT_STATE`. Examine o que realmente existe na raiz deste repositório e em `Assets/`. Preserve o que funciona. Escolha a próxima melhoria de maior valor real **dentro do escopo autorizado** e execute o ciclo:
+Leia `AGENTS.md`, `PROJECT_STATE` e `docs/CONTEXT_GUIDE.md`. Examine o que realmente existe na raiz deste repositório e em `Assets/`. Para documentos grandes, busque primeiro o assunto e abra somente as seções relevantes. Preserve o que funciona. Escolha a próxima melhoria de maior valor real **dentro do escopo autorizado** e execute o ciclo:
 
 INSPECIONAR → IMPLEMENTAR → COMPILAR/EXECUTAR → TESTAR → TENTAR QUEBRAR → CORRIGIR → TESTAR INTEGRAÇÃO → REGRESSÃO → ATUALIZAR PROJECT_STATE → CONTINUAR.
 
