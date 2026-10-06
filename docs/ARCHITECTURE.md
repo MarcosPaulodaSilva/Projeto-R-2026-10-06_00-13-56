@@ -8,6 +8,7 @@
 |---|---|
 | `Core/` | regras e estado sem dependência de cena |
 | `Player/` | movimento, input e câmera |
+| `Combat/` | regras de combate e integração do combo de espada |
 | `World/` | layout, mundo, atmosfera e interações |
 | `UI/` | HUD/interface |
 | `Visual/` | renderização, atlas e visual dos personagens |
