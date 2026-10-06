@@ -46,7 +46,7 @@
 
 Última validação registrada no Editor local, em 05/10/2026: **20 verificações de lógica + 11 verificações em Play aprovadas**. Essa validação é anterior à reformulação mais recente de Grünwald.
 
-A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub Actions em 06/10/2026. A reformulação visual ainda precisa ser validada no Unity Editor e em Play Mode no PC depois de sincronizar a `main`.
+A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub Actions em 06/10/2026. `Vadronia > Verificar demo` agora também exige `town-extra.png` e valida seu filtro de importação. A reformulação visual ainda precisa ser validada no Unity Editor e em Play Mode no PC depois de sincronizar a `main`.
 
 ## ATUAL
 
