@@ -101,3 +101,8 @@ O caminho dentro do GitHub **não foi renomeado** e continua raiz do projeto Uni
 O repositório `MarcosPaulodaSilva/Projeto-R-2026-10-06_00-13-56` passou a ser a fonte oficial da implementação Unity. O conteúdo local mais recente deste repositório prevaleceu sobre cópias antigas do projeto. Do repositório anterior foram migrados apenas organização, documentação, lore, referências e automações que ainda eram úteis.
 
 A raiz deste repositório é diretamente um projeto Unity (`Assets/`, `Packages/`, `ProjectSettings/`). O repositório antigo `MarcosPaulodaSilva/Projeto-R` permanece como histórico/origem da migração e não deve receber novas implementações do jogo.
+
+
+## Limpeza estrutural — 6 de outubro de 2026
+
+Removidos da árvore atual assets experimentais sem referências por nome ou GUID: `characters-neutral.png`, `player-walk.png`, `conrad-walk.png`, `NeutralAtlasLayout.cs` e `WalkAtlasLayout.cs`. O atlas ativo `Assets/Art/characters.png` não foi apagado: foi movido para `Assets/Resources/Vadronia/characters-original.png` preservando o mesmo GUID usado pela cena. `PROJECT_STATUS.md` foi incorporado a `PROJECT_STATE.md`; arte e instruções de Play passaram para `docs/`.

@@ -2,10 +2,11 @@
 
 | Assunto | Arquivo |
 |---|---|
-| Estado e próximo passo | [../PROJECT_STATUS.md](../PROJECT_STATUS.md) |
-| Estado técnico jogável | [../PROJECT_STATE.md](../PROJECT_STATE.md) |
+| Estado atual / próximo passo | [../PROJECT_STATE.md](../PROJECT_STATE.md) |
 | Regras para agentes | [../AGENTS.md](../AGENTS.md) |
 | Arquitetura | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| Teste no Editor | [PLAYTEST.md](PLAYTEST.md) |
+| Procedência/estado da arte | [ARTWORK.md](ARTWORK.md) |
 | Master operacional | [MASTER_PROMPT.md](MASTER_PROMPT.md) |
 | Bíblia de design | [PROJECT_BIBLE.txt](PROJECT_BIBLE.txt) |
 | Fundamentos | [PROJECT_FOUNDATIONS.md](PROJECT_FOUNDATIONS.md) |

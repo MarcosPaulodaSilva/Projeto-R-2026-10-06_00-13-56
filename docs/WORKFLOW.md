@@ -3,7 +3,7 @@
 ## Antes de trabalhar
 
 1. partir da `main` atualizada;
-2. ler `PROJECT_STATUS.md`;
+2. ler `PROJECT_STATE.md`;
 3. verificar se já existe PR tocando nos mesmos arquivos;
 4. criar uma branch para a tarefa.
 
@@ -29,4 +29,4 @@ O PR registra:
 - riscos/pendências;
 - próximo passo.
 
-Se o comportamento do jogo mudou, atualizar `PROJECT_STATUS.md` e `PROJECT_STATE.md` no mesmo PR.
+Se o comportamento do jogo mudou, atualizar `PROJECT_STATE.md` no mesmo PR.

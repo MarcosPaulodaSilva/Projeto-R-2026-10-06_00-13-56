@@ -23,8 +23,8 @@ namespace Vadronia.Editor
         }
         static void CreateScene()
         {
-            var atlas = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Art/characters.png");
-            if (atlas == null) { Debug.LogError("Atlas Assets/Art/characters.png ausente."); return; }
+            var atlas = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Vadronia/characters-original.png");
+            if (atlas == null) { Debug.LogError("Atlas Assets/Resources/Vadronia/characters-original.png ausente."); return; }
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             new GameObject("Vadronia Demo").AddComponent<VadroniaDemo>().characterAtlas = atlas;
             EditorSceneManager.SaveScene(scene, ScenePath);
@@ -40,7 +40,7 @@ namespace Vadronia.Editor
         public static void ValidateDemo()
         {
             int count = AdventureChecks.Run(message => Debug.Log(message));
-            foreach (string name in new[] { "terrain-v2", "town", "player-video/south", "player-video/southeast", "player-video/east", "player-video/northeast", "player-video/north", "player-video/northwest", "player-video/west" })
+            foreach (string name in new[] { "terrain-v2", "town", "characters-original", "player-video/south", "player-video/southeast", "player-video/east", "player-video/northeast", "player-video/north", "player-video/northwest", "player-video/west" })
             {
                 var texture = Resources.Load<Texture2D>("Vadronia/" + name);
                 if (texture == null) throw new System.Exception("Textura ausente: " + name);
@@ -66,7 +66,7 @@ namespace Vadronia.Editor
     {
         void OnPreprocessTexture()
         {
-            if (assetPath != "Assets/Art/characters.png" && !assetPath.StartsWith("Assets/Resources/Vadronia/")) return;
+            if (!assetPath.StartsWith("Assets/Resources/Vadronia/")) return;
             var t = (TextureImporter)assetImporter;
             t.textureType = TextureImporterType.Default;
             t.alphaSource = TextureImporterAlphaSource.FromInput;

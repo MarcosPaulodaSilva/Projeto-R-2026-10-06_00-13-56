@@ -2,12 +2,11 @@
 
 ## Antes de editar
 
-1. Leia `PROJECT_STATUS.md`.
-2. Leia `PROJECT_STATE.md`.
-3. Consulte `docs/ARCHITECTURE.md` para escolher o módulo.
-4. Use branch criada da `main` atual.
-5. Para decisões de sistema, consulte `docs/MASTER_PROMPT.md`.
-6. Para cânone/lore, consulte `docs/lore/LORE_BIBLE.txt`.
+1. Leia `PROJECT_STATE.md`.
+2. Consulte `docs/ARCHITECTURE.md` para escolher o módulo.
+3. Use branch criada da `main` atual para mudanças relevantes.
+4. Para decisões de sistema, consulte `docs/MASTER_PROMPT.md`.
+5. Para cânone/lore, consulte `docs/lore/LORE_BIBLE.txt`.
 
 ## Regras
 
@@ -16,11 +15,12 @@
 - Preserve `.meta`, GUIDs, cenas, saves e assets aprovados.
 - Não recrie sistemas existentes sem inspecionar o código.
 - Runtime não depende de `Assets/Editor`.
-- Use os módulos `Core / Player / World / UI / Visual / Bootstrap`.
-- Crie novos módulos como `Combat/`, `NPC/` ou `Inventory/` somente quando existir código real.
-- Não afirmar compilação, Play Mode ou teste Unity sem verificação real.
+- Use `Core / Player / World / UI / Visual / Bootstrap`.
+- Crie módulos novos somente quando houver implementação real.
+- Não mantenha arte experimental sem uso dentro de `Assets/`; referências ficam em `docs/`.
+- Não afirmar compilação, Play Mode ou validação Unity sem execução real.
 - A regressão .NET não substitui Play Mode.
-- Não gerar executável/pacote Windows sem pedido explícito de Marcos.
+- Não gerar executável/pacote Windows sem pedido explícito.
 - Projeto local atual: `C:/Users/Marcos/Downloads/Projeto R/Projeto R VadroniaDemo`.
 
-Se o estado jogável mudar, atualize `PROJECT_STATUS.md` e `PROJECT_STATE.md` no mesmo PR.
+Quando o estado do jogo ou da arquitetura mudar, atualize **somente** `PROJECT_STATE.md`; histórico datado vai para `docs/HISTORY.md`.

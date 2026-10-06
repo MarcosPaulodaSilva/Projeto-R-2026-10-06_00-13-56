@@ -1,4 +1,4 @@
-# Vadronia — exploração de Grünwald
+# Playtest — Vadronia / Grünwald
 
 Unity 6.6 (6000.6.0f1), C#, 2D top-down ortogonal, pipeline Built-in. Projeto local atual aberto no Editor: `C:/Users/Marcos/Downloads/Projeto R/Projeto R VadroniaDemo`.
 
@@ -35,4 +35,4 @@ Esta é uma versão de exploração ampliada. Os prédios ainda são fachadas; n
 
 Nenhum executável ou pacote de distribuição Windows foi gerado. Este repositório é o projeto Unity aberto localmente em `C:/Users/Marcos/Downloads/Projeto R/Projeto R VadroniaDemo`.
 
-A procedência da arte nova está em `ARTWORK.md`. As imagens originais e seus .meta foram preservados.
+A procedência e o estado da arte estão em `docs/ARTWORK.md`. As imagens originais e seus .meta foram preservados.
