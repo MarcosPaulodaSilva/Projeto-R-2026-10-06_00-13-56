@@ -91,6 +91,35 @@ namespace Vadronia
                     Require(p.X >= MovementCore.MinX && p.X <= MovementCore.MaxX && p.Y >= MovementCore.MinY && p.Y <= MovementCore.MaxY, "Fora do mapa");
                 }
             }, report, ref count);
+            Check("Sword combo percorre windup, active e recovery", () =>
+            {
+                var combo = new SwordCombo();
+                Require(combo.Press() && combo.Stage == 1 && combo.Phase == SwordPhase.Windup && combo.Swung, "Golpe 1 não iniciou");
+                combo.Tick(.07f);
+                Require(combo.Phase == SwordPhase.Active && combo.Struck, "Golpe 1 não entrou em active");
+                combo.Tick(.10f);
+                Require(combo.Phase == SwordPhase.Recovery && !combo.CanAct, "Golpe 1 não entrou em recovery");
+                combo.Tick(.06f);
+                Require(combo.CanAct, "Janela de cancelamento do golpe 1 não abriu");
+            }, report, ref count);
+            Check("Buffer do sword combo encadeia os três golpes", () =>
+            {
+                var combo = new SwordCombo();
+                combo.Press(); combo.Tick(.07f); combo.Press(); combo.Tick(.10f); combo.Tick(.06f);
+                Require(combo.Stage == 2 && combo.Phase == SwordPhase.Windup, "Golpe 2 não foi encadeado");
+                combo.Tick(.06f); combo.Press(); combo.Tick(.10f); combo.Tick(.07f);
+                Require(combo.Stage == 3 && combo.Phase == SwordPhase.Windup, "Golpe 3 não foi encadeado");
+            }, report, ref count);
+            Check("Cooldowns da espada contam e terminam em zero", () =>
+            {
+                var combo = new SwordCombo();
+                combo.StartWhirlCooldown(); combo.StartDashCooldown();
+                combo.Tick(.10f);
+                Require(Math.Abs(combo.WhirlRemaining - 5.9f) < .001f, "Cooldown do redemoinho incorreto");
+                Require(Math.Abs(combo.DashRemaining - 7.9f) < .001f, "Cooldown da investida incorreto");
+                for (int i = 0; i < 80; i++) combo.Tick(.10f);
+                Require(combo.WhirlReady && combo.DashReady, "Cooldown não voltou a pronto");
+            }, report, ref count);
             return count;
         }
         static void Check(string name, Action test, Action<string> report, ref int count)
