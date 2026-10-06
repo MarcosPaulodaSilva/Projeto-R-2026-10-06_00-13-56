@@ -12,9 +12,9 @@ Abra a cena `Assets/Scenes/Vadronia.unity` e pressione Play. Em uma cópia nova,
 | F / ↓ | Caminhar para baixo |
 | D / ← | Caminhar para a esquerda |
 | G / → | Caminhar para a direita |
-| Shift | Correr, consumindo fôlego |
+| Z | Correr, consumindo fôlego |
 | Espaço | Esquiva com custo e recarga |
-| E | Interagir / continuar diálogo |
+| T | Interagir / continuar diálogo |
 | Esc | Pausar / fechar diálogo |
 | F1 | Ocultar interface |
 | F5 | Salvar progresso |

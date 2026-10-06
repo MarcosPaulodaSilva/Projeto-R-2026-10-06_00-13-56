@@ -21,7 +21,7 @@
 - player com quadros de animação derivados do vídeo de referência;
 - Konrad usando o atlas original preservado por GUID; direção estável em diagonais (histerese) e leve respiração/passo por código, já que o atlas só tem 4 quadros de caminhada;
 - caminhada, corrida/fôlego e esquiva;
-- movimento de teclado em **RDFG** (`R` cima, `F` baixo, `D` esquerda, `G` direita), mantendo as setas como alternativa;
+- movimento de teclado em **RDFG** (`R` cima, `F` baixo, `D` esquerda, `G` direita), mantendo as setas como alternativa; **Z** corre e **T** interage/continua diálogo;
 - câmera suave;
 - HUD em UI Toolkit;
 - interação com NPC;
@@ -51,7 +51,7 @@ A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub
 
 ## ATUAL
 
-Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; a implementação está no repositório, mas precisa do teste físico de teclado de Marcos no Editor.
+Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; corrida foi remapeada de **Shift** para **Z** e interação/continuação de diálogo de **E** para **T**. A implementação está no repositório, mas precisa do teste físico de teclado de Marcos no Editor.
 
 ## PRÓXIMO
 

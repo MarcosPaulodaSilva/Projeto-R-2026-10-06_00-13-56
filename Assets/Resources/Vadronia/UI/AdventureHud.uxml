@@ -22,12 +22,12 @@
         <ui:VisualElement name="segments" class="segments" picking-mode="Ignore" />
         <ui:Label name="coins" class="subtitle" />
       </ui:VisualElement>
-      <ui:Label text="RDFG / SETAS  mover     SHIFT  correr     ESPAÇO  esquiva&#10;E  interagir     ESC  pausar     F1  ocultar interface     F5  salvar" class="controls" />
+      <ui:Label text="RDFG / SETAS  mover     Z  correr     ESPAÇO  esquiva&#10;T  interagir     ESC  pausar     F1  ocultar interface     F5  salvar" class="controls" />
     </ui:VisualElement>
     <ui:VisualElement name="dialog" class="dialog hidden">
       <ui:Label name="speaker" class="dialog-name" />
       <ui:Label name="dialogText" class="dialog-text" />
-      <ui:Label text="E  continuar     ESC  fechar" class="dialog-hint" />
+      <ui:Label text="T  continuar     ESC  fechar" class="dialog-hint" />
     </ui:VisualElement>
     <ui:VisualElement name="pause" class="pause-shade hidden">
       <ui:VisualElement class="pause-card">

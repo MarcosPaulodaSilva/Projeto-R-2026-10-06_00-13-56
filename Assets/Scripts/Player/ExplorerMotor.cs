@@ -15,7 +15,7 @@ namespace Vadronia
         public ExplorerMotor(CharacterView actor, TownWorld world) { Actor = actor; this.world = world; }
         public void Tick(float dt)
         {
-            Tick(dt, ReadMovement(), Held(KeyCode.LeftShift), Pressed(KeyCode.Space));
+            Tick(dt, ReadMovement(), Held(KeyCode.Z), Pressed(KeyCode.Space));
         }
         public void Tick(float dt, Vector2 input, bool sprint, bool dodge)
         {
@@ -44,7 +44,7 @@ namespace Vadronia
 #if ENABLE_INPUT_SYSTEM
             var k = Keyboard.current; if(k==null) return false;
             switch(key) { case KeyCode.R:return k.rKey.isPressed; case KeyCode.D:return k.dKey.isPressed; case KeyCode.F:return k.fKey.isPressed; case KeyCode.G:return k.gKey.isPressed;
-            case KeyCode.UpArrow:return k.upArrowKey.isPressed; case KeyCode.DownArrow:return k.downArrowKey.isPressed; case KeyCode.LeftArrow:return k.leftArrowKey.isPressed; case KeyCode.RightArrow:return k.rightArrowKey.isPressed; case KeyCode.LeftShift:return k.leftShiftKey.isPressed; } return false;
+            case KeyCode.UpArrow:return k.upArrowKey.isPressed; case KeyCode.DownArrow:return k.downArrowKey.isPressed; case KeyCode.LeftArrow:return k.leftArrowKey.isPressed; case KeyCode.RightArrow:return k.rightArrowKey.isPressed; case KeyCode.Z:return k.zKey.isPressed; } return false;
 #else
             return Input.GetKey(key);
 #endif
@@ -53,7 +53,7 @@ namespace Vadronia
         {
 #if ENABLE_INPUT_SYSTEM
             var k=Keyboard.current; if(k==null)return false;
-            switch(key) {case KeyCode.Space:return k.spaceKey.wasPressedThisFrame;case KeyCode.E:return k.eKey.wasPressedThisFrame;case KeyCode.Escape:return k.escapeKey.wasPressedThisFrame;case KeyCode.F1:return k.f1Key.wasPressedThisFrame;case KeyCode.F5:return k.f5Key.wasPressedThisFrame;}return false;
+            switch(key) {case KeyCode.Space:return k.spaceKey.wasPressedThisFrame;case KeyCode.T:return k.tKey.wasPressedThisFrame;case KeyCode.Escape:return k.escapeKey.wasPressedThisFrame;case KeyCode.F1:return k.f1Key.wasPressedThisFrame;case KeyCode.F5:return k.f5Key.wasPressedThisFrame;}return false;
 #else
             return Input.GetKeyDown(key);
 #endif
