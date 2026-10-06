@@ -61,7 +61,7 @@ namespace Vadronia
                 var invalid = MovementCore.Move(p, float.NaN, 0, empty);
                 Require(invalid.X == p.X && invalid.Y == p.Y, "NaN contaminou a posição");
             }, report, ref count);
-            Check("Spawns livres e percurso inteiro de Conrad", () =>
+            Check("Spawns livres e percurso inteiro de Konrad", () =>
             {
                 var blocks = TownLayout.Blocks(); var p = TownLayout.Patrol[0]; int target = 1, laps = 0;
                 var visited = new bool[TownLayout.Patrol.Length]; visited[0] = true;
@@ -73,7 +73,7 @@ namespace Vadronia
                     float distance = (float)Math.Sqrt(dx * dx + dy * dy);
                     float step = Math.Min(distance, 1.65f / 60);
                     if (distance > 0) p = MovementCore.Move(p, dx / distance * step, dy / distance * step, blocks);
-                    Require(MovementCore.Clear(p.X, p.Y, blocks), "Conrad dentro de obstáculo");
+                    Require(MovementCore.Clear(p.X, p.Y, blocks), "Konrad dentro de obstáculo");
                     if (Math.Abs(p.X - t.X) + Math.Abs(p.Y - t.Y) < .02f)
                     { visited[target] = true; target = (target + 1) % TownLayout.Patrol.Length; if (target == 1) laps++; }
                 }

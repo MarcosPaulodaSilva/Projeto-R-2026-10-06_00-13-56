@@ -37,7 +37,7 @@ namespace Vadronia.Editor
                 check(!actor.Cycle.Moving&&actor.AnimationFrame==restFrame&&actor.AnimationPhase==restPhase,"Parada mantém pose e fase sem caminhar no lugar");
                 game.Hud.SetPause(true);check(game.Hud.Paused,"Pausa é ativada");game.Hud.SetPause(false);
                 motor.State.Restore(new AdventureProgress());game.Interactions.RefreshPlants();
-                game.Interactions.Interact(0);check(game.Hud.DialogOpen&&motor.State.Progress.quest==1,"Conversa com Conrad inicia missão e diálogo");game.Hud.CloseDialog();
+                game.Interactions.Interact(0);check(game.Hud.DialogOpen&&motor.State.Progress.quest==1,"Conversa com Konrad inicia missão e diálogo");game.Hud.CloseDialog();
                 for(int i=2;i<=4;i++)game.Interactions.Interact(i);
                 check(motor.State.HerbCount==3,"Três canteiros coletados nas interações");
                 game.Interactions.Interact(0);game.Hud.CloseDialog();game.Interactions.Interact(0);game.Hud.CloseDialog();
