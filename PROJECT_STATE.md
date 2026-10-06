@@ -29,7 +29,8 @@
 - save local;
 - cena real, Packages e ProjectSettings preservados;
 - vila de Grünwald reformulada (2026-10-06): casas de frente e de costas ao longo das ruas, jardim noroeste, quintais, praça com poço, três bancas, bancos, mural, barris e canteiros, e fumaça saindo da chaminé da ferraria;
-- ronda de Konrad ampliada (10 pontos com pausa própria): praça, bancas, rua sul e quintal oeste.
+- ronda de Konrad ampliada (10 pontos com pausa própria): praça, bancas, rua sul e quintal oeste;
+- `village.ogg` e `city.ogg` importados como assets de áudio; **a reprodução ainda não está conectada ao runtime**.
 
 ## ORGANIZAÇÃO ATUAL
 
@@ -48,7 +49,7 @@ A regressão .NET deve permanecer verde. Como esta limpeza move um asset Unity p
 
 ## ATUAL
 
-Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga).
+Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles.
 
 ## PRÓXIMO
 
