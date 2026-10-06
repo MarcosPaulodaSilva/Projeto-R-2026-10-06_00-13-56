@@ -13,9 +13,10 @@ namespace Vadronia
         public Vector2 Heading { get; private set; } = Vector2.down;
         public bool IsSprinting { get; private set; }
         public ExplorerMotor(CharacterView actor, TownWorld world) { Actor = actor; this.world = world; }
-        public void Tick(float dt)
+        public void Tick(float dt) { Tick(dt, true); }
+        public void Tick(float dt, bool allowDodge)
         {
-            Tick(dt, ReadMovement(), Held(KeyCode.Z), Pressed(KeyCode.Space));
+            Tick(dt, ReadMovement(), Held(KeyCode.Z), allowDodge && Pressed(KeyCode.Space));
         }
         public void Tick(float dt, Vector2 input, bool sprint, bool dodge)
         {
@@ -29,6 +30,17 @@ namespace Vadronia
             var next = MovementCore.Move(old, velocity.x * dt, velocity.y * dt, world.Blocks);
             Actor.Place(next);
             Actor.Animate(dt, State.Dodging, IsSprinting);
+        }
+        public void Lunge(Vector2 direction, float distance)
+        {
+            if (distance <= 0 || float.IsNaN(distance) || float.IsInfinity(distance)) return;
+            if (direction.sqrMagnitude < .0001f) direction = Heading;
+            direction.Normalize();
+            velocity = Vector2.zero;
+            var old = Actor.Position;
+            var next = MovementCore.Move(old, direction.x * distance, direction.y * distance, world.Blocks);
+            Actor.Place(next);
+            Heading = direction;
         }
         public void Halt() { velocity = Vector2.zero; Actor.Place(Actor.Position); Actor.Animate(.1f,false,false); }
         public static Vector2 ReadMovement()

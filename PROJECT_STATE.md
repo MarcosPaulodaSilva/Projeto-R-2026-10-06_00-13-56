@@ -21,6 +21,7 @@
 - player com quadros de animação derivados do vídeo de referência;
 - Konrad usando o atlas original preservado por GUID; direção estável em diagonais (histerese) e leve respiração/passo por código, já que o atlas só tem 4 quadros de caminhada;
 - caminhada, corrida/fôlego e esquiva;
+- Sword Combo inicial do player: 3 golpes com windup/active/recovery, buffer de encadeamento, lunge e apresentação simples de espada; ataque no clique esquerdo;
 - movimento de teclado em **RDFG** (`R` cima, `F` baixo, `D` esquerda, `G` direita), mantendo as setas como alternativa; **Z** corre e **T** interage/continua diálogo;
 - câmera suave;
 - HUD em UI Toolkit;
@@ -51,7 +52,7 @@ A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub
 
 ## ATUAL
 
-Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; corrida foi remapeada de **Shift** para **Z** e interação/continuação de diálogo de **E** para **T**. A implementação está no repositório, mas precisa do teste físico de teclado de Marcos no Editor.
+Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; corrida foi remapeada de **Shift** para **Z** e interação/continuação de diálogo de **E** para **T**. O primeiro módulo de combate também foi integrado: **clique esquerdo** inicia/encadeia o Sword Combo de 3 golpes, com mira pelo mouse/analógico direito e lunge por golpe. Tudo ainda precisa do teste físico no Editor.
 
 ## PRÓXIMO
 
@@ -59,14 +60,15 @@ Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `to
 2. abrir no Unity e aguardar a importação/recompilação de `town-extra.png` e dos demais assets;
 3. conferir visualmente o mapa e ajustar `TownLayout.cs` somente se houver sobreposição;
 4. testar fisicamente o movimento: `R` cima, `F` baixo, `D` esquerda e `G` direita;
-5. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
-6. continuar a próxima mecânica autorizada.
+5. testar o Sword Combo com clique esquerdo, encadeando os 3 golpes e conferindo a mira/lunge;
+6. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
+7. continuar a próxima mecânica autorizada.
 
 ## LIMITES / DECISÕES
 
 - prédios ainda externos;
 - um NPC;
-- sem combate;
+- combate inicial limitado ao combo de espada do player; ainda sem inimigos, HP/dano aplicado, block/parry ou efeitos das habilidades E/H;
 - sem interiores;
 - casas em diagonal exigem arte nova (o atlas só tem fachadas de frente; "de costas" foi derivado dela);
 - `W`, `S`, `X` e `2` não podem ser usados como controles obrigatórios; o movimento atual é RDFG + setas;

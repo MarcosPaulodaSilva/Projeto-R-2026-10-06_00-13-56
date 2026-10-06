@@ -14,6 +14,7 @@ Abra a cena `Assets/Scenes/Vadronia.unity` e pressione Play. Em uma cópia nova,
 | G / → | Caminhar para a direita |
 | Z | Correr, consumindo fôlego |
 | Espaço | Esquiva com custo e recarga |
+| Mouse esquerdo | Combo de espada de 3 golpes |
 | T | Interagir / continuar diálogo |
 | Esc | Pausar / fechar diálogo |
 | F1 | Ocultar interface |
@@ -30,7 +31,7 @@ As teclas `W`, `S`, `X` e `2` não devem ser usadas como controles obrigatórios
 - Câmera suave com antecipação e abertura ao correr; interface com fôlego, moedas, objetivo, diálogos e pausa.
 - Corrida, esquiva com colisão, missão de coleta e salvamento local.
 
-Esta é uma versão de exploração ampliada. Os prédios ainda são fachadas; não há interiores ou combate. A animação é procedural sobre recortes da arte, sem novos clipes desenhados quadro a quadro.
+Esta é uma versão de exploração ampliada. Os prédios ainda são fachadas e não há interiores. O combate inicial permite ao player usar o combo de espada de 3 golpes; ainda não há inimigos/HP para aplicar dano. A animação de caminhada continua procedural sobre recortes da arte, sem novos clipes desenhados quadro a quadro.
 
 ## Verificações
 
