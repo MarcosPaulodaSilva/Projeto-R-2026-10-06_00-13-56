@@ -1,0 +1,42 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:Style src="AdventureHud.uss" />
+  <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+    <ui:VisualElement class="top-row" picking-mode="Ignore">
+      <ui:VisualElement class="brand" picking-mode="Ignore">
+        <ui:Label text="V A D R O N I A" class="eyebrow" />
+        <ui:Label text="Grünwald" class="title" />
+        <ui:Label text="A vila entre os pinheiros" class="subtitle" />
+      </ui:VisualElement>
+      <ui:VisualElement class="quest" picking-mode="Ignore">
+        <ui:Label text="CADERNO DE VIAGEM" class="eyebrow" />
+        <ui:Label name="questTitle" class="quest-title" />
+        <ui:Label name="questText" class="quest-text" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement class="spacer" picking-mode="Ignore" />
+    <ui:Label name="toast" class="toast hidden" />
+    <ui:Label name="prompt" class="prompt hidden" />
+    <ui:VisualElement class="bottom-row" picking-mode="Ignore">
+      <ui:VisualElement class="stats" picking-mode="Ignore">
+        <ui:Label name="staminaText" class="eyebrow" />
+        <ui:VisualElement name="segments" class="segments" picking-mode="Ignore" />
+        <ui:Label name="coins" class="subtitle" />
+      </ui:VisualElement>
+      <ui:Label text="WASD / SETAS  mover     SHIFT  correr     ESPAÇO  esquiva&#10;E  interagir     ESC  pausar     F1  ocultar interface     F5  salvar" class="controls" />
+    </ui:VisualElement>
+    <ui:VisualElement name="dialog" class="dialog hidden">
+      <ui:Label name="speaker" class="dialog-name" />
+      <ui:Label name="dialogText" class="dialog-text" />
+      <ui:Label text="E  continuar     ESC  fechar" class="dialog-hint" />
+    </ui:VisualElement>
+    <ui:VisualElement name="pause" class="pause-shade hidden">
+      <ui:VisualElement class="pause-card">
+        <ui:Label text="V A D R O N I A" class="eyebrow" />
+        <ui:Label text="Um breve descanso" class="title" />
+        <ui:Label text="Sua jornada espera por você." class="subtitle" />
+        <ui:Button name="resume" text="Continuar" class="button" />
+        <ui:Button name="save" text="Salvar progresso" class="button" />
+      </ui:VisualElement>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

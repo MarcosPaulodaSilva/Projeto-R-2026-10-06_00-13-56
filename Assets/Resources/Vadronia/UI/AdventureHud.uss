@@ -1,0 +1,27 @@
+.hud { flex-grow: 1; color: rgb(243,234,211); font-size: 16px; padding: 26px; }
+.top-row { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.brand { background-color: rgba(18,29,25,0.9); border-left-width: 3px; border-left-color: rgb(203,169,96); padding: 16px 22px; width: 272px; }
+.eyebrow { color: rgb(211,179,114); font-size: 12px; letter-spacing: 3px; }
+.title { font-size: 29px; -unity-font-style: bold; margin-top: 3px; }
+.subtitle { color: rgb(182,198,178); font-size: 13px; margin-top: 2px; }
+.quest { background-color: rgba(18,29,25,0.9); padding: 15px 20px; width: 300px; border-top-width: 2px; border-top-color: rgb(203,169,96); }
+.quest-title { -unity-font-style: bold; font-size: 17px; margin-top: 5px; }
+.quest-text { white-space: normal; color: rgb(196,204,186); font-size: 14px; margin-top: 6px; }
+.spacer { flex-grow: 1; }
+.toast { align-self: center; background-color: rgba(22,34,27,0.95); border-bottom-width: 2px; border-bottom-color: rgb(211,179,114); padding: 12px 22px; margin-bottom: 14px; font-size: 17px; }
+.prompt { align-self: center; background-color: rgba(18,26,23,0.93); padding: 10px 22px; margin-bottom: 14px; font-size: 17px; }
+.bottom-row { flex-direction: row; justify-content: space-between; align-items: flex-end; }
+.stats { background-color: rgba(18,29,25,0.9); padding: 12px 18px; width: 255px; }
+.segments { flex-direction: row; margin-top: 7px; margin-bottom: 5px; }
+.segment { width: 19px; height: 5px; margin-right: 3px; background-color: rgb(144,184,139); }
+.segment.empty { background-color: rgb(57,65,56); }
+.controls { background-color: rgba(18,29,25,0.9); padding: 13px 18px; color: rgb(211,217,201); font-size: 13px; white-space: normal; max-width: 670px; }
+.dialog { position: absolute; left: 17%; right: 17%; bottom: 105px; background-color: rgba(17,29,24,0.98); border-top-width: 3px; border-top-color: rgb(203,169,96); padding: 24px 30px; }
+.dialog-name { color: rgb(218,184,114); font-size: 20px; -unity-font-style: bold; margin-bottom: 10px; }
+.dialog-text { white-space: normal; font-size: 19px; margin-bottom: 12px; }
+.dialog-hint { color: rgb(173,189,169); font-size: 13px; }
+.pause-shade { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(7,16,13,0.72); justify-content: center; align-items: center; }
+.pause-card { width: 410px; padding: 32px; background-color: rgb(22,35,29); border-top-width: 3px; border-top-color: rgb(203,169,96); }
+.button { background-color: rgb(45,66,50); color: rgb(248,239,215); border-width: 1px; border-color: rgb(98,118,79); padding: 12px; margin-top: 14px; font-size: 17px; -unity-text-align: middle-center; }
+.button:hover { background-color: rgb(67,89,57); }
+.hidden { display: none; }

@@ -1,0 +1,63 @@
+{
+  "source": "assets/videos/gemini_generated_video_7a1daa7c.mp4",
+  "sourceSha256": "3985e8effb7ddc14a152bdfa2979aed7ad27c492bc4759b8bc14934a2828f2cb",
+  "sourceFps": 24,
+  "frameWidth": 200,
+  "frameHeight": 300,
+  "columns": 8,
+  "pivotX": 0.5,
+  "pivotY": 0.05,
+  "pixelsPerUnit": 160,
+  "southwest": "Mirrored southeast frames at runtime; no new artwork.",
+  "clips": [
+    {
+      "name": "south",
+      "sourceStartFrame": 6,
+      "frameCount": 25,
+      "idleFrame": 11,
+      "sha256": "314feccbbc6d18cd3356f57a07c095375701a304a29f240a7356051bab68e87b"
+    },
+    {
+      "name": "southeast",
+      "sourceStartFrame": 277,
+      "frameCount": 28,
+      "idleFrame": 0,
+      "sha256": "79fd7a85a48e20963d43282f843c04def659567102ceefc1f6d9eb2d6ed33bef"
+    },
+    {
+      "name": "east",
+      "sourceStartFrame": 189,
+      "frameCount": 27,
+      "idleFrame": 18,
+      "sha256": "d56a1055c9ba72a3d882a0b6756b6f2ad76212bda40ca5b1de17a9b8e87a52aa"
+    },
+    {
+      "name": "northeast",
+      "sourceStartFrame": 351,
+      "frameCount": 28,
+      "idleFrame": 26,
+      "sha256": "e15b5ec40be7dacc8d19ff8c3449fe3506b0074f51ffc9bebdf3e134393cfdaf"
+    },
+    {
+      "name": "north",
+      "sourceStartFrame": 66,
+      "frameCount": 32,
+      "idleFrame": 0,
+      "sha256": "c0ca052f850e7d759f5d035da5f6b8648463aa52d8bb65f6f3e85ae7780ba8ad"
+    },
+    {
+      "name": "northwest",
+      "sourceStartFrame": 403,
+      "frameCount": 28,
+      "idleFrame": 9,
+      "sha256": "480275f932a1f843204a04e8b46a968558143490b639d7abbec0fa834066379a"
+    },
+    {
+      "name": "west",
+      "sourceStartFrame": 145,
+      "frameCount": 28,
+      "idleFrame": 6,
+      "sha256": "aae9e2900ea5cf25ce8f5ecfb2eed46b3478b9580c9f5cd4ffa1785b974c8607"
+    }
+  ]
+}

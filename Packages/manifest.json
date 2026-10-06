@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "com.unity.pipeline": "0.8.0-exp.1"
+  }
+}
