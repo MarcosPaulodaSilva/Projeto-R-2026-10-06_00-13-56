@@ -1,0 +1,1372 @@
+BÍBLIA DE HISTÓRIA, MUNDO E LORE — PROJETO R Versão narrativa
+consolidada
+
+PROPÓSITO DESTE DOCUMENTO
+
+Este documento trata exclusivamente do universo ficcional do Projeto R:
+seu mundo, povos, reinos, personagens, conflitos, mistérios,
+instituições e trajetória narrativa do protagonista.
+
+Ele não é uma história do desenvolvimento do jogo. Portanto, não aborda
+Unity, Codex, arquitetura de software, performance, testes,
+prompts, agentes ou decisões técnicas de produção.
+
+Também não transforma mistérios deliberados em respostas. Quando o mundo
+não conhece uma verdade — especialmente no caso da civilização antiga de
+Vadronia e da morte de Heinrich Morigan — o desconhecido é parte do
+cânone.
+
+A versão narrativa vigente considera o protagonista e Nicasia Morigan
+com 18 anos no início. O mundo possui passagem de dias e horários para
+sustentar sua vida cotidiana, mas não existe envelhecimento narrativo
+automático, aniversário sistêmico anual ou passagem obrigatória de anos.
+O aniversário de Nicasia, 7 de novembro, permanece como informação de
+lore.
+
+====================================================================== 1.
+A IDEIA CENTRAL DO MUNDO
+======================================================================
+
+Projeto R se passa em um mundo medieval-fantástico formado, na região
+conhecida pela campanha, por três grandes reinos independentes:
+Vadronia, Migriard e Vitehria.
+
+O mundo não nasceu com o protagonista.
+
+Quando a história começa, reis já governaram e morreram, famílias nobres
+já carregam séculos de prestígio, estradas já ligam cidades, guildas já
+enviam exploradores para lugares perigosos, aldeões possuem casas e
+rotinas, comerciantes possuem negócios, soldados protegem fronteiras e
+ruínas muito mais antigas que os reinos atuais permanecem espalhadas
+pela terra.
+
+O protagonista entra nesse mundo como mais uma pessoa.
+
+Não existe uma profecia conhecida que o declare salvador. Não existe uma
+revelação inicial de sangue divino. Não existe uma obrigação de o
+universo inteiro se reorganizar em torno dele.
+
+Sua importância precisa ser conquistada.
+
+É possível começar como um desconhecido, sobreviver a estradas
+perigosas, ajudar pessoas, explorar dungeons, derrotar criaturas,
+construir amizades, formar um grupo de companions, adquirir reputação e
+gradualmente tornar-se conhecido por guildas, comunidades, nobres e
+famílias reais.
+
+A história é, portanto, tanto sobre o mundo quanto sobre a posição que o
+jogador escolhe ocupar dentro dele.
+
+======================================================================
+2. O TOM NARRATIVO
+======================================================================
+
+O universo combina beleza, acolhimento, perigo e mistério.
+
+Não é grimdark.
+
+Cidades possuem mercados, famílias, trabalhadores, crianças, guardas,
+viajantes, comerciantes e festas. Vilarejos podem ser pequenos e
+calorosos. Estradas atravessam paisagens bonitas. A natureza pode ser
+admirável.
+
+Ao mesmo tempo, o mundo não é seguro.
+
+Existem dungeons, criaturas, bandidos, ruínas, florestas perigosas e uma
+ameaça associada à escuridão da noite. Pessoas podem morrer. Companions
+podem ser perdidos. Expedições podem fracassar. Lugares abandonados
+podem esconder histórias que ninguém compreende por completo.
+
+A sensação desejada é que civilização e perigo coexistem.
+
+Durante o dia, uma estrada pode ser apenas uma estrada entre campos e
+montanhas. À noite, a mesma estrada pode parecer completamente diferente
+quando as últimas luzes de uma vila desaparecem atrás do viajante.
+
+A luz representa mais que iluminação: representa presença humana, abrigo
+e segurança.
+
+======================================================================
+3. OS TRÊS REINOS
+======================================================================
+
+Vadronia, Migriard e Vitehria são reinos soberanos.
+
+Nenhum é vassalo de outro. Nenhum é definido como o reino objetivamente
+superior. Nenhum é secretamente responsável por todos os acontecimentos
+do mundo.
+
+Não existe uma grande guerra dominando o início da campanha. As
+fronteiras permitem comércio, circulação de viajantes, aventureiros e
+mercadores.
+
+As diferenças entre os reinos são culturais, geográficas e políticas.
+
+VADRONIA olha para um passado que não consegue compreender.
+
+MIGRIARD aprendeu a sobreviver a uma natureza severa por meio de
+resistência, responsabilidade e comunidade.
+
+VITEHRIA vive cercada por uma natureza inquietante e aprendeu que nem
+tudo precisa ser dominado para que seja respeitado.
+
+Essas três identidades formam o coração cultural do mundo.
+
+======================================================================
+4. RELAÇÕES ENTRE OS REINOS
+======================================================================
+
+As coroas mantêm relações diplomáticas.
+
+Vadronia e Migriard possuem relações historicamente boas. Mercadorias,
+viajantes e rotas ligam regiões temperadas de Vadronia às terras frias
+de Migriard.
+
+Vadronia e Vitehria mantêm relações corretas, porém mais cautelosas. O
+comércio existe, mas a natureza reservada da cultura vitehriana cria
+maior distância.
+
+Migriard e Vitehria possuem respeito mútuo significativo. Apesar das
+diferenças, os dois povos entendem o que significa construir comunidades
+em ambientes difíceis.
+
+Essas relações são tendências entre governos e culturas, não regras para
+indivíduos.
+
+Um mercador vitehriano pode adorar Vadronia. Um nobre vadroniano pode
+desconfiar de estrangeiros. Um guerreiro de Migriard pode ter amizade
+antiga com alguém de Vitehria. Um aldeão pode nunca ter atravessado a
+fronteira de seu reino.
+
+O mundo deve preservar essa variedade humana.
+
+======================================================================
+5. VADRONIA — O REINO DAS MEMÓRIAS INCOMPLETAS
+======================================================================
+
+Vadronia é um reino de montanhas, vales, rios, pontes, florestas,
+estradas antigas e ruínas.
+
+Seus principais assentamentos são:
+
+Capital: Vadronia. Cidade secundária: Eisenbruck. Vilarejos: Grünwald e
+Nebelheim.
+
+A sociedade possui forte identidade comunitária e tradição militar
+disciplinada. Seus guerreiros são memoráveis não porque o reino seja
+declarado “o mais forte”, mas porque disciplina, formação, defesa e
+tradição ocupam lugar importante em sua cultura.
+
+Ao mesmo tempo, Vadronia carrega uma presença muito mais antiga que sua
+monarquia.
+
+Por todo o território existem vestígios de uma civilização desaparecida.
+
+E ninguém sabe realmente quem ela foi.
+
+======================================================================
+6. A CIVILIZAÇÃO SEM NOME
+======================================================================
+
+Antes dos atuais habitantes de Vadronia, outra civilização ocupou parte
+dessas terras.
+
+Ela é antiga o suficiente para que seu nome verdadeiro tenha
+desaparecido.
+
+Restaram construções. Símbolos. Ruínas. Inscrições. Estradas ou
+estruturas cuja finalidade nem sempre é evidente. Histórias transmitidas
+por gerações.
+
+Mas não restou uma explicação completa.
+
+Sua língua é indecifrável em sentido definitivo. Estudiosos podem
+reconhecer padrões, comparar símbolos e formular teorias, porém ninguém
+produzirá uma tradução perfeita que transforme todo o mistério em
+exposição.
+
+Não existe um último sobrevivente convenientemente esperando para contar
+tudo. Não existe um livro mágico contendo todas as respostas. Não existe
+obrigação narrativa de explicar por que essa civilização desapareceu.
+
+Pessoas de Vadronia possuem interpretações diferentes.
+
+Para alguns, as ruínas são apenas restos de um povo antigo. Para outros,
+são locais de mau presságio. Estudiosos podem enxergá-las como a maior
+questão histórica do reino. Aldeões podem conhecer histórias que não
+combinam entre si. Exploradores podem jurar ter visto coisas que outros
+consideram exagero.
+
+O jogo pode oferecer evidências, mas não precisa transformar evidência
+em certeza.
+
+O mistério é uma característica permanente do mundo.
+
+======================================================================
+7. A CAPITAL VADRONIA
+======================================================================
+
+A capital fica em uma região de vale cercada por montanhas.
+
+O Castelo Morigan domina visualmente a cidade e representa a
+continuidade da dinastia.
+
+Nas áreas próximas ao castelo concentram-se prestígio, residências
+nobres e estruturas ligadas à corte. Em outras regiões estão mercados,
+comércio, guilda, residências e bairros mais modestos.
+
+A cidade é antiga e cresceu organicamente. Não precisa parecer uma
+construção geometricamente perfeita.
+
+Casas, ruas, lojas, trabalhadores e viajantes fazem a capital parecer
+uma comunidade real.
+
+Mesmo com a crise sucessória, Vadronia não está em colapso.
+
+Os mercados continuam funcionando. Guardas continuam patrulhando.
+Comerciantes continuam vendendo. Famílias continuam vivendo. A Guilda
+continua enviando aventureiros. A coroa continua governando.
+
+Essa normalidade é importante porque torna a fragilidade política mais
+humana: o reino não está destruído; existe algo valioso que todos temem
+perder.
+
+======================================================================
+8. CASA MORIGAN
+======================================================================
+
+A família Morigan governa Vadronia.
+
+Seu brasão é uma coroa prateada acima de uma montanha com uma estrela.
+As cores são azul profundo, prata e branco.
+
+A montanha simboliza permanência. A estrela representa orientação. A
+coroa representa dever dinástico.
+
+A família está marcada pela ausência de Heinrich Morigan.
+
+======================================================================
+9. HEINRICH MORIGAN
+======================================================================
+
+Heinrich foi rei de Vadronia.
+
+Morreu aos 57 anos, dois anos antes do início da história, vítima de uma
+condição de natureza mágica, misteriosa e incurável.
+
+Sua morte deixou uma ferida pessoal na família e uma incerteza política
+no reino.
+
+O ponto mais importante é aquilo que NÃO se sabe.
+
+Não está estabelecido quem causou a condição. Não está estabelecido por
+que ocorreu. Não está estabelecido se existia um responsável. Não está
+estabelecido que a civilização antiga esteja ligada a ela.
+
+Rumores podem existir. Suspeitas podem existir. Personagens podem
+acreditar em teorias. Pistas podem ser interpretadas de maneiras
+diferentes.
+
+Mas a narrativa não é obrigada a entregar um culpado final.
+
+A morte de Heinrich é um mistério humano e político que pode continuar
+parcialmente aberto mesmo depois de grandes acontecimentos.
+
+======================================================================
+10. BEATRICE MORIGAN
+======================================================================
+
+Beatrice Morigan tem 45 anos e governa após a morte do marido.
+
+Ela é humilde, carismática, inteligente, madura, bondosa, forte e
+presente na vida de seus filhos.
+
+A morte de Heinrich a afetou profundamente. Sua tristeza não deve ser
+utilizada para reduzi-la a uma governante incapaz ou a uma personagem
+definida apenas pela perda.
+
+Beatrice continua sendo mãe, rainha e pessoa.
+
+Ela precisa equilibrar luto, responsabilidades políticas, proteção da
+família e um problema sucessório que envolve seus próprios filhos.
+
+Sua aprovação possui grande peso em qualquer eventual ascensão política
+do protagonista em Vadronia, não como uma chave arbitrária, mas porque
+ela ocupa uma posição central na família e no reino.
+
+======================================================================
+11. HENRY MORIGAN
+======================================================================
+
+Henry tem 23 anos e é o filho mais velho.
+
+É introvertido, inteligente, orgulhoso, gentil e cavalheiresco.
+
+Sua posição sucessória está ligada à continuidade, administração e
+tradição.
+
+Ele não é um antagonista automático.
+
+Henry pode acreditar genuinamente que sua forma de liderança é melhor
+para Vadronia. Pode amar sua família e ainda disputar a sucessão. Pode
+discordar de Julian sem desejar destruí-lo.
+
+A história não deve corromper artificialmente sua personalidade apenas
+para tornar outra rota mais conveniente.
+
+======================================================================
+12. JULIAN MORIGAN
+======================================================================
+
+Julian tem 19 anos e é o gêmeo mais velho de Kian.
+
+É bravo, corajoso, impulsivo, estressado em certos momentos, bondoso e
+atencioso.
+
+Possui maior ligação com a tradição guerreira de Vadronia.
+
+Assim como Henry, Julian não é vilão.
+
+A disputa sucessória deve funcionar justamente porque os dois podem
+possuir qualidades legítimas.
+
+Se ambos fossem apenas bom contra mau, a questão perderia sua força.
+
+======================================================================
+13. KIAN MORIGAN
+======================================================================
+
+Kian tem 19 anos e é irmão gêmeo de Julian.
+
+É tímido, carinhoso, ansioso, dependente e criativo.
+
+Ele não disputa ativamente a coroa.
+
+Sua presença ajuda a impedir que a família Morigan exista apenas como um
+tabuleiro político. Os Morigan são uma família antes de serem peças de
+sucessão.
+
+Kian pode observar tensões entre irmãos e carregar suas próprias
+preocupações sem precisar tornar-se um terceiro candidato.
+
+======================================================================
+14. NICASIA MORIGAN
+======================================================================
+
+Nicasia tem 18 anos no início da versão narrativa vigente.
+
+Seu aniversário, como informação de lore, é 7 de novembro. O jogo não
+utiliza envelhecimento anual automático.
+
+Nicasia é resiliente, empática, proativa, organizada, amorosa,
+responsável, sensível, honesta e observadora. Também pode ser pessimista
+e demonstrar ciúme moderado.
+
+Ela não deve existir apenas como “princesa disponível ao protagonista”.
+
+Possui família, rotina, opiniões e percepção própria do mundo.
+
+Sua relação com o jogador deve nascer de convivência, ações observadas,
+conversas, reputação e experiências concretas.
+
+Ela pode perceber como o protagonista trata pessoas comuns. Pode
+conhecer relatos de feitos dele. Pode lembrar interações anteriores.
+Pode reagir a companions presentes. Pode formar opinião antes que
+qualquer grande relação pessoal exista.
+
+A eventual rota com Nicasia é consequência de uma história
+compartilhada, não a função inicial da personagem.
+
+======================================================================
+15. A CRISE DE SUCESSÃO DE VADRONIA
+======================================================================
+
+Depois da morte de Heinrich, a sucessão tornou-se uma questão sensível.
+
+Os principais nomes são Henry e Julian.
+
+Henry representa uma direção mais administrativa e tradicional. Julian
+possui conexão maior com a identidade militar.
+
+Kian não disputa ativamente.
+
+As Grandes Casas podem apoiar lados diferentes, mudar de posição diante
+de acontecimentos e interpretar o futuro do reino de formas distintas.
+
+Não existe uma resposta canônica simples de “este é o irmão correto”.
+
+A crise precisa ser resolvida de maneira coerente com os acontecimentos
+da campanha.
+
+O protagonista pode tornar-se relevante para essa questão, mas não chega
+como alguém magicamente autorizado a tomar a coroa.
+
+======================================================================
+16. CASA FALKENBERG
+======================================================================
+
+Falkenberg é uma das três Grandes Casas de Vadronia.
+
+Está ligada à tradição militar, fortalezas, defesa, disciplina, coragem,
+serviço e liderança.
+
+Seu símbolo é associado a um falcão diante de uma montanha.
+
+Pode demonstrar afinidade inicial maior com Julian devido à importância
+que atribui à liderança militar.
+
+Isso não significa lealdade automática e eterna.
+
+A Casa possui seus próprios interesses e avaliação sobre o futuro do
+reino.
+
+======================================================================
+17. CASA EICHENWALD
+======================================================================
+
+Eichenwald está ligada a agricultura, florestas, abastecimento,
+comércio, estabilidade, prosperidade e responsabilidade administrativa.
+
+Seu símbolo é uma árvore de carvalho com raízes.
+
+Pode enxergar Henry com maior simpatia inicial por sua ligação com
+continuidade administrativa.
+
+Não é uma “facção pacifista” simples. Abastecimento e estabilidade são
+questões fundamentais para a sobrevivência de um reino.
+
+======================================================================
+18. CASA SILBERHAIN
+======================================================================
+
+Silberhain está ligada a administração, conhecimento, arquivos,
+história, prudência, planejamento e estudo das ruínas.
+
+Seu brasão é associado a uma lua prateada parcialmente coberta por
+galhos.
+
+É a mais cautelosa das três em muitas questões.
+
+Seu interesse pela história de Vadronia não significa que possua as
+respostas para a civilização desaparecida.
+
+Seus estudiosos também convivem com limites, teorias e contradições.
+
+======================================================================
+19. EISENBRUCK, GRÜNWALD E NEBELHEIM
+======================================================================
+
+Eisenbruck é a grande cidade secundária de Vadronia e ajuda a impedir
+que todo o reino seja reduzido à capital.
+
+Grünwald e Nebelheim são os dois vilarejos principais.
+
+Eles representam a escala humana do reino: aldeões, comerciantes,
+guardas, pequenas comunidades, viajantes e problemas locais.
+
+Nem toda história precisa envolver a coroa.
+
+Uma missão para uma família, um problema na estrada, um desaparecimento,
+uma criatura, uma disputa comercial ou uma dungeon próxima podem ser
+importantes para as pessoas daquele lugar mesmo que jamais alterem a
+sucessão real.
+
+Essa diferença de escala é essencial para a narrativa.
+
+======================================================================
+20. MIGRIARD — O REINO QUE RESISTE JUNTO
+======================================================================
+
+Migriard ocupa uma região de montanhas, neve, gelo, lagos congelados,
+coníferas e clima severo.
+
+Seus assentamentos principais são:
+
+Capital: Migriard. Cidade secundária: Eisenfjord. Vilarejos: Skallvik e
+Weissental.
+
+A família real é a Casa Haldren.
+
+As Grandes Casas são Bjornsen, Falkr e Eisenmark.
+
+Sua instituição de aventureiros é a Guilda de Migriard.
+
+A cultura possui influências nórdicas e germânicas, mas não deve cair em
+caricaturas.
+
+O povo de Migriard desenvolveu uma identidade de resistência, honra,
+hospitalidade e responsabilidade comunitária.
+
+Em uma terra severa, sobreviver sozinho é difícil.
+
+Por isso oferecer abrigo, ajudar viajantes e contribuir para a
+comunidade possuem significado profundo.
+
+======================================================================
+21. A VIDA EM MIGRIARD
+======================================================================
+
+O frio não transforma a região em um simulador de sobrevivência.
+
+A neve e as montanhas moldam cultura, arquitetura, rotas, perigos e
+histórias, mas o jogador não precisa administrar dezenas de medidores de
+temperatura ou fome.
+
+Casas utilizam pedra e madeira pesada. Telhados são inclinados. Chaminés
+e interiores aquecidos contrastam com o exterior. Luzes de janelas em
+noites frias reforçam a sensação de abrigo.
+
+A beleza de Migriard deve ser tão importante quanto sua severidade.
+
+Montanhas cobertas de neve, lagos, florestas e vales podem produzir
+algumas das paisagens mais impressionantes do mundo.
+
+======================================================================
+22. CASA HALDREN
+======================================================================
+
+Eirik Haldren, 52 anos, é o rei.
+
+Astrid Haldren, 48, é a rainha.
+
+Sigrid Haldren, 24, é a primogênita e herdeira reconhecida.
+
+Leif Haldren, 20, é o segundo filho.
+
+Freya Haldren, 17, é a caçula.
+
+Ao contrário de Vadronia, Migriard não possui uma crise sucessória.
+
+Sigrid será rainha.
+
+Essa estabilidade é uma escolha narrativa importante. Os três reinos não
+devem repetir o mesmo conflito com nomes diferentes.
+
+======================================================================
+23. SIGRID E A ROTA DE MIGRIARD
+======================================================================
+
+Sigrid é herdeira por direito próprio.
+
+Uma eventual relação com o protagonista não remove esse direito.
+
+Se o jogador construir uma trajetória pessoal e política suficientemente
+significativa em Migriard, pode eventualmente tornar-se seu consorte.
+
+Nesse caminho, Sigrid continua sendo a rainha legítima.
+
+A trajetória exige mais do que proximidade pessoal.
+
+O protagonista precisa construir respeito junto à família Haldren,
+reconhecimento no reino e um histórico concreto de serviços prestados à
+população.
+
+As Grandes Casas podem reagir à sua ascensão, mas Migriard não copia a
+estrutura vadroniana de escolher obrigatoriamente uma única Casa
+patrocinadora.
+
+A diferença é temática: em Migriard, pertencimento é demonstrado
+sobretudo pela responsabilidade assumida diante da comunidade.
+
+======================================================================
+24. VITEHRIA — O REINO SOB OS PINHEIROS
+======================================================================
+
+Vitehria é o mais sombrio visualmente dos três reinos.
+
+Não é maligno.
+
+Não é uma terra de pessoas permanentemente deprimidas.
+
+Sua escuridão vem da paisagem.
+
+Florestas imensas de coníferas cobrem grandes áreas. Troncos escuros,
+copas densas e pouca luz fazem essas matas parecerem quase negras vistas
+de longe.
+
+São conhecidas popularmente como Pinheirais Negros.
+
+Além das florestas existem montanhas rochosas, vales estreitos, lagos
+profundos, névoa, cachoeiras, clareiras e flores adaptadas à sombra.
+
+Em certas partes da mata, mesmo o dia parece enfraquecido.
+
+A identidade de Vitehria pode ser resumida assim:
+
+Aquilo que existe além da luz das cidades deve ser respeitado, não
+tratado com curiosidade inconsequente.
+
+======================================================================
+25. A CULTURA VITEHRIANA
+======================================================================
+
+Os vitehrianos trabalham, celebram, bebem, comem, formam famílias,
+discutem e contam histórias como qualquer outro povo.
+
+O cenário é sombrio. As pessoas continuam humanas.
+
+A diferença está na relação cultural com silêncio, floresta e noite.
+
+Histórias ao redor de fogueiras são importantes.
+
+Crianças podem crescer ouvindo conselhos como:
+
+não abandonar a estrada durante a neblina; não viajar sozinho por certas
+regiões; não apagar uma fogueira sem necessidade; ajudar viajantes
+encontrados no caminho.
+
+Algumas dessas tradições são superstição.
+
+Outras provavelmente nasceram de experiências concretas.
+
+O mundo não precisa marcar cada uma como verdadeira ou falsa.
+
+Essa incerteza faz parte da cultura.
+
+======================================================================
+26. A CAPITAL VITEHRIA
+======================================================================
+
+A capital Vitehria fica entre montanhas e um grande lago escuro,
+parcialmente cercada pelas florestas.
+
+Sua arquitetura utiliza pedra cinza-escura, madeira envelhecida e
+telhados inclinados.
+
+Durante o dia, continua sendo uma cidade viva: mercados, tecidos,
+bandeiras, flores, trabalhadores, nobres e viajantes.
+
+À noite, sua identidade muda.
+
+Lanternas. Janelas iluminadas. Braseiros. Guardas. Névoa.
+
+E, além das muralhas, as silhuetas dos pinheiros.
+
+O contraste entre a luz quente da cidade e a floresta fria é uma das
+imagens centrais do reino.
+
+======================================================================
+27. DRAKENWALD, RABENHEIM E DORNHAGEN
+======================================================================
+
+Drakenwald é a grande cidade secundária.
+
+Cresceu junto a uma das maiores estradas que atravessam os Pinheirais
+Negros e tornou-se parada segura para viajantes.
+
+Possui muralhas fortes, hospedarias, comércio e presença importante da
+Guilda de Vitehria.
+
+Rabenheim fica próximo de lagos e florestas densas.
+
+É pequeno, tranquilo e relativamente isolado. Pescadores, caçadores,
+famílias e viajantes ocasionais compõem sua vida.
+
+Dornhagen fica mais próximo das montanhas e de antigas estradas
+vitehrianas.
+
+É mais defensivo, protegido por paliçadas e pequena guarnição.
+
+======================================================================
+28. CASA NACHTWALD
+======================================================================
+
+A Casa Nachtwald governa Vitehria.
+
+Seu brasão mostra um cervo prateado diante de três pinheiros escuros.
+
+Cores: preto, vinho profundo e prata.
+
+O cervo simboliza orientação dentro da floresta. Os pinheiros
+representam Vitehria.
+
+A família é tradicional e reservada, mas não cruel.
+
+======================================================================
+29. ALARIC E HELENA NACHTWALD
+======================================================================
+
+Alaric Nachtwald, 50 anos, é o rei.
+
+É calmo, extremamente observador, reservado, culto e paciente.
+
+Fala pouco e pensa antes de decidir.
+
+Seu povo tende a vê-lo como previsível e justo.
+
+Helena Nachtwald, 46, é a rainha.
+
+É mais comunicativa que Alaric, elegante, pragmática, perspicaz e
+protetora da família.
+
+Possui influência importante na corte.
+
+O contraste entre os dois permite uma família real reservada sem
+transformá-la em emocionalmente vazia.
+
+======================================================================
+30. VIKTOR, ELARA E EMILIA
+======================================================================
+
+Viktor Nachtwald, 22, é o primogênito e herdeiro.
+
+É sério, disciplinado e responsável. Foi preparado desde cedo para
+assumir o reino.
+
+Não existe crise sucessória natural contra ele no começo.
+
+Elara Nachtwald, 18, é a segunda filha.
+
+É curiosa, independente, inteligente, irônica e observadora.
+
+Possui interesse especial pelas regiões naturais de Vitehria e conhece
+as florestas melhor do que normalmente se esperaria de alguém da família
+real.
+
+Emilia Nachtwald, 17, é a caçula.
+
+É sociável, gentil, determinada, espirituosa e interessada na vida das
+pessoas comuns.
+
+Viktor não deve ser transformado em vilão apenas para facilitar uma rota
+envolvendo Elara.
+
+======================================================================
+31. AS GRANDES CASAS DE VITEHRIA
+======================================================================
+
+Rabenmark: ligada a administração, comunicação entre territórios e
+estradas. Seu símbolo é um corvo prateado sobre uma torre.
+
+Dornwald: ligada a florestas, caçadores, guardas territoriais e
+comunidades menores. Seu símbolo é um cervo entre galhos espinhosos.
+
+Eisenhart: família de tradição militar, ligada a fortalezas e defesa
+territorial. Seu símbolo é uma torre prateada sobre campo escuro.
+
+Nenhuma é automaticamente “a casa maligna”.
+
+======================================================================
+32. ISOLAMENTO VERSUS ABERTURA
+======================================================================
+
+A tensão política central de Vitehria não é uma guerra de sucessão.
+
+É uma discussão sobre o futuro do reino.
+
+Uma parte da nobreza acredita que Vitehria deve ampliar comércio e
+relações com outros povos.
+
+Outra teme que dependência excessiva do exterior enfraqueça autonomia e
+tradições.
+
+Nenhuma posição é declarada absolutamente correta.
+
+Esse conflito deve aparecer através de pessoas e consequências, não como
+um simulador abstrato de política.
+
+Mercadores podem defender abertura. Comunidades isoladas podem temer
+mudanças. Nobres podem possuir razões econômicas, culturais ou
+estratégicas. A família real precisa equilibrar essas pressões.
+
+======================================================================
+33. ELARA E A ROTA DE VITEHRIA
+======================================================================
+
+Elara é a personagem ligada à rota real de Vitehria.
+
+Mas casar-se com ela não concede automaticamente a coroa.
+
+Viktor é o herdeiro legítimo.
+
+Para que o protagonista eventualmente alcance posição real, precisa
+existir uma transformação legítima da situação política e sucessória,
+construída pela narrativa e pelas escolhas.
+
+Viktor não deve ser morto, corrompido ou removido simplesmente porque o
+roteiro “precisa liberar espaço”.
+
+A rota de Vitehria deve ser distinta de Vadronia e Migriard e conversar
+com o conflito entre tradição, isolamento, abertura e futuro do reino.
+
+Os detalhes exatos dessa resolução permanecem deliberadamente não
+fechados onde o material original não os definiu.
+
+======================================================================
+34. AS GUILDAS
+======================================================================
+
+Cada reino possui sua instituição regional de aventureiros:
+
+Guilda de Vadronia. Guilda de Migriard. Guilda de Vitehria.
+
+As guildas conectam a vida civilizada às regiões perigosas.
+
+São lugares de contratos, notícias, exploradores, aventureiros e
+potenciais companions.
+
+Podem existir grupos de exploradores conhecidos dentro delas.
+
+A Guilda de Vadronia se conecta naturalmente às ruínas, estradas e
+perigos do reino.
+
+A de Migriard reúne pessoas acostumadas a regiões frias e difíceis.
+
+A de Vitehria possui presença de caçadores, rastreadores, exploradores
+florestais, mercenários e pessoas especializadas em regiões de pouca
+visibilidade.
+
+As guildas não controlam os reinos. São instituições importantes dentro
+deles.
+
+======================================================================
+35. COMPANIONS COMO PARTE DA HISTÓRIA
+======================================================================
+
+Companions não são apenas extensões de combate.
+
+São pessoas recrutadas ao longo da trajetória.
+
+Podem vir de guildas, cidades, vilarejos, tavernas, estradas ou
+encontros especiais.
+
+Possuem papéis, personalidade, equipamentos e relação própria com o
+protagonista.
+
+Um companion pode desenvolver confiança. Pode demonstrar preocupação.
+Pode ajudar financeiramente em situações pequenas quando o vínculo
+justificar. Pode oferecer presentes. Pode comentar acontecimentos. Pode
+morrer.
+
+Essa possibilidade de perda torna a viagem mais pessoal.
+
+A morte permanente de um companion, quando ocorre legitimamente, deve
+representar a perda de alguém que fazia parte da história do grupo, não
+apenas a remoção de uma unidade de combate.
+
+======================================================================
+36. O MUNDO COTIDIANO
+======================================================================
+
+O mundo precisa parecer existir independentemente de quests.
+
+Aldeões têm casas. Comerciantes trabalham. Guardas patrulham. Pessoas se
+encontram em praças. À noite, civis procuram segurança. De manhã,
+retomam suas tarefas.
+
+Uma pessoa que terminou sua quest não deixa de existir.
+
+Ela pode continuar conversando, trabalhando e reagindo ao mundo.
+
+Esse princípio é narrativamente importante: o protagonista não “liga”
+NPCs ao aceitar uma missão.
+
+As pessoas já possuíam uma vida antes de conhecê-lo.
+
+======================================================================
+37. DIA E NOITE COMO NARRATIVA
+======================================================================
+
+A passagem entre amanhecer, dia, entardecer, noite e madrugada muda o
+significado dos lugares.
+
+Durante o dia: estradas possuem viajantes; comércio funciona;
+trabalhadores realizam tarefas; praças têm movimento.
+
+No entardecer: pessoas começam a retornar; lojas se preparam para
+fechar; luzes começam a aparecer.
+
+À noite: civis procuram casas; janelas ficam iluminadas; guardas ganham
+importância; a escuridão além da civilização se torna ameaçadora.
+
+A noite não existe apenas como filtro visual.
+
+Ela conta algo sobre o mundo: a civilização possui limites.
+
+======================================================================
+38. A AMEAÇA NEGRA DA NOITE
+======================================================================
+
+Existe no mundo uma ameaça noturna associada à escuridão: uma criatura
+ou entidade negra extremamente perigosa.
+
+Ela torna luz e abrigo importantes.
+
+Não é necessário que toda noite seja uma perseguição constante.
+
+Sua força narrativa está no fato de que a escuridão pode significar
+vulnerabilidade.
+
+Uma janela acesa. Um poste na estrada. Uma fogueira. Uma vila ao longe.
+
+Esses elementos ganham significado porque existe algo fora deles.
+
+Vitehria, com seus Pinheirais Negros, amplifica naturalmente essa
+sensação, mas a ameaça não pertence exclusivamente ao reino.
+
+A origem definitiva da entidade não deve ser inventada sem nova decisão
+canônica.
+
+======================================================================
+39. CRIATURAS E O MUNDO NATURAL
+======================================================================
+
+Fantasia não significa que toda criatura incomum é hostil.
+
+O mundo deve possuir fauna passiva e seres estranhos que simplesmente
+existem.
+
+Inimigos precisam pertencer ao ambiente e comunicar ecossistemas.
+
+Em Vitehria, por exemplo, podem existir criaturas camufladas entre
+árvores, seres atraídos por fontes de luz, predadores que evitam
+estradas movimentadas ou organismos que parecem vegetação até se
+moverem.
+
+O objetivo é fazer o jogador sentir que criaturas não nasceram apenas
+para fornecer XP.
+
+======================================================================
+40. DUNGEONS COMO LUGARES DO MUNDO
+======================================================================
+
+Dungeons são espaços perigosos que existem fisicamente no mundo.
+
+O jogador encontra suas entradas durante exploração.
+
+Elas podem assumir formas diferentes: ruínas; fortalezas; minas;
+mosteiros; cavernas; estruturas antigas; locais parcialmente submersos;
+outros espaços coerentes com a região.
+
+Entrar é uma decisão.
+
+Depois de entrar, a expedição precisa ser concluída ou terminar em
+derrota.
+
+Isso dá às dungeons peso narrativo: não são apenas menus de combate.
+
+Exploradores se preparam. Guildas podem falar sobre elas. Comunidades
+podem temê-las. Bosses conhecidos podem gerar reputação justamente
+porque sobreviver àquele lugar significa algo.
+
+======================================================================
+41. EXEMPLOS DE DUNGEONS E LENDAS LOCAIS
+======================================================================
+
+Alguns conceitos definidos como direções incluem:
+
+Em Vitehria: Mosteiro da Floresta Silenciosa — construção abandonada
+sendo lentamente engolida pelos pinheiros. Cripta das Raízes —
+estruturas funerárias atravessadas por raízes gigantescas. Fortaleza Sem
+Luz — antiga fortificação abandonada por razões desconhecidas. O Lago
+Afundado — estrutura parcialmente submersa sob um lago florestal.
+
+Outros conceitos surgidos para ecossistemas de dungeon incluem nomes
+como: Jardins do Rei Adormecido; Observatório Partido; Mina das Pedras
+Cantantes; Mosteiro das Velas Apagadas.
+
+Esses nomes são conceitos de direção quando não houve confirmação
+posterior de obrigatoriedade. Não devem ser tratados automaticamente
+como acontecimentos históricos canônicos completos sem desenvolvimento
+adicional.
+
+======================================================================
+42. MORTE, RESGATE E CONTINUIDADE
+======================================================================
+
+Quando o protagonista cai no overworld, a história não termina
+automaticamente.
+
+Ele pode ser resgatado e acordar sob cuidados de um curandeiro na última
+cidade apropriada.
+
+Isso reforça que outras pessoas existem e podem agir mesmo quando o
+jogador perde.
+
+A derrota tem consequências sobre experiência e progressão.
+
+Em dungeons, as consequências podem ser mais severas e incluir perda
+limitada de itens, mas objetos essenciais à história são protegidos.
+
+Narrativamente, morrer/falhar numa expedição significa ter sido
+derrotado e resgatado, não apagar a existência da aventura.
+
+======================================================================
+43. REPUTAÇÃO E RECONHECIMENTO
+======================================================================
+
+O protagonista começa sem grande prestígio.
+
+Sua reputação cresce por acontecimentos concretos.
+Completar uma dungeon conhecida. Salvar pessoas. Ajudar uma comunidade.
+Cumprir contratos. Derrotar uma ameaça. Agir diante de testemunhas.
+Ganhar confiança de companions. Servir um reino.
+
+A história de ascensão deve funcionar como acumulação de memória social.
+
+Primeiro, algumas pessoas conhecem seu nome.
+
+Depois, uma guilda reconhece sua capacidade.
+
+Depois, histórias podem circular.
+
+Autoridades locais podem conhecê-lo.
+
+Nobres podem passar a prestar atenção.
+
+A corte pode finalmente ter razões para recebê-lo.
+
+Esse crescimento precisa parecer merecido.
+
+======================================================================
+44. RELACIONAMENTOS COMO HISTÓRIA
+======================================================================
+
+Relações importantes são construídas por contexto.
+
+Não basta selecionar a resposta “correta” repetidamente.
+
+Personagens podem lembrar: ações; conversas; decisões; companhias;
+reputação; feitos; maneira como o protagonista trata outras pessoas.
+
+Confiança não é sinônimo de romance.
+
+Amizade, respeito, gratidão, desconfiança, admiração, lealdade e
+conflito podem existir independentemente.
+
+Quando uma relação mais profunda acontece, ela deve parecer consequência
+de uma história compartilhada.
+
+======================================================================
+45. A TRAJETÓRIA DO PROTAGONISTA
+======================================================================
+
+A trajetória ideal pode ser entendida em estágios narrativos, sem
+transformá-los em uma sequência rígida.
+
+DESCONHECIDO O protagonista é apenas mais uma pessoa no mundo.
+
+AVENTUREIRO Começa a explorar, aceitar trabalhos e enfrentar perigos.
+
+EXPLORADOR RECONHECIDO Dungeons, contratos e feitos começam a construir
+reputação.
+
+ALIADO DE COMUNIDADES Pessoas e assentamentos passam a lembrar suas
+ações.
+
+MEMBRO RELEVANTE DA GUILDA Sua capacidade é reconhecida
+institucionalmente.
+
+FIGURA DE INTERESSE REGIONAL Nobres, autoridades e personagens
+importantes passam a prestar atenção.
+
+ALIADO DO REINO Grandes serviços transformam reputação local em
+reconhecimento político.
+
+FIGURA DA CORTE A relação com famílias reais deixa de ser absurda porque
+existe uma trajetória que a sustenta.
+
+POSSÍVEL FIGURA REAL Somente em rotas específicas, depois de relações,
+legitimidade e acontecimentos suficientes.
+
+A progressão não precisa ser idêntica para todo jogador.
+
+======================================================================
+46. A ROTA DE VADRONIA
+======================================================================
+
+A rota real de Vadronia é a mais politicamente complexa.
+
+O protagonista precisa construir uma relação genuína com Nicasia.
+
+Também precisa conquistar a aprovação de Beatrice, reconhecimento
+popular e demonstrar serviços extraordinários ao reino.
+
+Uma das Grandes Casas — Falkenberg, Eichenwald ou Silberhain — torna-se
+sua principal aliada política.
+
+A escolha da Casa altera a forma como sua legitimidade é construída.
+
+Ao mesmo tempo, a disputa entre Henry e Julian precisa receber resolução
+coerente.
+
+A ascensão do protagonista não apaga o direito, a personalidade ou a
+história dos dois irmãos.
+
+Se ele algum dia alcançar a coroa, isso deve parecer uma situação
+extraordinária produzida por muitos acontecimentos, e não o resultado
+automático de ter conquistado pontos com uma princesa.
+
+======================================================================
+47. A ROTA DE MIGRIARD
+======================================================================
+
+Migriard possui uma lógica diferente.
+
+Sigrid já é a herdeira.
+
+O protagonista não precisa substituí-la.
+
+Se a relação entre os dois se desenvolver e o protagonista conquistar
+respeito da Casa Haldren e do povo de Migriard, ele pode tornar-se
+rei-consorte.
+
+Sigrid permanece rainha.
+
+A legitimidade dele nasce de ser aceito ao lado dela e de ter
+demonstrado compromisso real com o reino.
+
+Essa rota preserva a autoridade própria de Sigrid.
+
+======================================================================
+48. A ROTA DE VITEHRIA
+======================================================================
+
+A rota de Vitehria envolve Elara.
+
+Mas Viktor é o herdeiro.
+
+Portanto, a eventual ascensão do protagonista exige transformação
+legítima da situação sucessória.
+
+Essa transformação deve estar conectada à história e às escolhas
+políticas de Vitehria, especialmente à tensão entre isolamento e
+abertura.
+
+Não está definido que Viktor morra. Não está definido que Viktor seja
+mau. Não está definido que simplesmente abdique para ajudar o
+protagonista.
+
+O modo exato pelo qual essa rota chega a uma solução real permanece
+espaço narrativo a ser desenvolvido futuramente.
+
+Isso é uma lacuna aberta, não autorização para preenchimento automático.
+
+======================================================================
+49. ESCOLHA E EXCLUSIVIDADE DA COROA
+======================================================================
+
+O protagonista pode conhecer pessoas, ajudar comunidades e construir
+relações nos três reinos.
+
+Mas não pode acumular três coroas.
+
+Em algum momento avançado, uma trajetória real implica compromisso.
+
+Isso reforça que escolhas importantes possuem consequências.
+
+A decisão não precisa impedir amizade ou respeito nos outros reinos, mas
+define onde o protagonista construiu sua vida política mais profunda.
+
+======================================================================
+50. O FINAL E O MUNDO DEPOIS DELE
+======================================================================
+
+A obtenção de uma posição real pode produzir uma sequência especial e
+créditos.
+
+Mas o mundo não deixa de existir.
+
+O save continua.
+
+Esse detalhe é coerente com a filosofia central do jogo: a história do
+protagonista pode atingir um marco enorme sem significar que toda a
+realidade terminou naquele instante.
+
+Cidades continuam existindo. Pessoas continuam trabalhando. Dungeons
+continuam sendo exploráveis. Companions continuam presentes. O jogador
+pode continuar vivendo naquele mundo.
+
+======================================================================
+51. TEMAS CENTRAIS
+======================================================================
+
+PERTENCIMENTO O protagonista não nasce pertencendo às estruturas mais
+importantes. Ele constrói vínculos.
+
+LEGITIMIDADE Poder não deve surgir apenas de força ou romance. Precisa
+ser reconhecido social e politicamente.
+
+MEMÓRIA Pessoas, famílias e reinos carregam o passado. Vadronia leva
+esse tema ao extremo através de uma civilização que não consegue
+compreender.
+
+COMUNIDADE Especialmente forte em Migriard, mas presente em todo o
+mundo. Civilização existe porque pessoas dependem umas das outras.
+
+LUZ E ESCURIDÃO A luz representa presença, abrigo e vida humana. A
+escuridão pode ser bela, mas também perigosa.
+
+MISTÉRIO SEM OBRIGAÇÃO DE RESPOSTA Nem todo enigma precisa terminar em
+exposição.
+
+ESCOLHA O jogador pode construir uma história diferente sem o mundo
+perder coerência.
+
+CONQUISTA DE IMPORTÂNCIA O protagonista não começa importante. Torna-se
+importante por aquilo que faz.
+
+======================================================================
+52. O QUE O MUNDO NÃO DEVE SE TORNAR
+======================================================================
+
+O universo não deve ser reduzido a uma guerra entre “reino bom” e “reino
+mau”.
+
+Vitehria não é maligna porque é escura.
+
+Migriard não é uma caricatura viking.
+
+Vadronia não é um reino condenado porque possui ruínas e mistérios.
+
+As famílias nobres não precisam esconder vilões em cada geração.
+
+Henry e Julian não precisam tornar-se monstros para que o protagonista
+tenha espaço.
+
+Viktor não precisa ser destruído para que Elara seja relevante.
+
+Sigrid não precisa perder sua legitimidade para que o protagonista
+alcance uma posição real.
+
+Beatrice não deve ser definida apenas pela dor.
+
+Nicasia não deve existir apenas como recompensa.
+
+Companions não são ferramentas descartáveis.
+
+Aldeões não existem apenas quando possuem quest.
+
+O mundo não existe apenas quando o protagonista está olhando.
+
+======================================================================
+53. MISTÉRIOS DELIBERADAMENTE ABERTOS
+======================================================================
+
+CIVILIZAÇÃO ANTIGA DE VADRONIA Nome verdadeiro: desconhecido. Língua
+completa: indecifrável. História completa: desconhecida. Causa do
+desaparecimento: não definida. Natureza exata de todas as ruínas: não
+definida.
+
+HEINRICH MORIGAN Origem exata da condição/maldição: desconhecida.
+Responsável: desconhecido/não estabelecido. Motivo: desconhecido/não
+estabelecido. Ligação com civilização antiga: não confirmada.
+
+AMEAÇA NEGRA NOTURNA Origem definitiva: não estabelecida. Explicação
+total: não estabelecida.
+
+VITEHRIA Resolução exata da rota sucessória envolvendo Elara, Viktor e o
+protagonista: ainda aberta.
+
+Esses pontos não são erros do lore.
+
+São fronteiras intencionais do conhecimento.
+
+======================================================================
+54. CRONOLOGIA NARRATIVA CONHECIDA
+======================================================================
+
+PASSADO REMOTO Uma civilização hoje sem nome ocupou partes de Vadronia.
+Sua cultura desapareceu. Ruínas, inscrições e estruturas sobreviveram.
+Não existe cronologia precisa estabelecida para esse período.
+
+PASSADO DOS REINOS Vadronia, Migriard e Vitehria desenvolveram suas
+próprias monarquias, famílias nobres, cidades, vilarejos, guildas e
+tradições. Não existe uma cronologia fechada de fundação dos três
+reinos.
+
+DOIS ANOS ANTES DO INÍCIO Heinrich Morigan, rei de Vadronia, morre aos
+57 anos após uma condição mágica misteriosa e incurável. Beatrice assume
+a responsabilidade de governar. A questão sucessória entre Henry e
+Julian torna-se uma fragilidade política importante.
+
+INÍCIO DO JOGO O protagonista tem 18 anos. Nicasia Morigan tem 18.
+Vadronia continua funcional, porém politicamente delicada. Migriard
+possui sucessão estável com Sigrid como herdeira. Vitehria possui Viktor
+como herdeiro e enfrenta debate político entre isolamento e abertura. Os
+três reinos mantêm relações diplomáticas. O protagonista ainda não é uma
+figura de importância histórica.
+
+A PARTIR DAÍ A cronologia deixa de ser uma única sequência fixa. As
+ações do jogador determinam quais comunidades conhece, quais dungeons
+explora, quem recruta, quais relações desenvolve, quais feitos realiza e
+qual reino, se algum, se torna o centro de sua ascensão política.
+
+======================================================================
+55. ESTADO DO MUNDO NO PRIMEIRO DIA DA HISTÓRIA
+======================================================================
+
+Quando o jogador começa, o mundo já está vivo.
+
+Em Vadronia, Beatrice governa e seus filhos carregam uma questão que
+ainda não foi resolvida.
+
+Em Migriard, Sigrid sabe que um dia herdará uma coroa e vive em um reino
+cuja identidade foi construída pela resistência coletiva.
+
+Em Vitehria, Viktor é preparado para governar enquanto a sociedade
+discute quanto deve abrir-se ao exterior.
+
+Nas guildas, aventureiros já possuem reputações que o protagonista
+desconhece.
+
+Nas estradas, comerciantes já viajam.
+
+Em vilarejos, pessoas já possuem preocupações locais.
+
+Nas florestas, criaturas já caçam ou fogem sem saber quem é o jogador.
+
+Nas ruínas, inscrições permanecem silenciosas há muito mais tempo do que
+qualquer reino atual consegue lembrar.
+
+Quando anoitece, pessoas acendem luzes porque aprenderam que a escuridão
+merece respeito.
+
+Nada disso começou porque o protagonista apareceu.
+
+Essa é uma das ideias mais importantes de todo o Projeto R.
+
+======================================================================
+56. RESUMO NARRATIVO OFICIAL
+======================================================================
+
+Projeto R é a história aberta de uma pessoa comum entrando em um mundo
+antigo, vivo e imperfeito.
+
+Três reinos oferecem três formas de compreender esse mundo.
+
+Vadronia vive entre o calor de suas comunidades e o peso de um passado
+impossível de reconstruir completamente. A morte misteriosa de Heinrich
+deixou a Casa Morigan ferida e uma disputa sucessória ameaça a
+estabilidade futura.
+
+Migriard encara montanhas, neve e invernos com uma cultura construída
+sobre resistência e hospitalidade. Sua sucessão é estável, e Sigrid
+representa continuidade em vez de crise.
+
+Vitehria vive entre pinheiros escuros, lagos, montanhas e névoa. Seu
+povo aprendeu a respeitar a floresta e debate quanto de sua antiga
+reserva deve permanecer diante de um mundo cada vez mais conectado.
+
+Entre esses reinos existem estradas, guildas, aventureiros, companions,
+criaturas, ruínas e dungeons.
+
+O protagonista começa sem título e sem destino garantido.
+
+Pode lutar. Explorar. Fracassar. Ser resgatado. Fazer amigos. Perder
+pessoas. Ser lembrado. Conquistar confiança. Tornar-se conhecido.
+Aproximar-se de famílias que, no início, não teriam razão alguma para
+saber seu nome.
+
+E, dependendo de sua trajetória, pode terminar não apenas como alguém
+que sobreviveu ao mundo, mas como alguém que passou a fazer parte de sua
+história.
+
+Mesmo então, o mundo continua.
+
+Porque o princípio fundamental permanece:
+
+o protagonista pode transformar sua posição dentro do mundo, mas o mundo
+nunca existiu apenas para ele.
+
+FIM BÍBLIA DE HISTÓRIA, MUNDO E LORE — PROJETO R

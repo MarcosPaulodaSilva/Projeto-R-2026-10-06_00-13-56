@@ -1,11 +1,38 @@
-# Estado atual — 05/10/2026
+# Estado atual — 06/10/2026
 
-Marcos autorizou uma grande atualização gráfica e mecânica, com visual/animação como prioridade. O pedido mais recente exige passos baixos e as duas pernas alternando. A restrição anterior de esperar após o passo 1 foi substituída por essa autorização.
+Este repositório é agora a fonte oficial da implementação Unity do Projeto R / Vadronia.
 
-Implementado e aplicado à pasta real do Editor: terreno novo, personagens neutros com pernas animadas independentemente, ambientação, câmera suave, HUD em UI Toolkit, corrida/fôlego, esquiva, interação com Conrad, coleta de três ervas, recompensa única de 25 moedas e save local.
+## FEITO
 
-Unity 6000.6.0f1: 20 verificações de lógica + 11 verificações em Play passaram. Capturas de cenário, HUD e poses de caminhada inspecionadas. Preservados cena, configuração local, arte original, GUIDs e progresso anterior aos testes. Backup anterior à atualização em `.local-backups/before-visual-update-20261004-220139` no workspace, fora do Git.
+- Unity 6000.6.0f1, 2D top-down ortogonal, Built-in pipeline.
+- Grünwald exterior com terreno, cenário e ambientação.
+- caminhada procedural com passos baixos e pernas alternadas;
+- corrida/fôlego e esquiva;
+- câmera suave;
+- HUD em UI Toolkit;
+- interação com NPC;
+- missão de três ervas;
+- recompensa única de 25 moedas;
+- save local;
+- cena real, Packages e ProjectSettings preservados do projeto local mais novo.
 
-A documentação operacional está em LEIA-ME.md. O histórico da transferência da nuvem está em `../project-state/unity-local-2026-10-04.md`. A versão HTML foi separada em `../../html/`.
+## VALIDADO
 
-Limites: prédios externos, um NPC, sem combate/interiores; caminhada procedural com recortes. Validado por ferramentas e capturas; avaliação manual da sensação do movimento cabe ao teste em Game. Não gerar builds Windows sem novo pedido explícito.
+Último registro local: **20 verificações de lógica + 11 verificações em Play aprovadas**. Isso antecede a reorganização de pastas desta migração; após puxar a migração no PC, o Unity deve recompilar e Play Mode deve ser revalidado.
+
+## ATUAL
+
+O código foi organizado por responsabilidade sem substituir as versões locais mais novas nem os seus `.meta`.
+
+Projeto local: `C:/Users/Marcos/Downloads/Projeto R/Projeto R VadroniaDemo`.
+
+## PRÓXIMO
+
+1. sincronizar esta `main` com a pasta local;
+2. abrir o Unity e aguardar reimportação/recompilação;
+3. executar as verificações do menu Vadronia e Play Mode;
+4. continuar a próxima mecânica autorizada.
+
+## LIMITES
+
+Prédios externos, um NPC, sem combate e sem interiores. Não gerar build Windows sem pedido explícito.
