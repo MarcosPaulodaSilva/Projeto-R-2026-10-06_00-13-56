@@ -27,13 +27,13 @@ namespace Vadronia
         float clock;
         public int Count => npcs.Count;
 
-        public VillageNpcs(Texture2D atlas, List<FootBlock> blocks)
+        public VillageNpcs(List<FootBlock> blocks)
         {
             this.blocks = blocks;
             foreach (var def in NpcRoster.All)
             {
-                var view = new CharacterView(def.Name, def.Route[0], null, atlas, true);
-                view.Tint(new Color(def.Red, def.Green, def.Blue), def.Scale);
+                var view = new CharacterView(def.Name, def.Route[0], def.Look);
+                view.Tint(Color.white, def.Scale);
                 var marker = art.Add(root.transform, def.Name + " — conversa", art.Square, Vector2.zero,
                     new Vector2(.1f, .1f), new Color(.75f, .9f, 1f), 15000);
                 marker.transform.localRotation = Quaternion.Euler(0, 0, 45);
