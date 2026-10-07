@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Vadronia
 {
-    // Whole frames: the player comes from Marcos's video, Konrad from the original atlas.
+    // Whole frames: player from Marcos's video, Konrad from the original atlas, villagers from procedural pixel art.
     public sealed class CharacterView : IDisposable
     {
         readonly GameObject root;
