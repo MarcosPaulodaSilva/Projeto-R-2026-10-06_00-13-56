@@ -116,6 +116,11 @@ InitTestScene*.unity*
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
+# Local patch/recovery files
+/*.patch
+/*.orig
+/*.rej
+
 # Local IDE / OS noise
 .idea/
 .vscode/

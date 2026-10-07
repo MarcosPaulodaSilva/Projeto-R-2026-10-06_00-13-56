@@ -81,6 +81,44 @@ namespace Vadronia
                 Require(laps >= 10, "Patrulha presa: " + laps + " voltas");
                 Require(Array.TrueForAll(visited, v => v), "Patrulha não alcançou todos os pontos");
             }, report, ref count);
+            Check("Roster dos NPCs é consistente", () =>
+            {
+                Require(NpcRoster.All.Length == 5, "Grünwald precisa dos cinco NPCs extras");
+                var ids = new HashSet<string>();
+                foreach (var npc in NpcRoster.All)
+                {
+                    Require(!string.IsNullOrWhiteSpace(npc.Id) && ids.Add(npc.Id), "ID de NPC ausente ou duplicado");
+                    Require(npc.Route != null && npc.Route.Length >= 2, npc.Name + ": rota curta");
+                    Require(npc.Lines != null && npc.Lines.Length > 0, npc.Name + ": sem falas");
+                }
+                var maren = NpcRoster.All[2];
+                Require(NpcRoster.Line(maren, 1, 0, 0).Contains("3 porção"), "Maren não informa as três ervas faltantes");
+                Require(NpcRoster.Line(maren, 1, 7, 0).Contains("já colheu"), "Maren não reconhece coleta completa");
+            }, report, ref count);
+            Check("Rotas dos NPCs livres e completas", () =>
+            {
+                var blocks = TownLayout.Blocks();
+                foreach (var npc in NpcRoster.All)
+                {
+                    Require(npc.Pause.Length == npc.Route.Length, npc.Name + ": uma pausa por ponto");
+                    var p = npc.Route[0]; int target = 1, laps = 0;
+                    var seen = new bool[npc.Route.Length]; seen[0] = true;
+                    Require(MovementCore.Clear(p.X, p.Y, blocks), npc.Name + " nasce dentro de obstáculo");
+                    for (int i = 0; i < 12000; i++)
+                    {
+                        var t = npc.Route[target]; float dx = t.X - p.X, dy = t.Y - p.Y;
+                        float d = (float)Math.Sqrt(dx * dx + dy * dy); float step = Math.Min(d, npc.Speed / 60);
+                        if (d > 0) p = MovementCore.Move(p, dx / d * step, dy / d * step, blocks);
+                        Require(MovementCore.Clear(p.X, p.Y, blocks), npc.Name + " dentro de obstáculo");
+                        if (Math.Abs(p.X - t.X) + Math.Abs(p.Y - t.Y) < .02f)
+                        {
+                            seen[target] = true; target = (target + 1) % npc.Route.Length;
+                            if (target == 1) laps++;
+                        }
+                    }
+                    Require(laps >= 5 && Array.TrueForAll(seen, v => v), npc.Name + ": rota presa");
+                }
+            }, report, ref count);
             Check("10.000 movimentos aleatórios preservam colisões e limites", () =>
             {
                 var p = new FootPoint(0, -5); var blocks = TownLayout.Blocks(); var random = new Random(32);

@@ -19,7 +19,7 @@
 - `MASTER_PROMPT`, `PROJECT_BIBLE`, `HISTORY` e `LORE_BIBLE` são bases pesquisáveis: não ler por inteiro por padrão.
 - Adquira contexto sob demanda: buscar → ler trecho → implementar; expandir somente se faltar informação ou houver conflito.
 - Runtime não depende de `Assets/Editor`.
-- Use `Core / Player / World / UI / Visual / Bootstrap`.
+- Use `Core / Player / Combat / World / UI / Visual / Bootstrap`.
 - Crie módulos novos somente quando houver implementação real.
 - Não mantenha arte experimental sem uso dentro de `Assets/`; referências ficam em `docs/`.
 - Não afirmar compilação, Play Mode ou validação Unity sem execução real.
