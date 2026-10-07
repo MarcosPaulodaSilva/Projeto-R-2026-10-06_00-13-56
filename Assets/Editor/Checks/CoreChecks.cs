@@ -81,6 +81,20 @@ namespace Vadronia
                 Require(laps >= 10, "Patrulha presa: " + laps + " voltas");
                 Require(Array.TrueForAll(visited, v => v), "Patrulha não alcançou todos os pontos");
             }, report, ref count);
+            Check("Roster dos NPCs é consistente", () =>
+            {
+                Require(NpcRoster.All.Length == 5, "Grünwald precisa dos cinco NPCs extras");
+                var ids = new HashSet<string>();
+                foreach (var npc in NpcRoster.All)
+                {
+                    Require(!string.IsNullOrWhiteSpace(npc.Id) && ids.Add(npc.Id), "ID de NPC ausente ou duplicado");
+                    Require(npc.Route != null && npc.Route.Length >= 2, npc.Name + ": rota curta");
+                    Require(npc.Lines != null && npc.Lines.Length > 0, npc.Name + ": sem falas");
+                }
+                var maren = NpcRoster.All[2];
+                Require(NpcRoster.Line(maren, 1, 0, 0).Contains("3 porção"), "Maren não informa as três ervas faltantes");
+                Require(NpcRoster.Line(maren, 1, 7, 0).Contains("já colheu"), "Maren não reconhece coleta completa");
+            }, report, ref count);
             Check("Rotas dos NPCs livres e completas", () =>
             {
                 var blocks = TownLayout.Blocks();
