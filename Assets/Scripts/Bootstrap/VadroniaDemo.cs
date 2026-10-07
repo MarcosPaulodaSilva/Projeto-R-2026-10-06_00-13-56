@@ -26,7 +26,7 @@ namespace Vadronia
             view.clearFlags=CameraClearFlags.SolidColor;view.backgroundColor=new Color32(34,48,35,255);view.allowHDR=view.allowMSAA=view.allowDynamicResolution=false;
             cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=new PlayerSword(motor,view);
             hud=new AdventureHud();interactions=new VillageInteraction(motor,conrad,hud);
-            villagers=new VillageNpcs(characterAtlas,town.Blocks);interactions.Npcs=villagers;
+            villagers=new VillageNpcs(town.Blocks);interactions.Npcs=villagers;
             atmosphere=new VillageAtmosphere(town,player.Position);
             cameraRig.Follow(player.Position,Vector2.zero,false,0,true);
         }
