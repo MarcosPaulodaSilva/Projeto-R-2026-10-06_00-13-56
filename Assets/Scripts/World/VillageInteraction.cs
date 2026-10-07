@@ -12,6 +12,7 @@ namespace Vadronia
         readonly string savePath;
         float clock; int target=-1;
         public string Hint {get;private set;}="";
+        public VillageNpcs Npcs;
         public VillageInteraction(ExplorerMotor motor,CharacterView conrad,AdventureHud hud)
         {
             this.motor=motor;this.conrad=conrad;this.hud=hud;
@@ -36,8 +37,10 @@ namespace Vadronia
         {
             clock+=dt;marker.transform.position=new Vector3(conrad.Position.X,conrad.Position.Y+2.04f+Mathf.Sin(clock*2)*.06f,0);
             Vector2 p=new Vector2(motor.Actor.Position.X,motor.Actor.Position.Y);
+            int npcIndex;
             target=-1;Hint="";
             if(Vector2.Distance(p,new Vector2(conrad.Position.X,conrad.Position.Y))<1.6f){target=0;Hint="T  ·  Conversar com Konrad";}
+            else if(Npcs!=null&&(npcIndex=Npcs.Nearest(p,out string npcHint))>=0){target=100+npcIndex;Hint=npcHint;}
             else if(Vector2.Distance(p,new Vector2(0,-.3f))<1.25f){target=1;Hint="T  ·  Beber água e recuperar fôlego";}
             else for(int i=0;i<herbs.Length;i++)if(motor.State.Progress.quest==1&&(motor.State.Progress.herbs&(1<<i))==0&&Vector2.Distance(p,herbs[i])<1.1f){target=2+i;Hint="T  ·  Colher ervas do jardim";break;}
             if(target<0&&Vector2.Distance(p,new Vector2(-3,4.25f))<1.3f){target=5;Hint="T  ·  Descansar na estalagem";}
@@ -59,6 +62,7 @@ namespace Vadronia
             else if(choice==1||choice==5){motor.State.Rest();hud.Notify(choice==1?"Água fresca. Fôlego recuperado.":"Um breve descanso. Fôlego recuperado.");Save(false);}
             else if(choice>=2&&choice<=4&&motor.State.Gather(choice-2)){plants[choice-2].SetActive(false);hud.Notify("Ervas colhidas  ·  "+motor.State.HerbCount+" / 3");Save(false);}
             else if(choice==6)hud.ShowDialog("GUILDA DE GRÜNWALD","Registro de viajantes e notícias da estrada. Konrad faz a ronda da praça e pode orientar quem acabou de chegar.");
+            else if(choice>=100&&Npcs!=null){Npcs.FacePlayer(choice-100,new Vector2(motor.Actor.Position.X,motor.Actor.Position.Y));if(Npcs.Talk(choice-100,motor.State,hud))Save(false);}
         }
         public void Save(){Save(true);}
         public void RefreshPlants()
