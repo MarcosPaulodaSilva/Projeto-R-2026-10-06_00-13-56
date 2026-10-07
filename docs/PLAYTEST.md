@@ -30,7 +30,7 @@ As teclas `W`, `S`, `X` e `2` não devem ser usadas como controles obrigatórios
 - Player usa quadros derivados do vídeo de referência; Konrad mantém o atlas original. A caminhada usa passos baixos e progressão pela distância percorrida.
 - Câmera suave com antecipação e abertura ao correr; interface com fôlego, moedas, objetivo, diálogos e pausa.
 - Corrida, esquiva com colisão, missão de coleta e salvamento local.
-- Cinco NPCs extras com rotas próprias, conversa e funções simples ligadas à vila/missão.
+- Cinco NPCs extras com rotas próprias, conversa e funções simples ligadas à vila/missão; cada um usa pixel art procedural temporária própria em vez de reutilizar visualmente o atlas de Konrad.
 
 Esta é uma versão de exploração ampliada. Os prédios ainda são fachadas e não há interiores. O combate inicial permite ao player usar o combo de espada de 3 golpes; ainda não há inimigos/HP para aplicar dano. A animação de caminhada continua procedural sobre recortes da arte, sem novos clipes desenhados quadro a quadro.
 
