@@ -12,6 +12,7 @@ Este documento registra apenas o que interessa para a árvore atual. Experimento
 - `docs/references/grunwald-map-preview-2026-10-06.png`: prévia estática gerada para revisão visual; não é importada pelo Unity.
 - `Assets/Resources/Vadronia/player-video/`: quadros atuais do Player derivados do vídeo de referência.
 - `Assets/Resources/Vadronia/characters-original.png`: atlas original ainda usado por Konrad. Foi movido de `Assets/Art/characters.png` mantendo o mesmo `.meta`/GUID.
+- `Assets/Scripts/Visual/NpcPixelArt.cs`: gerador procedural temporário dos 5 NPCs extras de Grünwald. Produz sprites 32x64, quatro direções e quatro quadros de caminhada por direção em runtime; cada NPC recebe aparência própria via `NpcLook`. Não substitui arte final futura.
 - `Assets/Resources/Vadronia/UI/Inter-Regular.ttf`: fonte da interface, com licença em `Inter-LICENSE.txt`.
 
 ## Arte aposentada da árvore atual

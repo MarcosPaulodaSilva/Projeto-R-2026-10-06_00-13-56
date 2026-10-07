@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace Vadronia
 {
-    // Whole frames: the player comes from Marcos's video, Konrad from the original atlas.
+    // Whole frames: player from Marcos's video, Konrad from the original atlas, villagers from procedural pixel art.
     public sealed class CharacterView : IDisposable
     {
         readonly GameObject root;
         readonly SpriteRenderer renderer;
         readonly List<Sprite> owned = new List<Sprite>();
+        readonly List<Texture2D> ownedTextures = new List<Texture2D>();
         readonly VisualLibrary visuals = new VisualLibrary();
         readonly Sprite[][] frames;
         readonly int[] idleFrames;
@@ -67,6 +68,42 @@ namespace Vadronia
                     idleFrames[d] = 1;
                     for (int i = 0; i < 4; i++)
                         frames[d][i] = Slice(original, AtlasLayout.Frames[d * 8 + 4 + i], new Vector2(.5f, 0), 160);
+                }
+            }
+            Position = position;
+            Place(position);
+            Animate(0);
+        }
+
+        public CharacterView(string name, FootPoint position, NpcLook look)
+        {
+            if (look == null) throw new ArgumentNullException(nameof(look));
+            fromVideo = false;
+            root = new GameObject(name);
+            renderer = root.AddComponent<SpriteRenderer>();
+            visuals.Add(root.transform, "Sombra dos pés", visuals.SoftDisc, Vector2.zero,
+                new Vector2(.72f, .23f), new Color(.08f, .09f, .07f, .65f), -16000);
+
+            var texture = new Texture2D(NpcPixelArt.SheetWidth, NpcPixelArt.SheetHeight, TextureFormat.RGBA32, false);
+            texture.name = name + " — pixel art procedural";
+            texture.filterMode = FilterMode.Point;
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.LoadRawTextureData(NpcPixelArt.Sheet(look));
+            texture.Apply(false, true);
+            ownedTextures.Add(texture);
+
+            frames = new Sprite[NpcPixelArt.Directions][];
+            idleFrames = new int[NpcPixelArt.Directions];
+            for (int d = 0; d < NpcPixelArt.Directions; d++)
+            {
+                frames[d] = new Sprite[NpcPixelArt.FramesPerDirection];
+                idleFrames[d] = 1;
+                for (int i = 0; i < NpcPixelArt.FramesPerDirection; i++)
+                {
+                    var rect = new Rect(i * NpcPixelArt.FrameWidth,
+                        NpcPixelArt.SheetHeight - (d + 1) * NpcPixelArt.FrameHeight,
+                        NpcPixelArt.FrameWidth, NpcPixelArt.FrameHeight);
+                    frames[d][i] = Slice(texture, rect, new Vector2(.5f, 0), NpcPixelArt.PixelsPerUnit);
                 }
             }
             Position = position;
@@ -134,6 +171,7 @@ namespace Vadronia
         {
             UnityEngine.Object.Destroy(root);
             foreach (var sprite in owned) UnityEngine.Object.Destroy(sprite);
+            foreach (var texture in ownedTextures) UnityEngine.Object.Destroy(texture);
             visuals.Dispose();
         }
 

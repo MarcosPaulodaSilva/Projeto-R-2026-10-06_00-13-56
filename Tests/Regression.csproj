@@ -8,6 +8,7 @@
     <Compile Include="../Assets/Scripts/Core/MovementCore.cs" Link="MovementCore.cs" />
     <Compile Include="../Assets/Scripts/Combat/SwordCombo.cs" Link="SwordCombo.cs" />
     <Compile Include="../Assets/Scripts/World/TownLayout.cs" Link="TownLayout.cs" />
+    <Compile Include="../Assets/Scripts/Visual/NpcPixelArt.cs" Link="NpcPixelArt.cs" />
     <Compile Include="../Assets/Scripts/World/NpcRoster.cs" Link="NpcRoster.cs" />
     <Compile Include="../Assets/Editor/Checks/CoreChecks.cs" Link="CoreChecks.cs" />
   </ItemGroup>
