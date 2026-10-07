@@ -89,11 +89,33 @@ namespace Vadronia
                 {
                     Require(!string.IsNullOrWhiteSpace(npc.Id) && ids.Add(npc.Id), "ID de NPC ausente ou duplicado");
                     Require(npc.Route != null && npc.Route.Length >= 2, npc.Name + ": rota curta");
+                    Require(npc.Look != null, npc.Name + ": aparência ausente");
                     Require(npc.Lines != null && npc.Lines.Length > 0, npc.Name + ": sem falas");
                 }
                 var maren = NpcRoster.All[2];
                 Require(NpcRoster.Line(maren, 1, 0, 0).Contains("3 porção"), "Maren não informa as três ervas faltantes");
                 Require(NpcRoster.Line(maren, 1, 7, 0).Contains("já colheu"), "Maren não reconhece coleta completa");
+            }, report, ref count);
+            Check("Pixel art procedural dos NPCs é válida", () =>
+            {
+                foreach (var npc in NpcRoster.All)
+                {
+                    var frame = NpcPixelArt.Frame(npc.Look, 0, 1);
+                    Require(frame.Length == NpcPixelArt.FrameWidth * NpcPixelArt.FrameHeight, npc.Name + ": quadro inválido");
+                    Require(Array.Exists(frame, p => p != NpcPixelArt.Clear), npc.Name + ": quadro vazio");
+                }
+
+                var look = NpcRoster.All[0].Look;
+                var right = NpcPixelArt.Frame(look, 1, 0);
+                var left = NpcPixelArt.Frame(look, 3, 0);
+                for (int y = 0; y < NpcPixelArt.FrameHeight; y++)
+                    for (int x = 0; x < NpcPixelArt.FrameWidth; x++)
+                        Require(left[y * NpcPixelArt.FrameWidth + x] ==
+                            right[y * NpcPixelArt.FrameWidth + (NpcPixelArt.FrameWidth - 1 - x)],
+                            "Perfil esquerdo não é espelho do direito");
+
+                var sheet = NpcPixelArt.Sheet(look);
+                Require(sheet.Length == NpcPixelArt.SheetWidth * NpcPixelArt.SheetHeight * 4, "Folha RGBA32 com tamanho incorreto");
             }, report, ref count);
             Check("Rotas dos NPCs livres e completas", () =>
             {
