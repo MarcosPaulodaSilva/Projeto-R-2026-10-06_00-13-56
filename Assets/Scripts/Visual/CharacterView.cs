@@ -14,7 +14,7 @@ namespace Vadronia
         readonly Sprite[][] frames;
         readonly int[] idleFrames;
         readonly bool fromVideo;
-        float phase, clock;
+        float phase, clock, baseScale = 1f;
         int direction;
         public readonly WalkCycle Cycle = new WalkCycle();
         public FootPoint Position { get; private set; }
@@ -120,8 +120,14 @@ namespace Vadronia
                 // give the guard weight without touching the frame data.
                 clock += dt;
                 float squash = Cycle.Moving ? 1f - .03f * Mathf.Abs(Mathf.Cos(phase * Mathf.PI * 4f)) : 1f + .012f * Mathf.Sin(clock * 2.2f);
-                root.transform.localScale = new Vector3(1f, squash, 1f);
+                root.transform.localScale = new Vector3(baseScale, squash * baseScale, 1f);
             }
+        }
+
+        public void Tint(Color color, float scale)
+        {
+            renderer.color = color;
+            baseScale = scale;
         }
 
         public void Dispose()
