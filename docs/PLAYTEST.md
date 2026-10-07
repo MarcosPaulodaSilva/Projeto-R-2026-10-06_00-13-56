@@ -20,7 +20,7 @@ Abra a cena `Assets/Scenes/Vadronia.unity` e pressione Play. Em uma cópia nova,
 | F1 | Ocultar interface |
 | F5 | Salvar progresso |
 
-Converse com Konrad, colha as três porções de ervas e volte para receber 25 moedas. O poço e a estalagem recuperam fôlego; a guilda tem uma placa informativa. O progresso da missão é salvo automaticamente e pode ser salvo com F5. O arquivo fica em `Application.persistentDataPath/grunwald-adventure-v1.json`.
+Converse com Konrad, colha as três porções de ervas e volte para receber 25 moedas. Grünwald também tem Helga (estalajadeira), Bruno (ferreiro), Maren (herbalista), Lúcia e Tomás; aproxime-se e use T para conversar. Helga recupera o fôlego, Bruno explica controles/combo e Maren adapta a dica ao progresso da missão. O poço e a estalagem também recuperam fôlego; a guilda tem uma placa informativa. O progresso da missão é salvo automaticamente e pode ser salvo com F5. O arquivo fica em `Application.persistentDataPath/grunwald-adventure-v1.json`.
 
 As teclas `W`, `S`, `X` e `2` não devem ser usadas como controles obrigatórios neste projeto, pois não funcionam no teclado de Marcos.
 
@@ -30,6 +30,7 @@ As teclas `W`, `S`, `X` e `2` não devem ser usadas como controles obrigatórios
 - Player usa quadros derivados do vídeo de referência; Konrad mantém o atlas original. A caminhada usa passos baixos e progressão pela distância percorrida.
 - Câmera suave com antecipação e abertura ao correr; interface com fôlego, moedas, objetivo, diálogos e pausa.
 - Corrida, esquiva com colisão, missão de coleta e salvamento local.
+- Cinco NPCs extras com rotas próprias, conversa e funções simples ligadas à vila/missão.
 
 Esta é uma versão de exploração ampliada. Os prédios ainda são fachadas e não há interiores. O combate inicial permite ao player usar o combo de espada de 3 golpes; ainda não há inimigos/HP para aplicar dano. A animação de caminhada continua procedural sobre recortes da arte, sem novos clipes desenhados quadro a quadro.
 
