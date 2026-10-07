@@ -26,6 +26,7 @@
 - câmera suave;
 - HUD em UI Toolkit;
 - interação com NPC;
+- 5 NPCs extras (Helga/Bruno/Maren/Lúcia/Tomás) com rotas, funções e falas dependentes da missão;
 - missão de três ervas;
 - recompensa única de 25 moedas;
 - save local;
@@ -37,7 +38,7 @@
 
 ## ORGANIZAÇÃO ATUAL
 
-- runtime em `Assets/Scripts/Core|Player|World|UI|Visual|Bootstrap`;
+- runtime em `Assets/Scripts/Core|Player|Combat|World|UI|Visual|Bootstrap`;
 - Editor em `Assets/Editor/Checks|Setup`;
 - documentação fora de `Assets/`;
 - referências que não entram no jogo ficam em `docs/`;
@@ -52,7 +53,7 @@ A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub
 
 ## ATUAL
 
-Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; corrida foi remapeada de **Shift** para **Z** e interação/continuação de diálogo de **E** para **T**. O primeiro módulo de combate também foi integrado: **clique esquerdo** inicia/encadeia o Sword Combo de 3 golpes, com mira pelo mouse/analógico direito e lunge por golpe. Tudo ainda precisa do teste físico no Editor.
+Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; corrida foi remapeada de **Shift** para **Z** e interação/continuação de diálogo de **E** para **T**. O primeiro módulo de combate também foi integrado: **clique esquerdo** inicia/encadeia o Sword Combo de 3 golpes, com mira pelo mouse/analógico direito e lunge por golpe. Foram integrados 5 NPCs extras (Helga, Bruno, Maren, Lúcia e Tomás) com rotas e interações; **não validados no Unity ainda** — as rotas são cobertas pela regressão de lógica, mas aparência/interação precisam de Play Mode.
 
 ## PRÓXIMO
 
@@ -61,13 +62,14 @@ Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `to
 3. conferir visualmente o mapa e ajustar `TownLayout.cs` somente se houver sobreposição;
 4. testar fisicamente o movimento: `R` cima, `F` baixo, `D` esquerda e `G` direita;
 5. testar o Sword Combo com clique esquerdo, encadeando os 3 golpes e conferindo a mira/lunge;
-6. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
-7. continuar a próxima mecânica autorizada.
+6. conversar com Helga, Bruno, Maren, Lúcia e Tomás; conferir rotas, cor/escala e falas conforme a missão;
+7. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
+8. continuar a próxima mecânica autorizada.
 
 ## LIMITES / DECISÕES
 
 - prédios ainda externos;
-- um NPC;
+- Konrad + 5 NPCs; os 5 novos reutilizam o atlas de Konrad com cor/escala, sem arte própria;
 - combate inicial limitado ao combo de espada do player; ainda sem inimigos, HP/dano aplicado, block/parry ou efeitos das habilidades E/H;
 - sem interiores;
 - casas em diagonal exigem arte nova (o atlas só tem fachadas de frente; "de costas" foi derivado dela);
