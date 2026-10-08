@@ -180,6 +180,7 @@ namespace Vadronia
                 for (int i = 0; i < 80; i++) combo.Tick(.10f);
                 Require(combo.WhirlReady && combo.DashReady, "Cooldown não voltou a pronto");
             }, report, ref count);
+            count += StoryChecks.Run(report);
             return count;
         }
         static void Check(string name, Action test, Action<string> report, ref int count)

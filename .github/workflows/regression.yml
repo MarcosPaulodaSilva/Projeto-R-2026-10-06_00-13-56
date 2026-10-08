@@ -9,6 +9,8 @@ on:
       - "Assets/Scripts/World/NpcRoster.cs"
       - "Assets/Scripts/Visual/NpcPixelArt.cs"
       - "Assets/Editor/Checks/CoreChecks.cs"
+      - "Assets/Editor/Checks/StoryChecks.cs"
+      - "Assets/Scripts/World/GrunwaldStory.cs"
       - "Tests/**"
       - ".github/workflows/regression.yml"
   push:
@@ -20,6 +22,8 @@ on:
       - "Assets/Scripts/World/NpcRoster.cs"
       - "Assets/Scripts/Visual/NpcPixelArt.cs"
       - "Assets/Editor/Checks/CoreChecks.cs"
+      - "Assets/Editor/Checks/StoryChecks.cs"
+      - "Assets/Scripts/World/GrunwaldStory.cs"
       - "Tests/**"
       - ".github/workflows/regression.yml"
 

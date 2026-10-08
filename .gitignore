@@ -1,4 +1,8 @@
 .local-backups/
+/Tests/bin/
+/Tests/obj/
+/Assets/_Recovery/
+/Assets/_Recovery.meta
 
 # Unity .gitignore Template
 # Source: https://github.com/github/gitignore/blob/main/Unity.gitignore
