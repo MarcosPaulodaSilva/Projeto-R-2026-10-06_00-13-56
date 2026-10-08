@@ -4,52 +4,64 @@ using UnityEngine;
 namespace Vadronia
 {
     /// <summary>
-    /// A praça é um único sprite de pedras artesanais gerado uma vez no carregamento.
-    /// A área central cobre completamente o piso retangular antigo; recortes com
-    /// dithering unem o calçamento às estradas de terra já pintadas;
-    /// A resolução por unidade corresponde exatamente à textura do terreno;
-    /// sem blocos de pedra como GameObjects e sem atualizações por frame.
+    /// Praça de Grünwald: base de terra para ocultar o calçamento antigo,
+    /// cobblestones irregulares e caminhos que entram organicamente na praça.
+    /// Dois sprites produzidos apenas uma vez ao abrir a cena; sem Tick e
+    /// sem GameObjects individuais para as pedras.
     /// </summary>
     public sealed class VillageSquare : IDisposable
     {
-        // terrain-v3 mede 896x704 em 28x22 unidades: 32 pixels/unidade.
-        // Um pixel da praça tem a mesma escala de um pixel do terreno.
-        const int Ppu = 32;
-        const int Width = 544, Height = 448;
+        // O terrain-v3 mede 896x704 em 28x22 unidades: 32 pixels por unidade.
+        const int Ppu = 32, Width = 576, Height = 480;
         readonly GameObject root;
-        readonly Texture2D texture;
-        readonly Sprite sprite;
+        readonly Texture2D soilTexture, stoneTexture;
+        readonly Sprite soilSprite, stoneSprite;
 
-        // Tons quentes de pedra: as casas, o poço e a ferraria pertencem à mesma vila.
-        static readonly Color32[] Stones =
+        static readonly Color32[] Paving =
         {
-            new Color32(162, 148, 119, 255),
-            new Color32(176, 160, 126, 255),
-            new Color32(153, 144, 119, 255),
-            new Color32(169, 154, 128, 255),
-            new Color32(148, 139, 111, 255),
-            new Color32(181, 166, 136, 255),
-            new Color32(156, 149, 127, 255),
-            new Color32(171, 153, 115, 255),
+            new Color32(180, 164, 133, 255),
+            new Color32(173, 157, 126, 255),
+            new Color32(190, 172, 139, 255),
+            new Color32(161, 153, 130, 255),
+            new Color32(178, 161, 131, 255),
+            new Color32(166, 151, 121, 255),
+            new Color32(193, 174, 141, 255),
+            new Color32(168, 160, 137, 255)
         };
 
         public VillageSquare(Transform parent)
         {
-            texture = new Texture2D(Width, Height, TextureFormat.RGBA32, false)
+            root = new GameObject("Praça de Grünwald — piso integrado");
+            root.transform.SetParent(parent, false);
+            soilTexture = MakeTexture("Terra sob a praça", PaintSoil());
+            stoneTexture = MakeTexture("Pedras antigas da praça", PaintStones());
+            soilSprite = AddLayer("Base de terra — remove retângulo antigo", soilTexture, -19800);
+            stoneSprite = AddLayer("Calçamento irregular e caminhos", stoneTexture, -19500);
+        }
+
+        static Texture2D MakeTexture(string name, Color32[] pixels)
+        {
+            var result = new Texture2D(Width, Height, TextureFormat.RGBA32, false)
             {
-                name = "Praça de Grünwald — pedra irregular",
+                name = name,
                 filterMode = FilterMode.Point,
                 wrapMode = TextureWrapMode.Clamp
             };
-            texture.SetPixels32(Paint());
-            texture.Apply(false, true);
-            sprite = Sprite.Create(texture, new Rect(0, 0, Width, Height),
+            result.SetPixels32(pixels);
+            result.Apply(false, true);
+            return result;
+        }
+
+        Sprite AddLayer(string name, Texture2D texture, int order)
+        {
+            var sprite = Sprite.Create(texture, new Rect(0, 0, Width, Height),
                 new Vector2(.5f, .5f), Ppu, 0, SpriteMeshType.FullRect);
-            root = new GameObject("Praça — pedras e acessos");
-            root.transform.SetParent(parent, false);
-            var renderer = root.AddComponent<SpriteRenderer>();
+            var layer = new GameObject(name);
+            layer.transform.SetParent(root.transform, false);
+            var renderer = layer.AddComponent<SpriteRenderer>();
             renderer.sprite = sprite;
-            renderer.sortingOrder = -19500; // Sobre o terreno, atrás de canteiros, NPCs e objetos.
+            renderer.sortingOrder = order; // Solo -20000, decoração plana -18000.
+            return sprite;
         }
 
         static int Hash(int x, int y, int seed)
@@ -62,102 +74,151 @@ namespace Vadronia
             }
         }
 
-        static float RoundedBox(float x, float y, float hx, float hy, float radius)
+        static float Box(float x, float y, float hx, float hy, float corner)
         {
-            float dx = Mathf.Abs(x) - hx;
-            float dy = Mathf.Abs(y) - hy;
-            return Mathf.Sqrt(Mathf.Max(0, dx) * Mathf.Max(0, dx) +
-                              Mathf.Max(0, dy) * Mathf.Max(0, dy))
-                   + Mathf.Min(Mathf.Max(dx, dy), 0) - radius;
+            float dx = Mathf.Abs(x) - hx, dy = Mathf.Abs(y) - hy;
+            return Mathf.Sqrt(Mathf.Max(dx, 0) * Mathf.Max(dx, 0) +
+                              Mathf.Max(dy, 0) * Mathf.Max(dy, 0))
+                + Mathf.Min(Mathf.Max(dx, dy), 0) - corner;
         }
 
         static float Path(float x, float y, float ax, float ay, float bx, float by, float radius)
         {
-            float vx = bx - ax, vy = by - ay;
-            float t = Mathf.Clamp01(((x - ax) * vx + (y - ay) * vy) / (vx * vx + vy * vy));
-            float dx = x - (ax + vx * t), dy = y - (ay + vy * t);
-            return Mathf.Sqrt(dx * dx + dy * dy) - radius;
+            float dx = bx - ax, dy = by - ay;
+            float t = Mathf.Clamp01(((x - ax) * dx + (y - ay) * dy) / (dx * dx + dy * dy));
+            float rx = x - (ax + t * dx), ry = y - (ay + t * dy);
+            return Mathf.Sqrt(rx * rx + ry * ry) - radius;
         }
 
-        static float Surface(float x, float y)
+        static float PlazaDistance(float x, float y)
         {
-            // Corpo da praça arredondado. Acesso norte para a guilda, sul para
-            // os caminhos da vila; acessos laterais encontram as ruas de terra.
-            float stone = RoundedBox(x, y - .08f, 4.65f, 3.35f, 1.08f);
-            stone = Mathf.Min(stone, Path(x, y, 0, 2.75f, 0, 4.70f, 1.28f));
-            stone = Mathf.Min(stone, Path(x, y, 0, -2.90f, 0, -4.95f, 1.36f));
-            stone = Mathf.Min(stone, Path(x, y, -4.65f, -.9f, -6.55f, -1.12f, .75f));
-            stone = Mathf.Min(stone, Path(x, y, 4.65f, -.9f, 6.55f, -1.12f, .75f));
-            return stone;
+            // Poço no centro, feira a sul e dois passeios laterais.
+            // Cantos amplamente arredondados, sem quatro lados retos de uma placa.
+            float d = Box(x + .05f, y - .06f, 3.62f, 2.74f, 1.20f);
+            d = Mathf.Min(d, Path(x, y, .05f, 2.0f, 0, 5.05f, 1.33f));
+            d = Mathf.Min(d, Path(x, y, 0, -2.2f, -.10f, -5.12f, 1.56f));
+            d = Mathf.Min(d, Path(x, y, -3.75f, -.6f, -6.6f, -.95f, .84f));
+            d = Mathf.Min(d, Path(x, y, 3.75f, -.6f, 6.6f, -.95f, .86f));
+            // Arestas gastas, para que o limite nunca forme um retângulo perfeito.
+            d += Mathf.Sin(x * 3.4f + y * 2.8f) * .135f;
+            d += Mathf.Sin(x * 8.1f - y * 5.2f) * .052f;
+            return d;
         }
 
-        static Color32[] Paint()
+        static Color32[] PaintSoil()
         {
-            var colors = new Color32[Width * Height];
+            var pixels = new Color32[Width * Height];
             for (int py = 0; py < Height; py++)
             {
                 float y = (py - Height * .5f) / Ppu;
-                // Fiadas desencontradas, pedras de cerca de 15x9 pixels do terreno.
-                int row = py / 9;
-                int rowLocal = py - row * 9;
-                int rowShift = (row & 1) * 8 + Hash(0, row, 2) % 4;
                 for (int px = 0; px < Width; px++)
                 {
                     float x = (px - Width * .5f) / Ppu;
-                    float contour = Surface(x, y);
-                    contour += (Hash(px / 7, py / 7, 31) % 101 - 50) * .0019f;
-                    contour += Mathf.Sin(y * 9f + x * 3f) * .044f;
+                    // O terreno anterior já tem uma praça retangular em x≈±4.3,
+                    // y≈-3.6..4.3. Ocultamos esse retângulo POR INTEIRO antes
+                    // de recortar a nova área de pedras; não se verá uma borda
+                    // cinzenta antiga nas lacunas do pavimento.
+                    float outsideX = Mathf.Max(0, Mathf.Abs(x) - 4.42f);
+                    float outsideY = Mathf.Max(0, Mathf.Max(y - 4.45f, -3.78f - y));
+                    float outside = Mathf.Max(outsideX, outsideY);
+                    float coverage = Mathf.Clamp01((.65f - outside) / .48f);
+                    if (coverage <= 0f) continue;
+                    int grain = Hash(px, py, 101) % 1000;
+                    if (coverage < 1f && grain >= coverage * 1000f) continue;
 
-                    // Pedras vão se espaçando na borda: não há outra textura
-                    // quadrada sobreposta ao chão, nem faixa lisa cinza.
-                    float coverage = Mathf.Clamp01((.56f - contour) / .56f);
-                    if (coverage <= 0) continue;
-                    int grain = Hash(px, py, 47) % 1000;
-                    if (coverage < 1 && grain >= coverage * 1000f) continue;
-
-                    int shiftedX = px + rowShift;
-                    int col = shiftedX / 15;
-                    int localX = shiftedX - col * 15;
-                    int seed = Hash(col, row, 18);
-                    // Recuos nos quatro cantos quebram o aspecto de ladrilhos perfeitos.
-                    bool chipped = (rowLocal == 1 || rowLocal == 7) &&
-                                   (localX == 1 || localX == 13) && (seed % 5 != 0);
-                    bool mortar = localX == 0 || localX == 14 ||
-                                  rowLocal == 0 || rowLocal == 8 || chipped;
-                    var stoneColor = Stones[seed % Stones.Length];
-                    int grit = Hash(px / 2, py / 2, 72) % 11 - 5;
-                    int bevel = rowLocal >= 7 ? 7 : rowLocal <= 2 ? -6 : 0;
-
-                    if (mortar)
+                    float d = PlazaDistance(x, y);
+                    int h = Hash(px / 3, py / 3, 55);
+                    int tiny = Hash(px, py, 56) % 13 - 6;
+                    // Solo pisado em volta do poço; vegetação reaparece nas
+                    // bordas, onde não há pedra. Nada de placa cinzenta.
+                    int greenChance = Mathf.RoundToInt(Mathf.Clamp01((d + .10f) / 1.5f) * 47f);
+                    bool green = h % 100 < greenChance;
+                    Color32 color;
+                    if (green)
                     {
-                        bool moss = Hash(col, row, 76) % 9 == 0;
-                        colors[py * Width + px] = moss
-                            ? new Color32(103, 114, 88, 255)
-                            : new Color32(113, 109, 91, 255);
+                        int var = (h / 100) % 25;
+                        color = new Color32((byte)(105 + var / 2), (byte)(122 + var), (byte)(57 + var / 4), 255);
                     }
                     else
                     {
+                        int var = (h / 100) % 17;
+                        color = new Color32((byte)(166 + var / 2), (byte)(137 + var / 2), (byte)(91 + var / 3), 255);
+                    }
+                    // Pequenos grãos e seixos da mesma escala do chão original.
+                    if (Hash(px, py, 44) % 79 == 0)
+                        color = new Color32(190, 177, 140, 255);
+                    else
+                        color = new Color32(
+                            (byte)Mathf.Clamp(color.r + tiny, 0, 255),
+                            (byte)Mathf.Clamp(color.g + tiny, 0, 255),
+                            (byte)Mathf.Clamp(color.b + tiny, 0, 255), 255);
+                    pixels[py * Width + px] = color;
+                }
+            }
+            return pixels;
+        }
+
+        static Color32[] PaintStones()
+        {
+            var pixels = new Color32[Width * Height];
+            for (int py = 0; py < Height; py++)
+            {
+                float y = (py - Height * .5f) / Ppu;
+                int row = py / 10;
+                int rowLocal = py % 10;
+                // Fiadas de dimensões ligeiramente distintas e desencontradas.
+                int stagger = (row & 1) * 7 + Hash(0, row, 17) % 5;
+                for (int px = 0; px < Width; px++)
+                {
+                    float x = (px - Width * .5f) / Ppu;
+                    float d = PlazaDistance(x, y);
+                    d += (Hash(px / 6, py / 6, 88) % 101 - 50) * .003f;
+                    float coverage = Mathf.Clamp01((.42f - d) / .80f);
+                    if (coverage <= 0f) continue;
+                    // Espaçar pedras em meio à terra torna o limite irregular
+                    // de verdade, e não apenas uma linha com transparência.
+                    if (coverage < 1f && Hash(px, py, 70) % 1000 > coverage * 1000f)
+                        continue;
+
+                    int sx = px + stagger, col = sx / 14, localX = sx % 14;
+                    int seed = Hash(col, row, 23);
+                    bool cornerChip = (localX == 1 || localX == 12) &&
+                        (rowLocal == 1 || rowLocal == 8) && seed % 4 != 0;
+                    bool mortar = localX == 0 || localX == 13 ||
+                                  rowLocal == 0 || rowLocal == 9 || cornerChip;
+                    // Pequenos canteiros de musgo nos encontros entre pedras.
+                    bool moss = (seed % 11 == 0 && (localX <= 2 || localX >= 11) && rowLocal <= 2);
+                    int grit = Hash(px / 2, py / 2, 61) % 11 - 5;
+                    int bevel = rowLocal >= 7 ? 6 : rowLocal <= 2 ? -7 : 0;
+                    if (mortar)
+                        pixels[py * Width + px] = moss ?
+                            new Color32(106, 113, 83, 255) :
+                            new Color32(119, 111, 89, 255);
+                    else
+                    {
+                        var c = Paving[seed % Paving.Length];
                         int light = grit + bevel;
-                        // Círculo discreto de pedra clara ao redor do poço,
-                        // sem bloquear o seu acesso nem alterar seu colisor.
-                        float distanceSq = x * x + y * y;
-                        if (distanceSq > .95f * .95f && distanceSq < 1.55f * 1.55f)
+                        // Anel gasto de pedras um pouco mais claras em volta do poço.
+                        float radius2 = x * x + y * y;
+                        if (radius2 > 1.05f * 1.05f && radius2 < 1.65f * 1.65f)
                             light += 7;
-                        colors[py * Width + px] = new Color32(
-                            (byte)Mathf.Clamp(stoneColor.r + light, 0, 255),
-                            (byte)Mathf.Clamp(stoneColor.g + light, 0, 255),
-                            (byte)Mathf.Clamp(stoneColor.b + light, 0, 255), 255);
+                        pixels[py * Width + px] = new Color32(
+                            (byte)Mathf.Clamp(c.r + light, 0, 255),
+                            (byte)Mathf.Clamp(c.g + light, 0, 255),
+                            (byte)Mathf.Clamp(c.b + light, 0, 255), 255);
                     }
                 }
             }
-            return colors;
+            return pixels;
         }
 
         public void Dispose()
         {
             if (root != null) UnityEngine.Object.Destroy(root);
-            if (sprite != null) UnityEngine.Object.Destroy(sprite);
-            if (texture != null) UnityEngine.Object.Destroy(texture);
+            if (soilSprite != null) UnityEngine.Object.Destroy(soilSprite);
+            if (stoneSprite != null) UnityEngine.Object.Destroy(stoneSprite);
+            if (soilTexture != null) UnityEngine.Object.Destroy(soilTexture);
+            if (stoneTexture != null) UnityEngine.Object.Destroy(stoneTexture);
         }
     }
 }
