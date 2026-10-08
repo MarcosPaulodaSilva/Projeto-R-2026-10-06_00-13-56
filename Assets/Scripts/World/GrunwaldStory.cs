@@ -33,12 +33,12 @@ namespace Vadronia
         // Anchors must stand on free ground (StoryChecks verifies it against the map's collision blocks).
         public static readonly StoryPoint[] Points =
         {
-            new StoryPoint(MuralChoice, StoryFlags.VozesMural, 3.4f, 2.9f, 1f,
+            new StoryPoint(MuralChoice, StoryFlags.VozesMural, 5.4f, 2.57f, .7f,
                 "T  ·  Ler o mural de avisos", "MURAL DE AVISOS",
                 "Viajantes: não deixem a estrada depois do pôr do sol e acendam uma luz ao acampar. " +
                 "Quem vir uma pedra antiga partida a leste da vila, avise a ronda. " +
                 "Dizem uns que ela sempre esteve assim; outros, que rachou há pouco.  — A ronda de Grünwald"),
-            new StoryPoint(BancaChoice, StoryFlags.VozesBanca, 3.3f, -2.85f, 1.1f,
+            new StoryPoint(BancaChoice, StoryFlags.VozesBanca, 3.3f, -2.23f, .7f,
                 "T  ·  Ouvir a conversa na banca", "NA BANCA",
                 "Dois fregueses discutem enquanto escolhem frutas.\n" +
                 "— A pedra rachou no inverno passado. Eu vi.\n" +

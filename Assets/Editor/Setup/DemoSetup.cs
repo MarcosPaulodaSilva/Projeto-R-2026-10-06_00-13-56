@@ -46,6 +46,8 @@ namespace Vadronia.Editor
                 if (texture == null) throw new System.Exception("Textura ausente: " + name);
                 if (texture.filterMode != FilterMode.Point) throw new System.Exception("Filtro incorreto: " + name);
             }
+            foreach(string asset in new[]{"town-blue","town-blue-props","terrain-blue"})
+                if(Resources.Load<Texture2D>("Vadronia/"+asset)==null)throw new System.Exception("Cenário novo ausente: "+asset);
             if (Resources.Load<AudioClip>("Vadronia/Audio/village") == null)
                 throw new System.Exception("Música da vila ausente: Resources/Vadronia/Audio/village.ogg");
             if (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null)

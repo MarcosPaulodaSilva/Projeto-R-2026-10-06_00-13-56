@@ -16,7 +16,9 @@ namespace Vadronia
         {
             root = new GameObject("Grünwald — ruas e praça");
             // terrain-v3 = terrain-v2 + paths, back lane and contact shade (Tools/build_terrain.py).
-            var texture = Resources.Load<Texture2D>("Vadronia/terrain-v3");
+            var texture = Resources.Load<Texture2D>("Vadronia/terrain-blue");
+            bool blueGround = texture != null;
+            if(texture == null) texture = Resources.Load<Texture2D>("Vadronia/terrain-v3");
             if(texture == null) texture = Resources.Load<Texture2D>("Vadronia/terrain-v2");
             if(texture == null) { texture = PaintGround(); owned.Add(texture); }
             var ground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * .5f, texture.width/28f);
@@ -24,16 +26,23 @@ namespace Vadronia
             var terrain = Add("Chão", ground, Vector2.zero, 1, -20000);
             terrain.transform.localScale = new Vector3(1,22f/ground.bounds.size.y,1);
             // Calçamento coeso, independente dos recortes de terra do terreno anterior.
-            square = new VillageSquare(root.transform);
+            if(!blueGround) square = new VillageSquare(root.transform);
             // Atlas 1 (casas de costas, cercas, barris...) is optional: without it the town still loads.
             var extra = Resources.Load<Texture2D>("Vadronia/town-extra");
+            var blue = Resources.Load<Texture2D>("Vadronia/town-blue");
+            var blueProps = Resources.Load<Texture2D>("Vadronia/town-blue-props");
             if(extra == null) Debug.LogWarning("Resources/Vadronia/town-extra.png não encontrado; adereços extras omitidos.");
             for (int i = 0; i < TownLayout.Props.Length; i++)
             {
                 var prop = TownLayout.Props[i];
                 var source = prop.Atlas == 0 ? scenery : extra;
+                int replacement = BlueTownAtlas.Replacement(prop);
+                int propReplacement = BlueTownAtlas.PropReplacement(prop);
+                if(blue!=null && replacement>=0)source=blue;
                 if(source == null) continue;
-                Rect bounds = (prop.Atlas == 0 ? TownAtlasLayout.Frames : TownAtlasLayout.Extra)[prop.Sprite];
+                Rect bounds = blue!=null && replacement>=0 ? BlueTownAtlas.Frames[replacement]
+                    : (prop.Atlas == 0 ? TownAtlasLayout.Frames : TownAtlasLayout.Extra)[prop.Sprite];
+                if(blueProps!=null && propReplacement>=0){source=blueProps;bounds=BlueTownAtlas.Props[propReplacement];}
                 // Flat decals (flower beds, dirt) are centred on the ground; everything else stands on its feet.
                 Sprite sprite = Sprite.Create(source, bounds, prop.Flat ? Vector2.one * .5f : new Vector2(.5f, 0), bounds.width / prop.Width, 0, SpriteMeshType.FullRect);
                 owned.Add(sprite);
@@ -110,7 +119,7 @@ namespace Vadronia
         static Color32 Color(int r, int g, int b) { return new Color32((byte)r, (byte)g, (byte)b, 255); }
         public void Dispose()
         {
-            square.Dispose();
+            square?.Dispose();
             if (root != null) UnityEngine.Object.Destroy(root);
             foreach (var asset in owned) if (asset != null) UnityEngine.Object.Destroy(asset);
             visuals.Dispose();

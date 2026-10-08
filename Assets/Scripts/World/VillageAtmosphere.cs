@@ -25,15 +25,10 @@ namespace Vadronia
                 var leaf=art.Add(root.transform,"Folha ao vento "+i,art.Disc,seeds[i],new Vector2(.045f,.095f),new Color(.69f,.65f,.3f,.7f),15000);leaves.Add(leaf);
             }
             for(int i=0;i<12;i++) smoke.Add(art.Add(root.transform,"Fumaça da ferraria "+i,art.SoftDisc,new Vector2(7.95f,7.4f),Vector2.one,new Color(.7f,.72f,.67f,.25f),15000));
-            foreach(var p in new[]{new Vector2(-4.5f,-3.7f),new Vector2(4.5f,-3.7f),new Vector2(-4.6f,3.8f),new Vector2(4.6f,3.8f)})
+            foreach(var p in new[]{new Vector2(-5.3f,-3.4f),new Vector2(5.3f,-3.4f),new Vector2(-5.5f,3.6f),new Vector2(6.4f,3.6f),new Vector2(1.3f,-8.6f),new Vector2(-10.6f,4.8f)})
             {
                 int order=-Mathf.RoundToInt(p.y*100)*10;
-                art.Add(root.transform,"Poste",art.Square,p+Vector2.up*.6f,new Vector2(.07f,1.2f),new Color(.22f,.15f,.09f),order);
-                art.Add(root.transform,"Lanterna",art.Square,p+Vector2.up*1.2f,new Vector2(.2f,.26f),new Color(.95f,.68f,.28f),order+1);
-                art.Add(root.transform,"Base de ferro",art.Square,p+Vector2.up*1.04f,new Vector2(.28f,.055f),new Color(.19f,.16f,.12f),order+2);
-                art.Add(root.transform,"Topo de ferro",art.Square,p+Vector2.up*1.36f,new Vector2(.29f,.07f),new Color(.19f,.16f,.12f),order+2);
-                foreach(float side in new[]{-.115f,.115f})art.Add(root.transform,"Aro de ferro",art.Square,p+new Vector2(side,1.2f),new Vector2(.035f,.3f),new Color(.19f,.16f,.12f),order+2);
-                lights.Add(art.Add(root.transform,"Luz quente",art.SoftDisc,p+Vector2.up*1.2f,new Vector2(1.7f,1.7f),new Color(1,.64f,.23f,.38f),order+2));
+                lights.Add(art.Add(root.transform,"Luz quente",art.SoftDisc,p+Vector2.up*.72f,new Vector2(.85f,.85f),new Color(1,.64f,.23f,.2f),order+2));
             }
             for(int i=0;i<dust.Length;i++){dust[i]=art.Add(root.transform,"Poeira de passo "+i,art.SoftDisc,Vector2.zero,Vector2.one,new Color(1,.85f,.62f,0),-7000);}
         }
@@ -51,7 +46,7 @@ namespace Vadronia
             for(int i=0;i<smoke.Count;i++)
             {
                 float life=Mathf.Repeat(clock*.23f+i/12f,1);
-                smoke[i].transform.localPosition=new Vector3(8.05f+life*.6f+Mathf.Sin(clock+i)*.1f,7.45f+life*2.6f,0);
+                smoke[i].transform.localPosition=new Vector3(8.4f+life*.6f+Mathf.Sin(clock+i)*.1f,6.4f+life*2.6f,0);
                 smoke[i].transform.localScale=Vector3.one*(.25f+life*1.4f);
                 smoke[i].color=new Color(.72f,.73f,.69f,Mathf.Sin(life*Mathf.PI)*.25f);
             }

@@ -209,6 +209,7 @@ namespace Vadronia
                 Require(combo.WhirlReady && combo.DashReady, "Cooldown não voltou a pronto");
             }, report, ref count);
             count += StoryChecks.Run(report);
+            count += InteractionChecks.Run(report);
             return count;
         }
         static void Check(string name, Action test, Action<string> report, ref int count)

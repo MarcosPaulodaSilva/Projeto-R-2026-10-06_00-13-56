@@ -34,7 +34,7 @@
 - save local;
 - cena real, Packages e ProjectSettings preservados;
 - vila de Grünwald reformulada (2026-10-06): casas de frente e de costas, viela dos fundos ao sul com casas voltadas para ela, jardim noroeste, quintais, praça com poço, três bancas, bancos, mural, barris, canteiros, arbustos, pedras e fumaça saindo da chaminé da ferraria;
-- chão `terrain-v3` (gerado por `Tools/build_terrain.py`): caminhos de terra até cada porta visível, viela, pátios pisados e sombra de assentamento sob as casas; bosquetes e borda de floresta com cinco tipos de árvore;
+- chão `terrain-blue`, caminhos de terra, praça arredondada e ruas residenciais; `terrain-v3` preservado como fallback; bosquetes e borda de floresta com cinco tipos de árvore;
 - ronda de Konrad ampliada (10 pontos com pausa própria): praça, bancas, rua sul e quintal oeste;
 - `village.ogg` toca em loop na vila, com atenuação na pausa e mudo persistente no menu ESC; `city.ogg` está importado e reservado para um mapa de cidade.
 
@@ -49,13 +49,14 @@
 
 ## VALIDAÇÃO
 
-Em 08/10/2026, revisão local sobre a main `11bef63`, incluindo praça, Sword Combo v2 e música restaurada pelo Cloud:
+Em 08/10/2026, reforma azul baseada nas duas referências de Marcos, sobre a main `dac45f6`:
 
-- 25 verificações puras passaram localmente com o SDK .NET 10 instalado, em projeto temporário fora dos Assets. A configuração versionada continua em .NET 8 para o CI; o SDK/reference pack 8 não está instalado neste PC.
-- Unity 6000.6.0f1 compilou a revisão; `Vadronia > Verificar demo` passou 35 verificações de lógica e conferência dos assets.
+- 33 verificações puras passaram localmente com o SDK .NET 10 instalado, em projeto temporário fora dos Assets. A configuração versionada continua em .NET 8 para o CI; o SDK/reference pack 8 não está instalado neste PC.
+- Unity 6000.6.0f1 compilou a revisão; `Vadronia > Verificar demo` passou 43 verificações de lógica e conferência dos assets.
+- `Vadronia > Verificar vila e interações em Play`: 21 verificações de acesso frontal ao mural, alcance, disputa entre NPC/mural resolvida pela direção, 12 entradas, identificação no HUD, diálogos de prefeitura/casa e uso dos assets novos na cena.
 - `Vadronia > Verificar exploração em Play` passou 36 verificações: duas quests, save JSON antigo, leitura repetida, relatos anteriores à oferta, recompensa única após recarga real do arquivo, cinco NPCs, oito direções do vídeo, repouso e colisão da investida da espada.
 - `Vadronia > Verificar combate em Play` passou 16 verificações: investida em quatro taxas de atualização, dano/ângulo do combo, três pulsos do redemoinho, recargas, corte final, colisão com o poço e interrupção de golpes/efeitos. Teste usa personagem e alvos temporários, sem alterar saves.
-- Progresso anterior e arquivos de save foram restaurados pelos testes de exploração. Praça e HUD foram inspecionados em captura real do Editor; isso não substitui aprovação artística de Marcos para a etapa 2.
+- Progresso anterior e arquivos de save foram restaurados pelos testes de exploração. Vila e HUD foram inspecionados em capturas reais do Editor. A reforma completa foi autorizada expressamente por Marcos com duas novas referências; a restrição anterior à etapa 2 foi superada por esse pedido.
 - Música: uma fonte em reprodução e um AudioListener; sinal de saída medido por dois segundos com pico de aproximadamente 0,30. A primeira leitura isolada retornava zero; amostragem contínua confirmou sinal no motor de áudio. Não representa escuta nos alto-falantes do usuário.
 - Existem avisos anteriores sobre Input Manager e APIs obsoletas; nenhuma migração de input foi feita nesta revisão. Nenhum executável Windows foi gerado.
 
@@ -63,7 +64,13 @@ Os controles foram verificados por código; não representa teste físico de tec
 
 ## ATUAL
 
-Praça da etapa 1, circulação de moradores, “Vozes da vila”, Sword Combo v2 e música do Cloud conferidos no Editor local. As correções desta revisão estabilizam a distância própria da habilidade H em 2,09 unidades no chão livre e limpam rastros/poeira/pose ao interromper combate. Antes, a investida chegava a 2,375 unidades em passos de 50 ms, contra 2,1375 em passos de 8,33 ms. Colisões ainda podem encurtar o avanço.
+Vila reformulada com terreno, ruas, calçamento, fachadas, bancas, poço, mural, lanternas, jardins, cercas, caixas e carroça derivados das referências fornecidas em 08/10. Telhados e detalhes arquitetônicos coloridos são azuis. A guilda ocupa o prédio de dois andares a oeste (-3, 4.8); a prefeitura com bandeira fica a leste (4.3, 4.8). A estalagem e Helga ficam no nordeste; ferraria e moradias têm identificação própria junto às entradas. Não foram criados interiores, loja ou sistema administrativo.
+
+As interações usam um seletor comum por distância/direção, alcance de 0,65–0,8 unidade, bloqueio por obstáculos e pequena estabilidade entre alvos semelhantes. Não há prioridade fixa de Konrad sobre os demais. Um destaque azul marca o alvo de T. Portas, balcões e mural exigem aproximação frontal; o mural foi movido para (5.4, 2.95), pois havia um banco bloqueando a frente do local antigo. A placa da guilda e a banca mantêm os IDs e flags de “Vozes da vila”. Nomes/funções aparecem na interface ao se aproximar de cada prédio.
+
+Ativos novos: `town-blue.png`, `town-blue-props.png` e `terrain-blue.png`. Sprites são recortados por `BlueTownAtlas.cs`; as imagens originais e seus GUIDs continuam preservados. Árvores e personagens anteriores continuam em uso. `VillageSquare` e terreno v3 ficam apenas como fallback; não são sobrepostos ao terreno novo. Referências, captura real e briefing dos assets estão em `docs/references/`. Backup dos Assets anteriores fora do Git: `.local-backups/before-blue-village-20261008` no workspace antigo do chat.
+
+Combate, animação do vídeo, música e saves mantidos. A habilidade H conserva o avanço corrigido de 2,09 unidades em chão livre; colisões podem encurtá-lo.
 
 As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.md`. A quest não revela tradução nem origem definitiva da civilização antiga e não define nova biografia para Konrad.
 
@@ -141,7 +148,7 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 
 ## PRÓXIMO
 
-1. obter a avaliação visual de Marcos sobre a praça da etapa 1 antes de modificar edifícios/rotas da etapa 2;
+1. avaliar com Marcos o resultado da vila azul e ajustar detalhes artísticos conforme necessário;
 2. revisar com Marcos a arte temporária dos NPCs: ela ainda difere do visual original de Konrad e do player;
 3. testar fisicamente RDFG, Z, T, clique esquerdo, E/H e o botão de música no Editor;
 4. continuar a próxima mecânica autorizada, sem substituir sistemas já existentes. A faixa de cidade aguarda o mapa correspondente.
