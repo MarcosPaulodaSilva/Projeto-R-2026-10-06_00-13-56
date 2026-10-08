@@ -44,6 +44,34 @@ namespace Vadronia.Editor
                 check(motor.State.Progress.quest==2&&motor.State.Progress.coins==25,"Entrega da missão concede 25 moedas uma única vez");
                 var loaded=JsonUtility.FromJson<AdventureProgress>(File.ReadAllText(path));
                 check(loaded.quest==2&&loaded.herbs==7&&loaded.coins==25,"Save em disco conserva missão, ervas e recompensa");
+                check(Vozes.Active(motor.State),"Konrad oferece Vozes da vila depois das ervas");
+                game.Interactions.Interact(7);game.Hud.CloseDialog();
+                game.Interactions.Interact(7);game.Hud.CloseDialog();
+                game.Interactions.Interact(8);game.Hud.CloseDialog();
+                check(Vozes.Heard(motor.State)==2&&motor.State.Progress.coins==25,"Mural e banca registram dois relatos sem duplicar leituras");
+                game.Interactions.Interact(0);game.Hud.CloseDialog();
+                check(!motor.State.HasFlag(StoryFlags.VozesConcluida),"Dois relatos ainda não concluem a missão");
+                game.Interactions.Interact(6);game.Hud.CloseDialog();
+                game.Interactions.Interact(0);game.Hud.CloseDialog();
+                check(motor.State.Progress.coins==40&&motor.State.HasFlag(StoryFlags.VozesConcluida),"Três relatos e retorno a Konrad pagam 15 moedas");
+                motor.State.Restore(JsonUtility.FromJson<AdventureProgress>(File.ReadAllText(path)));
+                game.Interactions.Interact(0);game.Hud.CloseDialog();
+                check(motor.State.Progress.coins==40&&Vozes.Heard(motor.State)==3,"Save real recarrega relatos e não paga a missão novamente");
+                motor.State.Restore(JsonUtility.FromJson<AdventureProgress>("{\"version\":1,\"quest\":2,\"herbs\":7,\"coins\":25}"));
+                check(motor.State.Progress.flags!=null&&motor.State.Progress.flags.Count==0&&motor.State.Progress.coins==25,"JSON antigo sem flags preserva o progresso");
+                foreach(int point in new[]{6,7,8}){game.Interactions.Interact(point);game.Hud.CloseDialog();}
+                check(Vozes.Heard(motor.State)==3&&!Vozes.Active(motor.State),"Relatos podem ser ouvidos antes da oferta");
+                game.Interactions.Interact(0);game.Hud.CloseDialog();
+                check(Vozes.Active(motor.State)&&motor.State.Progress.coins==25,"Oferta reconhece relatos anteriores sem pular diálogo");
+                game.Interactions.Interact(0);game.Hud.CloseDialog();
+                check(motor.State.Progress.coins==40,"Conclusão com relatos anteriores paga uma única recompensa");
+                check(game.Interactions.Npcs!=null&&game.Interactions.Npcs.Count==NpcRoster.All.Length,"Integração conserva os cinco NPCs da main");
+                for(int i=0;i<NpcRoster.All.Length;i++)
+                {
+                    game.Interactions.Interact(100+i);
+                    check(game.Hud.DialogOpen,"Conversa preservada com "+NpcRoster.All[i].Name);
+                    game.Hud.CloseDialog();
+                }
                 var document=UnityEngine.Object.FindFirstObjectByType<UIDocument>();
                 check(document.rootVisualElement.Q<Label>("questText")!=null&&document.panelSettings.textSettings.defaultFontAsset!=null,"Interface tem objetivo e fonte configurados");
                 var directions=new[]{Vector2.down,new Vector2(1,-1),Vector2.right,new Vector2(1,1),Vector2.up,new Vector2(-1,1),Vector2.left,new Vector2(-1,-1)};
@@ -67,6 +95,8 @@ namespace Vadronia.Editor
                 float blockedPhase=actor.AnimationPhase;
                 for(int i=0;i<60;i++)motor.Tick(1f/60,Vector2.up,false,false);
                 check(!actor.Cycle.Moving&&Mathf.Abs(actor.AnimationPhase-blockedPhase)<.00001f,"Colisão interrompe avanço da animação mesmo mantendo a direção pressionada");
+                actor.Place(new FootPoint(0,-.3f));motor.Halt();motor.Lunge(Vector2.up,2);
+                check(actor.Position.Y<=-.219f&&MovementCore.Clear(actor.Position.X,actor.Position.Y,TownLayout.Blocks()),"Investida da espada respeita colisão do poço");
                 Debug.Log(count+" verificações de exploração em Play passaram; progresso anterior será restaurado.");
             }
             finally

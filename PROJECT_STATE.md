@@ -28,6 +28,8 @@
 - interação com NPC;
 - 5 NPCs extras (Helga/Bruno/Maren/Lúcia/Tomás) com rotas, funções e falas dependentes da missão, agora com pixel art procedural temporária própria (32x64, 4 direções, 4 quadros);
 - missão de três ervas;
+- missão “Vozes da vila”: mural, banca e placa da guilda, diário, flags persistentes e 15 moedas de recompensa única;
+- saves antigos sem flags continuam carregando; relatos ouvidos antes da oferta também contam;
 - recompensa única de 25 moedas;
 - save local;
 - cena real, Packages e ProjectSettings preservados;
@@ -47,24 +49,28 @@
 
 ## VALIDAÇÃO
 
-Última validação registrada no Editor local, em 05/10/2026: **20 verificações de lógica + 11 verificações em Play aprovadas**. Essa validação é anterior à reformulação mais recente de Grünwald.
+Em 07/10/2026, após integração da pasta `Downloads/grunwald-quests-vozes-da-vila` sobre a main `e843b2b`:
 
-A integração do novo mapa/rota/assets passou no **Logic Regression** do GitHub Actions em 06/10/2026. `Vadronia > Verificar demo` agora também exige `town-extra.png` e valida seu filtro de importação. A reformulação visual ainda precisa ser validada no Unity Editor e em Play Mode no PC depois de sincronizar a `main`.
+- 24 verificações puras passaram localmente com o SDK .NET 10 instalado, em projeto temporário fora dos Assets. A configuração versionada continua em .NET 8 para o CI; o SDK/reference pack 8 não está instalado neste PC.
+- Unity 6000.6.0f1 compilou a integração; `Vadronia > Verificar demo` passou 34 verificações de lógica e conferência dos assets.
+- `Vadronia > Verificar exploração em Play` passou 36 verificações: duas quests, save JSON antigo, leitura repetida, relatos anteriores à oferta, recompensa única após recarga real do arquivo, cinco NPCs, oito direções do vídeo, repouso e colisão da investida da espada.
+- Progresso anterior e arquivos de save foram restaurados pelos testes. Mapa e diálogo longo da oferta foram inspecionados em capturas do Editor.
+- Uma chamada do Pipeline excedeu 5 segundos; o teste terminou e seu resultado completo foi confirmado no Console. Isso não foi erro do jogo.
+
+Os controles foram verificados por código; não representa teste físico de teclado feito por Marcos nem aprovação artística dos NPCs.
 
 ## ATUAL
 
-Reformulação visual do mapa de Grünwald (`TownLayout`, `TownWorld`, atlas `town-extra.png`) e nova rota de Konrad. **Não validada no Unity ainda**: foi escrita sem Editor; só a lógica de colisão/patrulha foi conferida offline com `Tools/preview_town.py`. O teste de patrulha em `CoreChecks` agora exige todos os pontos alcançados e ≥10 voltas (a rota é mais longa que a antiga). Os arquivos `village.ogg` e `city.ogg` estão importados, mas ainda não há sistema de música/playback ligado a eles. O movimento foi remapeado de WASD para **RDFG**; corrida foi remapeada de **Shift** para **Z** e interação/continuação de diálogo de **E** para **T**. O primeiro módulo de combate também foi integrado: **clique esquerdo** inicia/encadeia o Sword Combo de 3 golpes, com mira pelo mouse/analógico direito e lunge por golpe. Foram integrados 5 NPCs extras (Helga, Bruno, Maren, Lúcia e Tomás) com rotas, interações e aparências próprias geradas por `NpcPixelArt`; **não validados no Unity ainda** — regras, rotas e geração de pixels são cobertas pela regressão de lógica, mas aparência/interação precisam de Play Mode.
+“Vozes da vila” integrada sem substituir as mudanças mais recentes do Cloud: mapa, controles RDFG/Z/T, Sword Combo e cinco NPCs permanecem. O pacote original estava baseado numa versão anterior e removeria as interações dos NPCs e testes de combate se fosse copiado integralmente; esses pontos foram combinados manualmente.
+
+As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.md`. A quest não revela tradução nem origem definitiva da civilização antiga e não define nova biografia para Konrad.
 
 ## PRÓXIMO
 
-1. sincronizar a `main` com a pasta local;
-2. abrir no Unity e aguardar a importação/recompilação de `town-extra.png` e dos demais assets;
-3. conferir visualmente o mapa e ajustar `TownLayout.cs` somente se houver sobreposição;
-4. testar fisicamente o movimento: `R` cima, `F` baixo, `D` esquerda e `G` direita;
-5. testar o Sword Combo com clique esquerdo, encadeando os 3 golpes e conferindo a mira/lunge;
-6. conversar com Helga, Bruno, Maren, Lúcia e Tomás; conferir rotas, cor/escala e falas conforme a missão;
-7. executar `Vadronia > Verificar demo` e `Vadronia > Verificar exploração em Play`;
-8. continuar a próxima mecânica autorizada.
+1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
+2. revisar com Marcos a arte temporária dos NPCs: ela ainda difere do visual original de Konrad e do player;
+3. testar fisicamente RDFG, Z, T e o clique esquerdo no Editor;
+4. continuar a próxima mecânica autorizada, sem substituir sistemas já existentes.
 
 ## LIMITES / DECISÕES
 

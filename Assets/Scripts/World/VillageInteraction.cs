@@ -40,11 +40,13 @@ namespace Vadronia
             int npcIndex;
             target=-1;Hint="";
             if(Vector2.Distance(p,new Vector2(conrad.Position.X,conrad.Position.Y))<1.6f){target=0;Hint="T  ·  Conversar com Konrad";}
-            else if(Npcs!=null&&(npcIndex=Npcs.Nearest(p,out string npcHint))>=0){target=100+npcIndex;Hint=npcHint;}
             else if(Vector2.Distance(p,new Vector2(0,-.3f))<1.25f){target=1;Hint="T  ·  Beber água e recuperar fôlego";}
             else for(int i=0;i<herbs.Length;i++)if(motor.State.Progress.quest==1&&(motor.State.Progress.herbs&(1<<i))==0&&Vector2.Distance(p,herbs[i])<1.1f){target=2+i;Hint="T  ·  Colher ervas do jardim";break;}
             if(target<0&&Vector2.Distance(p,new Vector2(-3,4.25f))<1.3f){target=5;Hint="T  ·  Descansar na estalagem";}
-            if(target<0&&Vector2.Distance(p,new Vector2(4.3f,4.25f))<1.3f){target=6;Hint="T  ·  Ler a placa da guilda";}
+            if(target<0&&Vector2.Distance(p,new Vector2(4.3f,4.25f))<1.3f){target=GrunwaldStory.GuildaChoice;Hint="T  ·  Ler a placa da guilda";}
+            if(target<0)foreach(var point in GrunwaldStory.Points)
+                if(Vector2.Distance(p,new Vector2(point.X,point.Y))<point.Radius){target=point.Choice;Hint=point.Hint;break;}
+            if(target<0&&Npcs!=null&&(npcIndex=Npcs.Nearest(p,out string npcHint))>=0){target=100+npcIndex;Hint=npcHint;}
             if(!ExplorerMotor.Pressed(KeyCode.T))return;
             if(hud.DialogOpen){hud.CloseDialog();return;}
             if(hud.Paused)return;
@@ -57,12 +59,32 @@ namespace Vadronia
                 conrad.Face(new Vector2(motor.Actor.Position.X-conrad.Position.X,motor.Actor.Position.Y-conrad.Position.Y));
                 if(motor.State.Progress.quest==0){motor.State.AcceptQuest();hud.ShowDialog("KONRAD","Bem-vindo a Grünwald. Preciso de três porções de ervas para os viajantes. Há canteiros a oeste da praça, perto da banca ao sul e no jardim a noroeste. Pode me ajudar?");Save(false);}
                 else if(motor.State.ClaimReward()){hud.ShowDialog("KONRAD","São as ervas de que precisávamos. Obrigado pela ajuda! Aqui estão 25 moedas pelo seu trabalho. Aproveite a vila.");Save(false);}
-                else hud.ShowDialog("KONRAD",motor.State.Progress.quest==2?"Bom ver você novamente. Descanse um pouco junto ao poço antes de seguir viagem.":"Os três canteiros ficam a oeste da praça, a sudeste e a noroeste. Chegue perto das ervas e pressione T. Volte quando tiver as três porções.");
+                else if(motor.State.Progress.quest==2)TalkAboutTheStone();
+                else hud.ShowDialog("KONRAD","Os três canteiros ficam a oeste da praça, a sudeste e a noroeste. Chegue perto das ervas e pressione T. Volte quando tiver as três porções.");
             }
             else if(choice==1||choice==5){motor.State.Rest();hud.Notify(choice==1?"Água fresca. Fôlego recuperado.":"Um breve descanso. Fôlego recuperado.");Save(false);}
             else if(choice>=2&&choice<=4&&motor.State.Gather(choice-2)){plants[choice-2].SetActive(false);hud.Notify("Ervas colhidas  ·  "+motor.State.HerbCount+" / 3");Save(false);}
-            else if(choice==6)hud.ShowDialog("GUILDA DE GRÜNWALD","Registro de viajantes e notícias da estrada. Konrad faz a ronda da praça e pode orientar quem acabou de chegar.");
+            else if(choice==GrunwaldStory.GuildaChoice)Hear(StoryFlags.VozesGuilda,GrunwaldStory.GuildaSpeaker,GrunwaldStory.GuildaText);
             else if(choice>=100&&Npcs!=null){Npcs.FacePlayer(choice-100,new Vector2(motor.Actor.Position.X,motor.Actor.Position.Y));if(Npcs.Talk(choice-100,motor.State,hud))Save(false);}
+            else foreach(var point in GrunwaldStory.Points)if(point.Choice==choice){Hear(point.Flag,point.Speaker,point.Text);break;}
+        }
+        // Konrad after the herb favour: offer "Vozes da vila", report progress, pay once, then comment.
+        void TalkAboutTheStone()
+        {
+            var state=motor.State;
+            if(Vozes.TryAccept(state)){hud.ShowDialog("KONRAD",GrunwaldStory.KonradOferta(Vozes.Heard(state)));Save(false);}
+            else if(Vozes.TryComplete(state)){hud.ShowDialog("KONRAD",GrunwaldStory.KonradConclusao());hud.Notify("Relatos anotados  ·  +"+Vozes.Reward+" moedas");Save(false);}
+            else if(state.HasFlag(StoryFlags.VozesConcluida))hud.ShowDialog("KONRAD",GrunwaldStory.KonradDepois);
+            else hud.ShowDialog("KONRAD",GrunwaldStory.KonradAndamento(state.HasFlag(StoryFlags.VozesMural),state.HasFlag(StoryFlags.VozesBanca),state.HasFlag(StoryFlags.VozesGuilda)));
+        }
+        // Reading a notice or overhearing talk is world knowledge: it is remembered even before Konrad asks.
+        void Hear(string flag,string speaker,string text)
+        {
+            bool fresh=motor.State.AddFlag(flag);
+            hud.ShowDialog(speaker,text);
+            if(!fresh)return;
+            Save(false);
+            if(Vozes.Active(motor.State))hud.Notify("Relato ouvido  ·  "+Vozes.Heard(motor.State)+" / "+Vozes.Needed);
         }
         public void Save(){Save(true);}
         public void RefreshPlants()

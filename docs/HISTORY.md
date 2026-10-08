@@ -106,3 +106,7 @@ A raiz deste repositório é diretamente um projeto Unity (`Assets/`, `Packages/
 ## Limpeza estrutural — 6 de outubro de 2026
 
 Removidos da árvore atual assets experimentais sem referências por nome ou GUID: `characters-neutral.png`, `player-walk.png`, `conrad-walk.png`, `NeutralAtlasLayout.cs` e `WalkAtlasLayout.cs`. O atlas ativo `Assets/Art/characters.png` não foi apagado: foi movido para `Assets/Resources/Vadronia/characters-original.png` preservando o mesmo GUID usado pela cena. `PROJECT_STATUS.md` foi incorporado a `PROJECT_STATE.md`; arte e instruções de Play passaram para `docs/`.
+
+## 07/10/2026 — Integração local de Vozes da vila
+
+Pacote de Downloads revisado e combinado com a main e843b2b. Preservados NPCs, combate, controles e mapa do Cloud. Acrescentadas flags aditivas, diário, três relatos e recompensa única; verificações em Play cobrem saves antigos e recarga real. Resultados: 24 checks puros locais (.NET 10), 34 de lógica no Unity e 36 em Play. Capturas do mapa e do diálogo inspecionadas. Nenhum build Windows gerado.

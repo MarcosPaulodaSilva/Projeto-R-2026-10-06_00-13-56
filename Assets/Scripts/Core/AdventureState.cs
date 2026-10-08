@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Vadronia
 {
@@ -9,6 +10,8 @@ namespace Vadronia
         public int quest; // 0: undiscovered; 1: gather; 2: reward claimed
         public int herbs;
         public int coins;
+        // Stable story IDs (see StoryFlags). Added without bumping the version: saves without the field load as empty.
+        public List<string> flags = new List<string>();
     }
 
     // Pure rules shared by gameplay and Editor checks.
@@ -51,11 +54,24 @@ namespace Vadronia
             if (Progress.quest != 1 || HerbCount != 3) return false;
             Progress.quest = 2; Progress.coins += 25; return true;
         }
+        public bool HasFlag(string id)
+        {
+            return id != null && Progress.flags != null && Progress.flags.Contains(id);
+        }
+        /// <summary>True when the flag is new. Unknown IDs are refused so a typo never reaches a save.</summary>
+        public bool AddFlag(string id)
+        {
+            if (id == null || Array.IndexOf(StoryFlags.All, id) < 0 || HasFlag(id)) return false;
+            if (Progress.flags == null) Progress.flags = new List<string>();
+            if (Progress.flags.Count >= StoryFlags.MaxFlags) return false;
+            Progress.flags.Add(id); return true;
+        }
         public void Restore(AdventureProgress progress)
         {
             if (progress == null || progress.version != 1) return;
             progress.quest = Math.Max(0, Math.Min(2, progress.quest));
             progress.herbs &= 7; progress.coins = Math.Max(0, Math.Min(999999, progress.coins));
+            progress.flags = StoryFlags.Clean(progress.flags);
             Progress = progress;
         }
     }

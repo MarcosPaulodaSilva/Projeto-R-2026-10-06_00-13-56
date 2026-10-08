@@ -37,8 +37,8 @@ namespace Vadronia
             stamina.text="FÔLEGO  "+Mathf.RoundToInt(state.Stamina)+" / 100";
             for(int i=0;i<10;i++)segments[i].EnableInClassList("empty",state.Stamina<(i+1)*10);
             coins.text=state.Progress.coins+" moedas  ·  "+(state.Dodging?"Esquiva":"Exploração");
-            questTitle.text=state.Progress.quest==0?"Conheça a vila":state.Progress.quest==1?"Uma pequena ajuda":"Um favor retribuído";
-            questText.text=state.Progress.quest==0?"Converse com Konrad na praça.":state.Progress.quest==1?(state.HerbCount==3?"Volte a Konrad para entregar as ervas.":"Colha ervas nos jardins: "+state.HerbCount+" / 3") : "Konrad agradeceu sua ajuda. Explore Grünwald.";
+            string title,text;QuestJournal.Describe(state,out title,out text);
+            questTitle.text=title;questText.text=text;
             prompt.text=hint;prompt.EnableInClassList("hidden",string.IsNullOrEmpty(hint)||DialogOpen||Paused);
             toastTime-=dt;toast.EnableInClassList("hidden",toastTime<=0);
         }
