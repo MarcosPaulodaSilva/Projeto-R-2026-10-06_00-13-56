@@ -103,6 +103,15 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 - `Vadronia > Verificar demo` passa a conferir que a faixa da vila existe. O CI .NET não substitui teste com áudio/Unity Editor.
 - A branch local `codex/village-soundtrack` não havia sido publicada no GitHub; esta restauração usa as faixas já versionadas, não afirma recuperar exatamente a implementação inédita daquela branch.
 
+## ETAPA 1 — PRAÇA CENTRAL (08/10/2026)
+
+- Reforma da praça para se aproximar da composição visual solicitada: poço central, corredor livre no eixo norte–sul, duas bancas na parte sul, bancos nas laterais e jardins simétricos nas margens.
+- `VillageSquare.cs` gera uma única textura de pedra de tons quentes, com juntas de musgo, círculo discreto ao redor do poço e **bordas recortadas/dithered**. A praça se prolonga pelas quatro entradas, encontrando o chão de terra sem o retângulo de cor chapada anterior.
+- `TownLayout.cs` reorganiza apenas os itens da praça. Edifícios e rotas externas ficam para a **etapa 2**, que depende de aprovação visual da etapa 1.
+- Ponto da quest da banca acompanha a banca leste. A posição e o colisor do poço permanecem intactos.
+- `CoreChecks` passa a testar simetria das bancas, acessos centrais e âncoras de quest contra os colisores.
+- Nenhum asset antigo foi excluído; áudio, combates e saves não foram modificados. O resultado artístico precisa ser conferido no Unity Editor antes de começar a etapa 2.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;

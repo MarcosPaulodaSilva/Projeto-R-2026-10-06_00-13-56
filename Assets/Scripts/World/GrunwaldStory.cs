@@ -38,7 +38,7 @@ namespace Vadronia
                 "Viajantes: não deixem a estrada depois do pôr do sol e acendam uma luz ao acampar. " +
                 "Quem vir uma pedra antiga partida a leste da vila, avise a ronda. " +
                 "Dizem uns que ela sempre esteve assim; outros, que rachou há pouco.  — A ronda de Grünwald"),
-            new StoryPoint(BancaChoice, StoryFlags.VozesBanca, 3.3f, -1.8f, 1.1f,
+            new StoryPoint(BancaChoice, StoryFlags.VozesBanca, 3.3f, -2.85f, 1.1f,
                 "T  ·  Ouvir a conversa na banca", "NA BANCA",
                 "Dois fregueses discutem enquanto escolhem frutas.\n" +
                 "— A pedra rachou no inverno passado. Eu vi.\n" +
