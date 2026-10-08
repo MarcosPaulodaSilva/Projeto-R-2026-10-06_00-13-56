@@ -5,7 +5,8 @@ namespace Vadronia
 {
     /// <summary>
     /// A praça é um único sprite de pedras artesanais gerado uma vez no carregamento.
-    /// Recortes com dithering unem o calçamento às estradas de terra já pintadas;
+    /// A área central cobre completamente o piso retangular antigo; recortes com
+    /// dithering unem o calçamento às estradas de terra já pintadas;
     /// sem blocos de pedra como GameObjects e sem atualizações por frame.
     /// </summary>
     public sealed class VillageSquare : IDisposable
@@ -79,7 +80,7 @@ namespace Vadronia
         {
             // Corpo da praça arredondado. Acesso norte para a guilda, sul para
             // os caminhos da vila; acessos laterais encontram as ruas de terra.
-            float stone = RoundedBox(x, y - .08f, 4.55f, 2.45f, .98f);
+            float stone = RoundedBox(x, y - .08f, 4.65f, 3.35f, 1.08f);
             stone = Mathf.Min(stone, Path(x, y, 0, 2.75f, 0, 4.70f, 1.28f));
             stone = Mathf.Min(stone, Path(x, y, 0, -2.90f, 0, -4.95f, 1.36f));
             stone = Mathf.Min(stone, Path(x, y, -4.65f, -.9f, -6.55f, -1.12f, .75f));
@@ -105,7 +106,7 @@ namespace Vadronia
 
                     // Pedras vão se espaçando na borda: não há outra textura
                     // quadrada sobreposta ao chão, nem faixa lisa cinza.
-                    float coverage = Mathf.Clamp01((.33f - contour) / .67f);
+                    float coverage = Mathf.Clamp01((.56f - contour) / .56f);
                     if (coverage <= 0) continue;
                     int grain = Hash(px / 3, py / 3, 47) % 1000;
                     if (coverage < 1 && grain >= coverage * 1000f) continue;
