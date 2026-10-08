@@ -75,6 +75,17 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 - Integração na `main` solicitada sem testes; compilação/Play Mode no Unity **não foram executados nesta atualização**.
 - Após `git pull` ou Pull no GitHub Desktop dentro da pasta do projeto principal, o Unity Hub poderá abrir os arquivos atualizados.
 
+## AUDITORIA — revisão estática de 08/10/2026
+
+- Conferidos no GitHub os arquivos do projeto Unity, seus pares `.meta`, a configuração de Git e os scripts de combate, movimento, interface, cenário e NPCs. Nenhum `.meta` sem asset nem asset sem `.meta` foi encontrado na árvore versionada.
+- `VadroniaDemo.Update` agora interrompe o combate ao pausar, evitando retomar uma habilidade incompleta após sair do menu.
+- `PlayerPose.Reset` restaura também posição visual, deslocamento acumulado, mistura da corrida e estado interno de passos.
+- `PlayerSword.Interrupt` limpa rastros e deslocamentos transitórios ao interromper.
+- Texto da HUD atualizado com as habilidades E/H existentes.
+- Nenhum asset foi removido: `terrain-v2` ainda é fallback do terreno; `docs/references` documenta a arte do projeto; `.meta` e GUIDs são preservados.
+- A pasta local `Library` e caches de build já estão excluídos do versionamento pelo `.gitignore`.
+- Inspeção estática apenas: consumo de RAM, FPS, Unity/Play Mode e controles físicos não foram medidos nesta revisão.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;

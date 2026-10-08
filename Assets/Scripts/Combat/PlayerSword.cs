@@ -138,6 +138,9 @@ namespace Vadronia
         {
             Combo.Interrupt();
             mode = Mode.None;
+            hits.Clear();
+            lungeMoved = smoothBody = Vector2.zero;
+            trailT = ghostT = 0f;
             pose.Reset();
         }
 

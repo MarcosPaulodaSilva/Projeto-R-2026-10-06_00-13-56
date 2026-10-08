@@ -82,8 +82,13 @@ namespace Vadronia
         /// <summary>Volta o corpo à pose neutra (diálogo, interrupção).</summary>
         public void Reset()
         {
-            Offset = Vector2.zero; Roll = 0; Scale = Vector2.one; lean = 0;
+            Offset = Vector2.zero; Roll = 0; Scale = Vector2.one;
+            lean = 0; runBlend = 0; Running = false;
+            var pos = view.Position;
+            lastPos = new Vector2(pos.X, pos.Y);
+            lastStep = Mathf.FloorToInt(view.AnimationPhase * 2f) & 1;
             var t = view.Transform;
+            t.position = new Vector3(pos.X, pos.Y, 0);
             t.rotation = Quaternion.identity;
             t.localScale = Vector3.one;
             if (shadow != null) shadow.localPosition = Vector3.zero;

@@ -35,7 +35,7 @@ namespace Vadronia
             if(motor==null||hud==null)return;
             float dt=Mathf.Min(Time.deltaTime,.05f);
             hud.Tick(motor.State,interactions.Hint,Time.unscaledDeltaTime);
-            if(hud.Paused){motor.Halt();return;}
+            if(hud.Paused){sword?.Interrupt();motor.Halt();return;}
             interactions.Tick(dt);
             if(hud.DialogOpen)
             {
