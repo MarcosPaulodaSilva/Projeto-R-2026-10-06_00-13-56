@@ -36,7 +36,7 @@
 - vila de Grünwald reformulada (2026-10-06): casas de frente e de costas, viela dos fundos ao sul com casas voltadas para ela, jardim noroeste, quintais, praça com poço, três bancas, bancos, mural, barris, canteiros, arbustos, pedras e fumaça saindo da chaminé da ferraria;
 - chão `terrain-v3` (gerado por `Tools/build_terrain.py`): caminhos de terra até cada porta visível, viela, pátios pisados e sombra de assentamento sob as casas; bosquetes e borda de floresta com cinco tipos de árvore;
 - ronda de Konrad ampliada (10 pontos com pausa própria): praça, bancas, rua sul e quintal oeste;
-- `village.ogg` e `city.ogg` importados como assets de áudio; **a reprodução ainda não está conectada ao runtime**.
+- `village.ogg` toca em loop na vila, com atenuação na pausa e mudo persistente no menu ESC; `city.ogg` está importado e reservado para um mapa de cidade.
 
 ## ORGANIZAÇÃO ATUAL
 
@@ -49,19 +49,21 @@
 
 ## VALIDAÇÃO
 
-Em 07/10/2026, após integração da pasta `Downloads/grunwald-quests-vozes-da-vila` sobre a main `e843b2b`:
+Em 08/10/2026, revisão local sobre a main `11bef63`, incluindo praça, Sword Combo v2 e música restaurada pelo Cloud:
 
-- 24 verificações puras passaram localmente com o SDK .NET 10 instalado, em projeto temporário fora dos Assets. A configuração versionada continua em .NET 8 para o CI; o SDK/reference pack 8 não está instalado neste PC.
-- Unity 6000.6.0f1 compilou a integração; `Vadronia > Verificar demo` passou 34 verificações de lógica e conferência dos assets.
+- 25 verificações puras passaram localmente com o SDK .NET 10 instalado, em projeto temporário fora dos Assets. A configuração versionada continua em .NET 8 para o CI; o SDK/reference pack 8 não está instalado neste PC.
+- Unity 6000.6.0f1 compilou a revisão; `Vadronia > Verificar demo` passou 35 verificações de lógica e conferência dos assets.
 - `Vadronia > Verificar exploração em Play` passou 36 verificações: duas quests, save JSON antigo, leitura repetida, relatos anteriores à oferta, recompensa única após recarga real do arquivo, cinco NPCs, oito direções do vídeo, repouso e colisão da investida da espada.
-- Progresso anterior e arquivos de save foram restaurados pelos testes. Mapa e diálogo longo da oferta foram inspecionados em capturas do Editor.
-- Uma chamada do Pipeline excedeu 5 segundos; o teste terminou e seu resultado completo foi confirmado no Console. Isso não foi erro do jogo.
+- `Vadronia > Verificar combate em Play` passou 16 verificações: investida em quatro taxas de atualização, dano/ângulo do combo, três pulsos do redemoinho, recargas, corte final, colisão com o poço e interrupção de golpes/efeitos. Teste usa personagem e alvos temporários, sem alterar saves.
+- Progresso anterior e arquivos de save foram restaurados pelos testes de exploração. Praça e HUD foram inspecionados em captura real do Editor; isso não substitui aprovação artística de Marcos para a etapa 2.
+- Música: uma fonte em reprodução e um AudioListener; sinal de saída medido por dois segundos com pico de aproximadamente 0,30. A primeira leitura isolada retornava zero; amostragem contínua confirmou sinal no motor de áudio. Não representa escuta nos alto-falantes do usuário.
+- Existem avisos anteriores sobre Input Manager e APIs obsoletas; nenhuma migração de input foi feita nesta revisão. Nenhum executável Windows foi gerado.
 
 Os controles foram verificados por código; não representa teste físico de teclado feito por Marcos nem aprovação artística dos NPCs.
 
 ## ATUAL
 
-“Vozes da vila” integrada sem substituir as mudanças mais recentes do Cloud: mapa, controles RDFG/Z/T, Sword Combo e cinco NPCs permanecem. O pacote original estava baseado numa versão anterior e removeria as interações dos NPCs e testes de combate se fosse copiado integralmente; esses pontos foram combinados manualmente.
+Praça da etapa 1, circulação de moradores, “Vozes da vila”, Sword Combo v2 e música do Cloud conferidos no Editor local. As correções desta revisão estabilizam a distância própria da habilidade H em 2,09 unidades no chão livre e limpam rastros/poeira/pose ao interromper combate. Antes, a investida chegava a 2,375 unidades em passos de 50 ms, contra 2,1375 em passos de 8,33 ms. Colisões ainda podem encurtar o avanço.
 
 As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.md`. A quest não revela tradução nem origem definitiva da civilização antiga e não define nova biografia para Konrad.
 
@@ -139,10 +141,10 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 
 ## PRÓXIMO
 
-1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
+1. obter a avaliação visual de Marcos sobre a praça da etapa 1 antes de modificar edifícios/rotas da etapa 2;
 2. revisar com Marcos a arte temporária dos NPCs: ela ainda difere do visual original de Konrad e do player;
-3. testar fisicamente RDFG, Z, T e o clique esquerdo no Editor;
-4. continuar a próxima mecânica autorizada, sem substituir sistemas já existentes.
+3. testar fisicamente RDFG, Z, T, clique esquerdo, E/H e o botão de música no Editor;
+4. continuar a próxima mecânica autorizada, sem substituir sistemas já existentes. A faixa de cidade aguarda o mapa correspondente.
 
 ## LIMITES / DECISÕES
 

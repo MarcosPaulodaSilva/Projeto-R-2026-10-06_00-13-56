@@ -15,6 +15,8 @@ Abra a cena `Assets/Scenes/Vadronia.unity` e pressione Play. Em uma cópia nova,
 | Z | Correr, consumindo fôlego |
 | Espaço | Esquiva com custo e recarga |
 | Mouse esquerdo | Combo de espada de 3 golpes |
+| E | Redemoinho de Aço |
+| H | Investida Cortante |
 | T | Interagir / continuar diálogo |
 | Esc | Pausar / fechar diálogo |
 | F1 | Ocultar interface |
@@ -32,13 +34,14 @@ As teclas `W`, `S`, `X` e `2` não devem ser usadas como controles obrigatórios
 - Corrida, esquiva com colisão, missão de coleta e salvamento local.
 - Cinco NPCs extras com rotas próprias, conversa e funções simples ligadas à vila/missão; cada um usa pixel art procedural temporária própria em vez de reutilizar visualmente o atlas de Konrad.
 
-Esta é uma versão de exploração ampliada. Os prédios ainda são fachadas e não há interiores. O combate inicial permite ao player usar o combo de espada de 3 golpes; ainda não há inimigos/HP para aplicar dano. A animação de caminhada continua procedural sobre recortes da arte, sem novos clipes desenhados quadro a quadro.
+Os prédios ainda são fachadas e não há interiores. O combo e as habilidades E/H podem atingir o boneco de treino perto do ponto inicial, que mostra vida e se recupera. Ainda não há inimigos reais nem HP dos NPCs. A caminhada usa quadros completos extraídos do vídeo, em oito direções; sudoeste espelha sudeste. Poses adicionais de combate/corrida são aplicadas sobre esses quadros. No menu ESC, o botão de música alterna o mudo e salva a preferência.
 
 ## Verificações
 
-- **Vadronia > Verificar demo**: 20 verificações de lógica e conferência dos recursos/pipeline, incluindo `town-extra.png`.
-- Em Play, **Vadronia > Verificar exploração em Play**: 11 verificações de movimento, corrida, colisão na esquiva, repouso, pausa, diálogos, missão, recompensa, save em disco e interface. O teste restaura os arquivos de progresso anteriores; execute fora de uma sessão de jogo importante.
-- As duas rotinas foram executadas no Editor local em 05/10/2026. Console sem erros de compilação/execução no fechamento da validação. Cenário, interface e poses de caminhada inspecionados em capturas do Editor. Testes de controles foram programáticos; sensação ao jogar precisa da avaliação de Marcos.
+- **Vadronia > Verificar demo**: lógica e conferência de recursos/pipeline.
+- Em Play, **Vadronia > Verificar exploração em Play**: movimento, missões, saves, NPCs e oito direções. Restaura os arquivos de progresso anteriores; execute fora de uma sessão de jogo importante.
+- Em Play, **Vadronia > Verificar combate em Play**: distância da investida em diferentes taxas de atualização, dano e ângulo dos golpes, recargas, colisões e interrupção. Usa personagem/alvos temporários e não grava saves.
+- Os resultados e limites da validação mais recente ficam em `PROJECT_STATE.md`. Os testes usam entradas programáticas; sensação ao jogar e aprovação do visual precisam da avaliação de Marcos.
 
 Nenhum executável ou pacote de distribuição Windows foi gerado. Este repositório é o projeto Unity aberto localmente em `C:/Users/Marcos/Downloads/Projeto R/Projeto R VadroniaDemo`.
 

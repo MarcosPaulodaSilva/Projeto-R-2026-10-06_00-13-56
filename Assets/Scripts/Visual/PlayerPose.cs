@@ -92,6 +92,11 @@ namespace Vadronia
             t.rotation = Quaternion.identity;
             t.localScale = Vector3.one;
             if (shadow != null) shadow.localPosition = Vector3.zero;
+            for (int i = 0; i < DustCount; i++)
+            {
+                dustLife[i] = 0f;
+                dust[i].gameObject.SetActive(false);
+            }
         }
 
         /// <summary>Poeira extra (ex.: pouso do golpe 3).</summary>
