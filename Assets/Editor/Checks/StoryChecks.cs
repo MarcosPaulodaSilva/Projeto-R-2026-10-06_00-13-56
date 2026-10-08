@@ -115,7 +115,7 @@ namespace Vadronia
                 var blocks = TownLayout.Blocks();
                 var spots = new List<float[]>();
                 foreach (var p in GrunwaldStory.Points) spots.Add(new[] { p.X, p.Y, p.Radius });
-                spots.Add(new[] { 4.3f, 4.25f, 1.3f }); // placa da guilda (VillageInteraction)
+                foreach(var building in VillageBuildings.All)spots.Add(new[] {building.Door.X,building.Door.Y,.7f});
                 foreach (var spot in spots)
                     Require(MovementCore.Clear(spot[0], spot[1], blocks), "Âncora dentro de obstáculo em " + spot[0] + ", " + spot[1]);
                 // Varredura em grade a partir do ponto de partida do jogador (0, -3.9).

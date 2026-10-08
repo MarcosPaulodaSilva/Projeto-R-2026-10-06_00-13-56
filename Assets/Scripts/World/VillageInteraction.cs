@@ -9,9 +9,13 @@ namespace Vadronia
         readonly GameObject root=new GameObject("Interações de Grünwald");readonly VisualLibrary art=new VisualLibrary();
         readonly Vector2[] herbs={new Vector2(-5.5f,-2),new Vector2(8,-6.5f),new Vector2(-10.2f,7.2f)};
         readonly GameObject[] plants=new GameObject[3];readonly SpriteRenderer marker;
+        readonly SpriteRenderer focusMarker;
+        readonly System.Collections.Generic.List<FootBlock> blocks=TownLayout.Blocks();
         readonly string savePath;
         float clock; int target=-1;
         public string Hint {get;private set;}="";
+        public int Target => target;
+        public FootPoint TargetPosition {get;private set;}
         public VillageNpcs Npcs;
         public VillageInteraction(ExplorerMotor motor,CharacterView conrad,AdventureHud hud)
         {
@@ -31,26 +35,53 @@ namespace Vadronia
             }
             marker=art.Add(root.transform,"Konrad — conversa",art.Square,Vector2.zero,new Vector2(.12f,.12f),new Color(1,.81f,.37f),15000);
             marker.transform.localRotation=Quaternion.Euler(0,0,45);
+            focusMarker=art.Add(root.transform,"Alvo da interação",art.SoftDisc,Vector2.zero,new Vector2(.65f,.22f),new Color(.45f,.8f,1f,.75f),14001);
             hud.SaveRequested=Save;hud.Notify("Bem-vindo a Grünwald. Encontre Konrad na praça.");
         }
         public void Tick(float dt)
         {
             clock+=dt;marker.transform.position=new Vector3(conrad.Position.X,conrad.Position.Y+2.04f+Mathf.Sin(clock*2)*.06f,0);
-            Vector2 p=new Vector2(motor.Actor.Position.X,motor.Actor.Position.Y);
-            int npcIndex;
-            target=-1;Hint="";
-            if(Vector2.Distance(p,new Vector2(conrad.Position.X,conrad.Position.Y))<1.6f){target=0;Hint="T  ·  Conversar com Konrad";}
-            else if(Vector2.Distance(p,new Vector2(0,-.3f))<1.25f){target=1;Hint="T  ·  Beber água e recuperar fôlego";}
-            else for(int i=0;i<herbs.Length;i++)if(motor.State.Progress.quest==1&&(motor.State.Progress.herbs&(1<<i))==0&&Vector2.Distance(p,herbs[i])<1.1f){target=2+i;Hint="T  ·  Colher ervas do jardim";break;}
-            if(target<0&&Vector2.Distance(p,new Vector2(-3,4.25f))<1.3f){target=5;Hint="T  ·  Descansar na estalagem";}
-            if(target<0&&Vector2.Distance(p,new Vector2(4.3f,4.25f))<1.3f){target=GrunwaldStory.GuildaChoice;Hint="T  ·  Ler a placa da guilda";}
-            if(target<0)foreach(var point in GrunwaldStory.Points)
-                if(Vector2.Distance(p,new Vector2(point.X,point.Y))<point.Radius){target=point.Choice;Hint=point.Hint;break;}
-            if(target<0&&Npcs!=null&&(npcIndex=Npcs.Nearest(p,out string npcHint))>=0){target=100+npcIndex;Hint=npcHint;}
+            SelectTarget();
             if(!ExplorerMotor.Pressed(KeyCode.T))return;
             if(hud.DialogOpen){hud.CloseDialog();return;}
             if(hud.Paused)return;
             Interact(target);
+        }
+        public void SelectTarget()
+        {
+            int previous=target;target=-1;Hint="";float best=float.PositiveInfinity;
+            var p=motor.Actor.Position;
+            float angle=motor.Actor.Facing*Mathf.PI/4;
+            var facing=new FootPoint(Mathf.Sin(angle),-Mathf.Cos(angle));
+            Consider(0,conrad.Position,.8f,false,"T  ·  Conversar com Konrad",p,facing,previous,ref best);
+            Consider(1,new FootPoint(0,-.34f),.65f,true,"T  ·  Beber água do poço",p,facing,previous,ref best);
+            for(int i=0;i<herbs.Length;i++)
+                if(motor.State.Progress.quest==1&&(motor.State.Progress.herbs&(1<<i))==0)
+                    Consider(2+i,new FootPoint(herbs[i].x,herbs[i].y),.65f,false,"T  ·  Colher ervas",p,facing,previous,ref best);
+            string place="";float near=2.6f;
+            foreach(var building in VillageBuildings.All)
+            {
+                float d=Vector2.Distance(new Vector2(p.X,p.Y),new Vector2(building.Door.X,building.Door.Y));
+                if(d<near&&p.Y<building.Door.Y+.4f){near=d;place=building.Name+"  ·  "+building.Function;}
+                string verb=building.Choice==5?"Descansar na ":building.Choice==6?"Ler registro da ":"Identificar ";
+                Consider(building.Choice,building.Door,.7f,true,"T  ·  "+verb+building.Name,p,facing,previous,ref best);
+            }
+            foreach(var point in GrunwaldStory.Points)
+                Consider(point.Choice,new FootPoint(point.X,point.Y),point.Radius,true,point.Hint,p,facing,previous,ref best);
+            // Other counters remain usable independently of the story-bearing east stall.
+            Consider(22,new FootPoint(-3.3f,-2.23f),.7f,true,"T  ·  Banca de alimentos",p,facing,previous,ref best);
+            Consider(23,new FootPoint(6.4f,-5.08f),.7f,true,"T  ·  Banca de ervas",p,facing,previous,ref best);
+            if(Npcs!=null)for(int i=0;i<Npcs.Count;i++)
+                Consider(100+i,Npcs.Position(i),.8f,false,Npcs.Hint(i),p,facing,previous,ref best);
+            focusMarker.gameObject.SetActive(target>=0&&!hud.DialogOpen&&!hud.Paused);
+            focusMarker.transform.position=new Vector3(TargetPosition.X,TargetPosition.Y,0);
+            hud.SetInteractionHint(Hint);hud.SetPlace(place);
+        }
+        void Consider(int choice,FootPoint at,float range,bool front,string hint,FootPoint p,FootPoint facing,int previous,ref float best)
+        {
+            float score=InteractionFocus.Score(p,facing,at,range,front,blocks,previous==choice);
+            if(score>=best)return;
+            best=score;target=choice;Hint=hint;TargetPosition=at;
         }
         public void Interact(int choice)
         {
@@ -65,6 +96,10 @@ namespace Vadronia
             else if(choice==1||choice==5){motor.State.Rest();hud.Notify(choice==1?"Água fresca. Fôlego recuperado.":"Um breve descanso. Fôlego recuperado.");Save(false);}
             else if(choice>=2&&choice<=4&&motor.State.Gather(choice-2)){plants[choice-2].SetActive(false);hud.Notify("Ervas colhidas  ·  "+motor.State.HerbCount+" / 3");Save(false);}
             else if(choice==GrunwaldStory.GuildaChoice)Hear(StoryFlags.VozesGuilda,GrunwaldStory.GuildaSpeaker,GrunwaldStory.GuildaText);
+            else if(choice==22)hud.ShowDialog("BANCA DE ALIMENTOS","Frutas, legumes e pão dos moradores de Grünwald. Na banca leste circulam também notícias da estrada. O comércio ainda não está disponível.");
+            else if(choice==23)hud.ShowDialog("BANCA DE ERVAS","Ervas e hortaliças da vila. Maren conhece os canteiros usados no favor de Konrad; converse com ela para saber onde procurar.");
+            else if(choice>=20&&choice<100)
+            {foreach(var building in VillageBuildings.All)if(building.Choice==choice){hud.ShowDialog(building.Name.ToUpperInvariant(),building.Text);break;}}
             else if(choice>=100&&Npcs!=null){Npcs.FacePlayer(choice-100,new Vector2(motor.Actor.Position.X,motor.Actor.Position.Y));if(Npcs.Talk(choice-100,motor.State,hud))Save(false);}
             else foreach(var point in GrunwaldStory.Points)if(point.Choice==choice){Hear(point.Flag,point.Speaker,point.Text);break;}
         }

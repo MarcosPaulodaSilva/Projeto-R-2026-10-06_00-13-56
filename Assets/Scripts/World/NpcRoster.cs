@@ -29,7 +29,7 @@ namespace Vadronia
         public static readonly NpcDefinition[] All =
         {
             new NpcDefinition("helga", "HELGA", "Estalajadeira", NpcFunction.Rest,
-                new[] { new FootPoint(-4f, 3.8f), new FootPoint(-2.4f, 3.8f), new FootPoint(-3.2f, 3.5f) },
+                new[] { new FootPoint(11.2f, 5.3f), new FootPoint(12.4f, 5.3f), new FootPoint(11.8f, 5.1f) },
                 new[] { 4f, 3f, 5f }, .5f, 1f,
                 new NpcLook
                 {

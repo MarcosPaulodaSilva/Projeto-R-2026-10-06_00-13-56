@@ -17,7 +17,7 @@ namespace Vadronia
             public float Wait;
         }
 
-        const float TalkRange = 1.5f;
+        const float TalkRange = .8f;
         const float TalkRangeSq = TalkRange * TalkRange;
         const float FreezeRangeSq = TalkRangeSq * .64f;
         readonly List<Npc> npcs = new List<Npc>(NpcRoster.All.Length);
@@ -26,6 +26,8 @@ namespace Vadronia
         readonly VisualLibrary art = new VisualLibrary();
         float clock;
         public int Count => npcs.Count;
+        public FootPoint Position(int index) => npcs[index].View.Position;
+        public string Hint(int index) => npcs[index].Hint;
 
         public VillageNpcs(List<FootBlock> blocks)
         {
