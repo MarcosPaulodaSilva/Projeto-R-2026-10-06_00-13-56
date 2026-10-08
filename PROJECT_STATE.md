@@ -112,6 +112,14 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 - `CoreChecks` passa a testar simetria das bancas, acessos centrais e âncoras de quest contra os colisores.
 - Nenhum asset antigo foi excluído; áudio, combates e saves não foram modificados. O resultado artístico precisa ser conferido no Unity Editor antes de começar a etapa 2.
 
+## ETAPA 1 — ACABAMENTO DE PIXEL ART (08/10/2026)
+
+- Corrigida a principal discrepância de escala: o calçamento tinha 64 pixels por unidade, enquanto `terrain-v3` tem **32 pixels por unidade**. Agora o pavimento usa a mesma densidade do terreno.
+- Redesenhadas as fiadas de pedra com juntas mais finas, cantos gastos e pequenas variações de luz, mantendo a paleta quente, musgo discreto e caminhos orgânicos da reforma anterior.
+- Sprite único de 544×448 pixels gerado no início do jogo (antes: 960×720), com redução do uso de memória de textura e sem atualização por frame.
+- Casas, colisões, pontos de missão, música, NPCs, Sword Combo, rotas e saves preservados. Esta revisão complementa **somente a praça central**, não inicia a etapa 2.
+- Revisão visual no Editor ainda necessária para confirmar o resultado estético das imagens escolhidas pelo usuário.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
