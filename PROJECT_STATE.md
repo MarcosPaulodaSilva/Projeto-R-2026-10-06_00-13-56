@@ -120,6 +120,14 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 - Casas, colisões, pontos de missão, música, NPCs, Sword Combo, rotas e saves preservados. Esta revisão complementa **somente a praça central**, não inicia a etapa 2.
 - Revisão visual no Editor ainda necessária para confirmar o resultado estético das imagens escolhidas pelo usuário.
 
+## ETAPA 1 — CORREÇÃO DO RETÂNGULO ANTIGO (08/10/2026)
+
+- A revisão da captura real mostrou que o retângulo do calçamento antigo ainda aparecia atrás da nova textura. Trocar apenas pixels/cores na camada superior não apagava o piso original.
+- `VillageSquare.cs` agora desenha **duas camadas procedurais de 32 PPU** em vez de só uma: uma base de terra que cobre integralmente a geometria do antigo retângulo e o novo calçamento quente por cima, com limite arredondado, irregular e caminhos conectados.
+- A base mistura terra, grama e pequenos seixos onde as pedras se espaçam. O novo mosaico traz juntas, pedras de quinas gastas, variações entre fiadas e musgo discreto.
+- Renderização em apenas dois sprites, gerados uma única vez na abertura da cena. Nenhum update por frame, nenhum colisor modificado; a integridade das casas, NPCs, quests, áudio, Sword Combo e saves foi mantida.
+- Aprovação artística definitiva depende de captura da cena no Unity 6000.6.0f1 e comparação com as duas imagens de destino; **etapa 2 não foi iniciada**.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
