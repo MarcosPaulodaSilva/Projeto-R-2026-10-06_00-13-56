@@ -95,6 +95,14 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 - Tudo funciona com os atlases atuais. Para igualar inteiramente a arte conceitual ainda serão necessários assets finais próprios para novas fachadas/objetos e refazer o atlas do terreno fora do runtime.
 - Alterações adicionadas inicialmente numa branch de revisão; a validação de lógica automatizada não substitui avaliação estética ou Play Mode no Unity.
 
+## RESTAURAÇÃO DA MÚSICA (08/10/2026)
+
+- Diagnóstico: a main tinha `village.ogg` e `city.ogg` importados, mas faltavam `AudioSource` de runtime e `AudioListener` na câmera gerada por `VadroniaDemo`; por isso não havia reprodução ambiente em Play.
+- `VillageMusic.cs` toca `village.ogg` em loop 2D, com volume moderado e atenuação suave na pausa. O mudo fica salvo no PlayerPrefs.
+- O menu ESC ganhou botão para ligar/desligar música. O restante do HUD, as cenas, missões, ataques, sprites e efeitos do vilarejo foram mantidos.
+- `Vadronia > Verificar demo` passa a conferir que a faixa da vila existe. O CI .NET não substitui teste com áudio/Unity Editor.
+- A branch local `codex/village-soundtrack` não havia sido publicada no GitHub; esta restauração usa as faixas já versionadas, não afirma recuperar exatamente a implementação inédita daquela branch.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
