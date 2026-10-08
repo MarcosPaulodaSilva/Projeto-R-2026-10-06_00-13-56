@@ -36,6 +36,7 @@
         <ui:Label text="Sua jornada espera por você." class="subtitle" />
         <ui:Button name="resume" text="Continuar" class="button" />
         <ui:Button name="save" text="Salvar progresso" class="button" />
+        <ui:Button name="musicToggle" text="Música: ligada" class="button" />
       </ui:VisualElement>
     </ui:VisualElement>
   </ui:VisualElement>

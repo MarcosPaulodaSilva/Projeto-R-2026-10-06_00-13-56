@@ -9,12 +9,14 @@ namespace Vadronia
         readonly PanelSettings panel;
         readonly VisualElement hud,dialog,pause;
         readonly Label stamina,coins,questTitle,questText,prompt,toast,speaker,dialogText;
+        readonly Button musicToggle;
         readonly VisualElement[] segments=new VisualElement[10];
         float toastTime;
         public bool Paused {get;private set;}
         public bool DialogOpen {get;private set;}
         public bool Hidden {get;private set;}
         public Action SaveRequested;
+        public Action MusicToggleRequested;
         public AdventureHud()
         {
             root=new GameObject("Interface — Vadronia");
@@ -27,6 +29,8 @@ namespace Vadronia
             prompt=hud.Q<Label>("prompt");toast=hud.Q<Label>("toast");speaker=hud.Q<Label>("speaker");dialogText=hud.Q<Label>("dialogText");
             for(int i=0;i<10;i++){segments[i]=new VisualElement();segments[i].AddToClassList("segment");hud.Q("segments").Add(segments[i]);}
             hud.Q<Button>("resume").clicked+=()=>SetPause(false);hud.Q<Button>("save").clicked+=()=>SaveRequested?.Invoke();
+            musicToggle=hud.Q<Button>("musicToggle");
+            if(musicToggle!=null)musicToggle.clicked+=()=>MusicToggleRequested?.Invoke();
             foreach(var label in hud.Query<Label>().ToList())label.pickingMode=PickingMode.Ignore;
         }
         public void Tick(AdventureState state,string hint,float dt)
@@ -41,6 +45,10 @@ namespace Vadronia
             questTitle.text=title;questText.text=text;
             prompt.text=hint;prompt.EnableInClassList("hidden",string.IsNullOrEmpty(hint)||DialogOpen||Paused);
             toastTime-=dt;toast.EnableInClassList("hidden",toastTime<=0);
+        }
+        public void SetMusicMuted(bool muted)
+        {
+            if (musicToggle != null) musicToggle.text = muted ? "Música: desligada" : "Música: ligada";
         }
         public void Notify(string text){toast.text=text;toastTime=4;}
         public void ShowDialog(string name,string text){Hidden=false;hud.RemoveFromClassList("hidden");speaker.text=name;dialogText.text=text;DialogOpen=true;dialog.RemoveFromClassList("hidden");}

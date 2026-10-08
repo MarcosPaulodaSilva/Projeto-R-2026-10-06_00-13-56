@@ -46,6 +46,8 @@ namespace Vadronia.Editor
                 if (texture == null) throw new System.Exception("Textura ausente: " + name);
                 if (texture.filterMode != FilterMode.Point) throw new System.Exception("Filtro incorreto: " + name);
             }
+            if (Resources.Load<AudioClip>("Vadronia/Audio/village") == null)
+                throw new System.Exception("Música da vila ausente: Resources/Vadronia/Audio/village.ogg");
             if (UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline != null)
                 throw new System.Exception("Esta demo usa Built-in. Remova o pipeline customizado antes de testar.");
             Debug.Log(count + " verificações de lógica passaram; atlas e pipeline verificados. Teste também em Play.");
