@@ -15,7 +15,7 @@ namespace Vadronia
         // terrain-v3 mede 896x704 em 28x22 unidades: 32 pixels/unidade.
         // Um pixel da praça tem a mesma escala de um pixel do terreno.
         const int Ppu = 32;
-        const int Width = 512, Height = 416;
+        const int Width = 544, Height = 448;
         readonly GameObject root;
         readonly Texture2D texture;
         readonly Sprite sprite;
