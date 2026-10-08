@@ -65,6 +65,13 @@ Os controles foram verificados por código; não representa teste físico de tec
 
 As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.md`. A quest não revela tradução nem origem definitiva da civilização antiga e não define nova biografia para Konrad.
 
+### Sword Combo v2 — integração em revisão
+- Nova apresentação da espada: lâmina em pixel art gerada em código, arcos, rastro, poeira, inclinação e salto por pose, sem alterar quadros do vídeo.
+- Runtime troca `PlayerSword` por `SwordController`, mantendo `PlayerSword.cs` no histórico do projeto como fallback de código.
+- Reaproveita `Assets/Scripts/Combat/SwordCombo.cs` existente e seu `.meta`, sem classe duplicada; combo faz avanço via `ExplorerMotor.Lunge` para respeitar colisões.
+- Redemoinho (E, 6 s), investida (H, 8 s), corrida com Z/Shift, ataque com mouse esquerdo ou botão sul do gamepad, mira por mouse ou analógico direito e boneco de treino temporário.
+- Pendente: confirmar compilação e testar em Unity 6000.6.0f1, incluindo correções de posicionamento visual, Play Mode, teclado e gamepad. Não houve validação gráfica local nesta integração.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
@@ -76,7 +83,7 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 
 - prédios ainda externos;
 - Konrad mantém o atlas original; os 5 NPCs novos usam pixel art procedural temporária própria, ainda sujeita a substituição por arte final;
-- combate inicial limitado ao combo de espada do player; ainda sem inimigos, HP/dano aplicado, block/parry ou efeitos das habilidades E/H;
+- combate com combo e habilidades E/H ligadas ao boneco de treino; ainda sem inimigos reais, block/parry ou integração de dano/HP com NPCs;
 - sem interiores;
 - casas em diagonal exigem arte nova (o atlas só tem fachadas de frente; "de costas" foi derivado dela);
 - `W`, `S`, `X` e `2` não podem ser usados como controles obrigatórios; o movimento atual é RDFG + setas;

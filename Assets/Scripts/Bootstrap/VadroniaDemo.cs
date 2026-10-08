@@ -8,10 +8,10 @@ namespace Vadronia
         public CharacterView Player => player;
         public CharacterView Conrad => conrad;
         public ExplorerMotor Motor => motor;
-        public PlayerSword Sword => sword;
+        public SwordController Sword => sword;
         public AdventureHud Hud => hud;
         public VillageInteraction Interactions => interactions;
-        CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;PlayerSword sword;
+        CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;SwordController sword;
         AdventureCamera cameraRig;AdventureHud hud;VillageInteraction interactions;VillageAtmosphere atmosphere;VillageNpcs villagers;
         int waypoint=1;float wait;bool warnedPatrol;
         void Start()
@@ -24,8 +24,8 @@ namespace Vadronia
             conrad=new CharacterView("Konrad",TownLayout.Patrol[0],null,characterAtlas,true);
             view=new GameObject("Camera — Grünwald").AddComponent<Camera>();view.tag="MainCamera";view.orthographic=true;view.orthographicSize=5.65f;
             view.clearFlags=CameraClearFlags.SolidColor;view.backgroundColor=new Color32(34,48,35,255);view.allowHDR=view.allowMSAA=view.allowDynamicResolution=false;
-            cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=new PlayerSword(motor,view);
-            hud=new AdventureHud();interactions=new VillageInteraction(motor,conrad,hud);
+            cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);
+            hud=new AdventureHud();sword=new SwordController(motor,view,hud.Notify);sword.SpawnDummy(new Vector2(2.4f,-3.9f));interactions=new VillageInteraction(motor,conrad,hud);
             villagers=new VillageNpcs(town.Blocks);interactions.Npcs=villagers;
             atmosphere=new VillageAtmosphere(town,player.Position);
             cameraRig.Follow(player.Position,Vector2.zero,false,0,true);
@@ -35,7 +35,7 @@ namespace Vadronia
             if(motor==null||hud==null)return;
             float dt=Mathf.Min(Time.deltaTime,.05f);
             hud.Tick(motor.State,interactions.Hint,Time.unscaledDeltaTime);
-            if(hud.Paused){motor.Halt();return;}
+            if(hud.Paused){sword?.Interrupt();motor.Halt();return;}
             interactions.Tick(dt);
             if(hud.DialogOpen)
             {
@@ -43,7 +43,7 @@ namespace Vadronia
                 villagers?.Tick(0,true,new Vector2(player.Position.X,player.Position.Y));
                 return;
             }
-            motor.Tick(dt,sword==null||sword.Combo.CanAct);sword?.Tick(dt);TickPatrol(dt);
+            sword.Tick(dt);TickPatrol(dt);
             villagers?.Tick(dt,false,new Vector2(player.Position.X,player.Position.Y));
             atmosphere.Tick(dt,player,motor.IsSprinting);
         }
