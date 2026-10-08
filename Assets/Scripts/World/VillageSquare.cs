@@ -7,12 +7,15 @@ namespace Vadronia
     /// A praça é um único sprite de pedras artesanais gerado uma vez no carregamento.
     /// A área central cobre completamente o piso retangular antigo; recortes com
     /// dithering unem o calçamento às estradas de terra já pintadas;
+    /// A resolução por unidade corresponde exatamente à textura do terreno;
     /// sem blocos de pedra como GameObjects e sem atualizações por frame.
     /// </summary>
     public sealed class VillageSquare : IDisposable
     {
-        const int Ppu = 64;
-        const int Width = 960, Height = 720;
+        // terrain-v3 mede 896x704 em 28x22 unidades: 32 pixels/unidade.
+        // Um pixel da praça tem a mesma escala de um pixel do terreno.
+        const int Ppu = 32;
+        const int Width = 512, Height = 416;
         readonly GameObject root;
         readonly Texture2D texture;
         readonly Sprite sprite;
@@ -94,34 +97,36 @@ namespace Vadronia
             for (int py = 0; py < Height; py++)
             {
                 float y = (py - Height * .5f) / Ppu;
-                int row = py / 18;
-                int rowLocal = py - row * 18;
-                int rowShift = (row & 1) * 16 + Hash(0, row, 2) % 9;
+                // Fiadas desencontradas, pedras de cerca de 15x9 pixels do terreno.
+                int row = py / 9;
+                int rowLocal = py - row * 9;
+                int rowShift = (row & 1) * 8 + Hash(0, row, 2) % 4;
                 for (int px = 0; px < Width; px++)
                 {
                     float x = (px - Width * .5f) / Ppu;
                     float contour = Surface(x, y);
-                    contour += (Hash(px / 14, py / 14, 31) % 101 - 50) * .0019f;
+                    contour += (Hash(px / 7, py / 7, 31) % 101 - 50) * .0019f;
                     contour += Mathf.Sin(y * 9f + x * 3f) * .044f;
 
                     // Pedras vão se espaçando na borda: não há outra textura
                     // quadrada sobreposta ao chão, nem faixa lisa cinza.
                     float coverage = Mathf.Clamp01((.56f - contour) / .56f);
                     if (coverage <= 0) continue;
-                    int grain = Hash(px / 3, py / 3, 47) % 1000;
+                    int grain = Hash(px, py, 47) % 1000;
                     if (coverage < 1 && grain >= coverage * 1000f) continue;
 
                     int shiftedX = px + rowShift;
-                    int col = shiftedX / 29;
-                    int localX = shiftedX - col * 29;
+                    int col = shiftedX / 15;
+                    int localX = shiftedX - col * 15;
                     int seed = Hash(col, row, 18);
-                    int seamX = (seed % 3 == 0) ? 2 : 1;
-                    int seamY = seed % 6 == 0 ? 2 : 1;
-                    bool mortar = localX <= seamX || localX >= 28 - seamX ||
-                                  rowLocal <= seamY || rowLocal >= 17 - seamY;
+                    // Recuos nos quatro cantos quebram o aspecto de ladrilhos perfeitos.
+                    bool chipped = (rowLocal == 1 || rowLocal == 7) &&
+                                   (localX == 1 || localX == 13) && (seed % 5 != 0);
+                    bool mortar = localX == 0 || localX == 14 ||
+                                  rowLocal == 0 || rowLocal == 8 || chipped;
                     var stoneColor = Stones[seed % Stones.Length];
-                    int grit = Hash(px / 4, py / 5, 72) % 11 - 5;
-                    int bevel = rowLocal >= 14 ? 7 : rowLocal < 4 ? -6 : 0;
+                    int grit = Hash(px / 2, py / 2, 72) % 11 - 5;
+                    int bevel = rowLocal >= 7 ? 7 : rowLocal <= 2 ? -6 : 0;
 
                     if (mortar)
                     {
@@ -135,8 +140,9 @@ namespace Vadronia
                         int light = grit + bevel;
                         // Círculo discreto de pedra clara ao redor do poço,
                         // sem bloquear o seu acesso nem alterar seu colisor.
-                        float wellDistance = Mathf.Sqrt(x * x + y * y);
-                        if (wellDistance > .9f && wellDistance < 1.55f) light += 9;
+                        float distanceSq = x * x + y * y;
+                        if (distanceSq > .95f * .95f && distanceSq < 1.55f * 1.55f)
+                            light += 7;
                         colors[py * Width + px] = new Color32(
                             (byte)Mathf.Clamp(stoneColor.r + light, 0, 255),
                             (byte)Mathf.Clamp(stoneColor.g + light, 0, 255),
