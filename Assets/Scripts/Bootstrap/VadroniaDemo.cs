@@ -25,7 +25,7 @@ namespace Vadronia
             view=new GameObject("Camera — Grünwald").AddComponent<Camera>();view.tag="MainCamera";view.orthographic=true;view.orthographicSize=5.65f;
             view.clearFlags=CameraClearFlags.SolidColor;view.backgroundColor=new Color32(34,48,35,255);view.allowHDR=view.allowMSAA=view.allowDynamicResolution=false;
             cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=new PlayerSword(motor,view);
-            hud=new AdventureHud();interactions=new VillageInteraction(motor,conrad,hud);
+            hud=new AdventureHud();sword.Notify=hud.Notify;interactions=new VillageInteraction(motor,conrad,hud);
             villagers=new VillageNpcs(town.Blocks);interactions.Npcs=villagers;
             atmosphere=new VillageAtmosphere(town,player.Position);
             cameraRig.Follow(player.Position,Vector2.zero,false,0,true);

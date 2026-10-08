@@ -65,6 +65,16 @@ Os controles foram verificados por código; não representa teste físico de tec
 
 As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.md`. A quest não revela tradução nem origem definitiva da civilização antiga e não define nova biografia para Konrad.
 
+## ATUALIZAÇÃO — Sword Combo v2 (08/10/2026)
+
+- `PlayerSword.cs` atualizado preservando a API pública utilizada por `VadroniaDemo` (`Combo`, `Aim`, `Tick`, `Interrupt`, `Dispose` e construtor).
+- Espada procedural, poses adicionais de corrida e golpes, trilhas, poeira, três cortes encadeados, Redemoinho de Aço em E e Investida Cortante em H.
+- Botões sul/oeste/norte do gamepad para ataque/habilidades quando o Input System estiver ativo; a mira por analógico direito já está na classe `PlayerSword`.
+- Boneco de treino gerado temporariamente perto do jogador e avisos de recarga ligados ao HUD.
+- Mantidos `SwordCombo.cs`, `ExplorerMotor.cs`, cenas, GUIDs existentes, NPCs, mapa e persistência.
+- Integração na `main` solicitada sem testes; compilação/Play Mode no Unity **não foram executados nesta atualização**.
+- Após `git pull` ou Pull no GitHub Desktop dentro da pasta do projeto principal, o Unity Hub poderá abrir os arquivos atualizados.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
@@ -76,7 +86,7 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 
 - prédios ainda externos;
 - Konrad mantém o atlas original; os 5 NPCs novos usam pixel art procedural temporária própria, ainda sujeita a substituição por arte final;
-- combate inicial limitado ao combo de espada do player; ainda sem inimigos, HP/dano aplicado, block/parry ou efeitos das habilidades E/H;
+- combate atualizado com combo e efeitos/skills E e H e boneco de treino com HP; ainda sem inimigos reais, block/parry nem HP integrado aos NPCs;
 - sem interiores;
 - casas em diagonal exigem arte nova (o atlas só tem fachadas de frente; "de costas" foi derivado dela);
 - `W`, `S`, `X` e `2` não podem ser usados como controles obrigatórios; o movimento atual é RDFG + setas;
