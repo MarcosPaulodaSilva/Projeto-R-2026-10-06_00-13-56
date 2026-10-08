@@ -86,6 +86,15 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 - A pasta local `Library` e caches de build já estão excluídos do versionamento pelo `.gitignore`.
 - Inspeção estática apenas: consumo de RAM, FPS, Unity/Play Mode e controles físicos não foram medidos nesta revisão.
 
+## REVISÃO VISUAL DE GRÜNWALD — praça e vida cotidiana (08/10/2026)
+
+- `VillageSquare.cs` desenha calçamento único com pedras de mesma escala e paleta, bordas irregulares e musgo, integrando visualmente a praça ao terreno existente. Um sprite único, gerado apenas no carregamento; zero pedras como GameObjects individuais.
+- `TownLayout.cs` ganhou canteiros, bancos e cercas decorativas nas margens dos percursos, sem novos colisores ou mudanças em NPCs de quest.
+- `TownWorld.cs` diminui/disciplina as sombras projetadas por sprites; props pequenos deixam de ter manchas desproporcionais.
+- `VillageCrowd.cs` adiciona dois moradores circulando na feira com a mesma pipeline de sprites dos NPCs existentes; sem interferir nas falas, missões e progressão.
+- Tudo funciona com os atlases atuais. Para igualar inteiramente a arte conceitual ainda serão necessários assets finais próprios para novas fachadas/objetos e refazer o atlas do terreno fora do runtime.
+- Alterações adicionadas inicialmente numa branch de revisão; a validação de lógica automatizada não substitui avaliação estética ou Play Mode no Unity.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;

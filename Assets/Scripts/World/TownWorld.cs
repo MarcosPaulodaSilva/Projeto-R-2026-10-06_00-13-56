@@ -9,6 +9,7 @@ namespace Vadronia
         readonly GameObject root;
         readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
         readonly VisualLibrary visuals = new VisualLibrary();
+        readonly VillageSquare square;
         public Transform Root => root.transform;
         public readonly List<FootBlock> Blocks = TownLayout.Blocks();
         public TownWorld(Texture2D scenery)
@@ -22,6 +23,8 @@ namespace Vadronia
             owned.Add(ground);
             var terrain = Add("Chão", ground, Vector2.zero, 1, -20000);
             terrain.transform.localScale = new Vector3(1,22f/ground.bounds.size.y,1);
+            // Calçamento coeso, independente dos recortes de terra do terreno anterior.
+            square = new VillageSquare(root.transform);
             // Atlas 1 (casas de costas, cercas, barris...) is optional: without it the town still loads.
             var extra = Resources.Load<Texture2D>("Vadronia/town-extra");
             if(extra == null) Debug.LogWarning("Resources/Vadronia/town-extra.png não encontrado; adereços extras omitidos.");
@@ -34,7 +37,13 @@ namespace Vadronia
                 // Flat decals (flower beds, dirt) are centred on the ground; everything else stands on its feet.
                 Sprite sprite = Sprite.Create(source, bounds, prop.Flat ? Vector2.one * .5f : new Vector2(.5f, 0), bounds.width / prop.Width, 0, SpriteMeshType.FullRect);
                 owned.Add(sprite);
-                if(!prop.Flat) visuals.Add(root.transform,"Sombra — "+prop.Name,visuals.SoftDisc,new Vector2(prop.X+.3f,prop.Y-.12f),new Vector2(prop.Width*1.15f,prop.Width*.42f),new Color(.07f,.1f,.075f,.7f),-17000);
+                // Sombras só em volumes grandes. Arbustos e barris não projetam discos desproporcionais.
+                bool structure = (prop.Atlas == 0 && prop.Sprite <= 3) || (prop.Atlas == 1 && prop.Sprite <= 6);
+                if (!prop.Flat && (structure || prop.IsTree))
+                    visuals.Add(root.transform, "Sombra — " + prop.Name, visuals.SoftDisc,
+                        new Vector2(prop.X, prop.Y - .09f),
+                        new Vector2(prop.Width * (structure ? .92f : .64f), structure ? .32f : .24f),
+                        new Color(.08f, .1f, .07f, .4f), -18600);
                 var renderer = Add(prop.Name, sprite, new Vector2(prop.X, prop.Y), 1, prop.Flat ? -18000 : -Mathf.RoundToInt(prop.Y * 100)*10);
                 renderer.flipX = prop.Flip;
                 renderer.color = new Color(prop.Red, prop.Green, prop.Blue, 1f);
@@ -101,6 +110,7 @@ namespace Vadronia
         static Color32 Color(int r, int g, int b) { return new Color32((byte)r, (byte)g, (byte)b, 255); }
         public void Dispose()
         {
+            square.Dispose();
             if (root != null) UnityEngine.Object.Destroy(root);
             foreach (var asset in owned) if (asset != null) UnityEngine.Object.Destroy(asset);
             visuals.Dispose();
