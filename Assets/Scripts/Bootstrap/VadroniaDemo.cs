@@ -12,7 +12,7 @@ namespace Vadronia
         public AdventureHud Hud => hud;
         public VillageInteraction Interactions => interactions;
         CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;PlayerSword sword;
-        AdventureCamera cameraRig;AdventureHud hud;VillageInteraction interactions;VillageAtmosphere atmosphere;VillageNpcs villagers;
+        AdventureCamera cameraRig;AdventureHud hud;VillageInteraction interactions;VillageAtmosphere atmosphere;VillageNpcs villagers;VillageCrowd crowd;
         int waypoint=1;float wait;bool warnedPatrol;
         void Start()
         {
@@ -27,6 +27,7 @@ namespace Vadronia
             cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=new PlayerSword(motor,view);
             hud=new AdventureHud();sword.Notify=hud.Notify;interactions=new VillageInteraction(motor,conrad,hud);
             villagers=new VillageNpcs(town.Blocks);interactions.Npcs=villagers;
+            crowd=new VillageCrowd(town.Blocks);
             atmosphere=new VillageAtmosphere(town,player.Position);
             cameraRig.Follow(player.Position,Vector2.zero,false,0,true);
         }
@@ -41,10 +42,12 @@ namespace Vadronia
             {
                 sword?.Interrupt();motor.Halt();conrad.Place(conrad.Position);conrad.Animate(dt);
                 villagers?.Tick(0,true,new Vector2(player.Position.X,player.Position.Y));
+                crowd?.Tick(0,true);
                 return;
             }
             motor.Tick(dt,sword==null||sword.Combo.CanAct);sword?.Tick(dt);TickPatrol(dt);
             villagers?.Tick(dt,false,new Vector2(player.Position.X,player.Position.Y));
+            crowd?.Tick(dt,false);
             atmosphere.Tick(dt,player,motor.IsSprinting);
         }
         void TickPatrol(float dt)
@@ -58,7 +61,7 @@ namespace Vadronia
             else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Konrad encontrou obstáculo na patrulha.");}
         }
         void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
-        void OnDestroy(){interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();villagers?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
+        void OnDestroy(){interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();villagers?.Dispose();crowd?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
         void OnDrawGizmosSelected()
         {
             Gizmos.color=new Color(1,.5f,0,.7f);
