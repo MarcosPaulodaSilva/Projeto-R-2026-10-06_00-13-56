@@ -81,6 +81,34 @@ namespace Vadronia
                 Require(laps >= 10, "Patrulha presa: " + laps + " voltas");
                 Require(Array.TrueForAll(visited, v => v), "Patrulha não alcançou todos os pontos");
             }, report, ref count);
+            Check("Praça organizada mantém circulação e interações acessíveis", () =>
+            {
+                var blocks = TownLayout.Blocks();
+                TownProp well = new TownProp(), west = new TownProp(), east = new TownProp();
+                bool gotWell = false, gotWest = false, gotEast = false;
+                foreach (var prop in TownLayout.Props)
+                {
+                    if (prop.Name == "Poço da praça") { well = prop; gotWell = true; }
+                    else if (prop.Name == "Banca oeste") { west = prop; gotWest = true; }
+                    else if (prop.Name == "Banca leste") { east = prop; gotEast = true; }
+                }
+                Require(gotWell && gotWest && gotEast, "Faltam poço ou bancas da praça");
+                Require(well.X == 0 && well.Y == 0, "Poço mudou da âncora de missão");
+                Require(Math.Abs(west.X + east.X) < .001f && Math.Abs(west.Y - east.Y) < .001f,
+                    "Bancas devem flanquear simetricamente o corredor central");
+                Require(west.Y < -1.5f && east.Y < -1.5f, "A feira precisa ficar abaixo do poço");
+                foreach (var pt in new[] {
+                    new FootPoint(0, -3.9f), new FootPoint(0, -2.5f),
+                    new FootPoint(-1.3f, -1.4f), new FootPoint(1.3f, -1.4f),
+                    new FootPoint(-1.4f, 1.5f), new FootPoint(1.4f, 1.5f),
+                    new FootPoint(0, 3.5f), new FootPoint(3.3f, -2.85f)
+                })
+                    Require(MovementCore.Clear(pt.X, pt.Y, blocks),
+                        "Circulação da praça bloqueada em " + pt.X + "," + pt.Y);
+                foreach (var point in GrunwaldStory.Points)
+                    Require(MovementCore.Clear(point.X, point.Y, blocks),
+                        "Interação de Vozes da Vila bloqueada: " + point.Hint);
+            }, report, ref count);
             Check("Roster dos NPCs é consistente", () =>
             {
                 Require(NpcRoster.All.Length == 5, "Grünwald precisa dos cinco NPCs extras");
