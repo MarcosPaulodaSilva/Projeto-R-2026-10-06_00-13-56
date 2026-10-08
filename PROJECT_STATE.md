@@ -128,6 +128,15 @@ As três fontes de relato são pontos de interação, descritos em `docs/QUESTS.
 - Renderização em apenas dois sprites, gerados uma única vez na abertura da cena. Nenhum update por frame, nenhum colisor modificado; a integridade das casas, NPCs, quests, áudio, Sword Combo e saves foi mantida.
 - Aprovação artística definitiva depende de captura da cena no Unity 6000.6.0f1 e comparação com as duas imagens de destino; **etapa 2 não foi iniciada**.
 
+## ETAPA 1 — POLIMENTO DAS PEDRAS E JARDINS (08/10/2026)
+
+- Após comparar a captura atual às duas composições pedidas, o piso uniforme e a borda de contorno ainda deixavam a praça com aspecto de placa grande.
+- O piso passou a usar uma silhueta superelíptica com cantos orgânicos e quatro acessos, evitando os lados longos e retos anteriores; as bordas continuam se mesclando ao solo original coberto pela base de terra.
+- O gerador de pedras usa fiadas e blocos com alturas e larguras variadas, mantendo pixel art a 32 PPU: reduz a repetição de fileiras idênticas visível nas capturas.
+- Quatro novos canteiros baixos, puramente decorativos, destacam curvas da praça e deixam o entorno mais florido como nas imagens de destino.
+- Casas, música, combate, poço, pontos de interação e scripts de NPCs permanecem intactos. A etapa 2 não foi iniciada.
+- Validação final do visual só pode ocorrer após executar a cena no Unity; não confundir testes de regressão com aprovação estética.
+
 ## PRÓXIMO
 
 1. conectar `village.ogg` e `city.ogg` à reprodução no jogo, com controle de volume;
