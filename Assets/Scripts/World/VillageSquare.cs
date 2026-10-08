@@ -74,13 +74,6 @@ namespace Vadronia
             }
         }
 
-        static float Box(float x, float y, float hx, float hy, float corner)
-        {
-            float dx = Mathf.Abs(x) - hx, dy = Mathf.Abs(y) - hy;
-            return Mathf.Sqrt(Mathf.Max(dx, 0) * Mathf.Max(dx, 0) +
-                              Mathf.Max(dy, 0) * Mathf.Max(dy, 0))
-                + Mathf.Min(Mathf.Max(dx, dy), 0) - corner;
-        }
 
         static float Path(float x, float y, float ax, float ay, float bx, float by, float radius)
         {
@@ -92,16 +85,21 @@ namespace Vadronia
 
         static float PlazaDistance(float x, float y)
         {
-            // Poço no centro, feira a sul e dois passeios laterais.
-            // Cantos amplamente arredondados, sem quatro lados retos de uma placa.
-            float d = Box(x + .05f, y - .06f, 3.62f, 2.74f, 1.20f);
-            d = Mathf.Min(d, Path(x, y, .05f, 2.0f, 0, 5.05f, 1.33f));
-            d = Mathf.Min(d, Path(x, y, 0, -2.2f, -.10f, -5.12f, 1.56f));
-            d = Mathf.Min(d, Path(x, y, -3.75f, -.6f, -6.6f, -.95f, .84f));
-            d = Mathf.Min(d, Path(x, y, 3.75f, -.6f, 6.6f, -.95f, .86f));
-            // Arestas gastas, para que o limite nunca forme um retângulo perfeito.
-            d += Mathf.Sin(x * 3.4f + y * 2.8f) * .135f;
-            d += Mathf.Sin(x * 8.1f - y * 5.2f) * .052f;
+            // Contorno superelíptico: praça medieval larga no miolo, afunilando
+            // nos quatro cantos. Não há lados retilíneos nem textura quadrada.
+            // Feiras nas laterais, poço no centro e caminhos conectados.
+            float xNorm = Mathf.Abs(x + .06f) / (4.85f + .10f * Mathf.Sin(y * 1.8f));
+            float yNorm = Mathf.Abs(y - .02f) / 3.55f;
+            const float Shape = 2.45f;
+            float d = (Mathf.Pow(Mathf.Pow(xNorm, Shape) +
+                                 Mathf.Pow(yNorm, Shape), 1f / Shape) - 1f) * 3.65f;
+            d = Mathf.Min(d, Path(x, y, 0, 2.25f, .05f, 5.15f, 1.38f));
+            d = Mathf.Min(d, Path(x, y, 0, -2.2f, -.13f, -5.18f, 1.42f));
+            d = Mathf.Min(d, Path(x, y, -3.55f, -.78f, -6.55f, -1.16f, .88f));
+            d = Mathf.Min(d, Path(x, y, 3.55f, -.78f, 6.55f, -1.16f, .88f));
+            // Borda esburacada, como pedras colocadas em épocas diferentes.
+            d += Mathf.Sin(x * 3.05f + y * 2.27f) * .14f;
+            d += Mathf.Sin(x * 7.14f - y * 5.31f) * .066f;
             return d;
         }
 
@@ -161,15 +159,30 @@ namespace Vadronia
         static Color32[] PaintStones()
         {
             var pixels = new Color32[Width * Height];
+            // Pedras com comprimentos/larguras diferentes, não um grid regular
+            // de ladrilhos. Os limites são calculados uma vez por fiada/pedra.
+            int row = -1, rowStart = 0, rowHeight = 0;
             for (int py = 0; py < Height; py++)
             {
+                if (py >= rowStart + rowHeight)
+                {
+                    rowStart += rowHeight;
+                    row++;
+                    rowHeight = 8 + Hash(0, row, 19) % 5;
+                }
                 float y = (py - Height * .5f) / Ppu;
-                int row = py / 10;
-                int rowLocal = py % 10;
-                // Fiadas de dimensões ligeiramente distintas e desencontradas.
-                int stagger = (row & 1) * 7 + Hash(0, row, 17) % 5;
+                int rowLocal = py - rowStart;
+                int col = 0;
+                int stoneStart = -((row & 1) * 7 + Hash(0, row, 17) % 5);
+                int stoneWidth = 11 + Hash(col, row, 41) % 6;
                 for (int px = 0; px < Width; px++)
                 {
+                    while (px >= stoneStart + stoneWidth)
+                    {
+                        stoneStart += stoneWidth;
+                        col++;
+                        stoneWidth = 11 + Hash(col, row, 41) % 6;
+                    }
                     float x = (px - Width * .5f) / Ppu;
                     float d = PlazaDistance(x, y);
                     d += (Hash(px / 6, py / 6, 88) % 101 - 50) * .003f;
@@ -180,16 +193,16 @@ namespace Vadronia
                     if (coverage < 1f && Hash(px, py, 70) % 1000 > coverage * 1000f)
                         continue;
 
-                    int sx = px + stagger, col = sx / 14, localX = sx % 14;
+                    int localX = px - stoneStart;
                     int seed = Hash(col, row, 23);
-                    bool cornerChip = (localX == 1 || localX == 12) &&
-                        (rowLocal == 1 || rowLocal == 8) && seed % 4 != 0;
-                    bool mortar = localX == 0 || localX == 13 ||
-                                  rowLocal == 0 || rowLocal == 9 || cornerChip;
-                    // Pequenos canteiros de musgo nos encontros entre pedras.
-                    bool moss = (seed % 11 == 0 && (localX <= 2 || localX >= 11) && rowLocal <= 2);
+                    bool cornerChip = (localX == 1 || localX == stoneWidth - 2) &&
+                        (rowLocal == 1 || rowLocal == rowHeight - 2) && seed % 4 != 0;
+                    bool mortar = localX == 0 || localX == stoneWidth - 1 ||
+                                  rowLocal == 0 || rowLocal == rowHeight - 1 || cornerChip;
+                    bool moss = seed % 9 == 0 &&
+                        (localX <= 2 || localX >= stoneWidth - 3) && rowLocal <= 2;
                     int grit = Hash(px / 2, py / 2, 61) % 11 - 5;
-                    int bevel = rowLocal >= 7 ? 6 : rowLocal <= 2 ? -7 : 0;
+                    int bevel = rowLocal >= rowHeight - 3 ? 6 : rowLocal <= 2 ? -7 : 0;
                     if (mortar)
                         pixels[py * Width + px] = moss ?
                             new Color32(106, 113, 83, 255) :

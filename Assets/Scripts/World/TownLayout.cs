@@ -81,6 +81,12 @@ namespace Vadronia
             Soft("Flores junto ao poço leste", 13, 1.7f, .15f, 1.16f),
             Soft("Jardim norte oeste", 13, -4.3f, 2.72f, 1.3f),
             Soft("Jardim norte leste", 13, 4.3f, 2.72f, 1.3f),
+            // Canteiros baixos contornam as bordas das pedras, sem bloquear
+            // a ronda, a feira, as missões ou o acesso ao poço.
+            Soft("Flores da borda central oeste", 13, -5.05f, .8f, .95f),
+            Soft("Flores da borda central leste", 13, 5.05f, .8f, .95f),
+            Soft("Flores da curva sul oeste", 13, -4.5f, -3.5f, 1.05f),
+            Soft("Flores da curva sul leste", 13, 4.5f, -3.5f, 1.05f),
             Soft("Flores junto ao banco oeste", 13, -4.0f, 2.13f, 1.12f),
             Soft("Flores junto ao banco leste", 13, 4.0f, 2.13f, 1.12f),
             Soft("Canteiro feira oeste", 13, -5.0f, -2.68f, 1.25f),
