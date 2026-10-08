@@ -84,9 +84,17 @@ namespace Vadronia
         // =====================================================================================================
         public void Tick(float dt)
         {
-            dt = Mathf.Min(dt, .05f);
-            Combo.Tick(dt);
             ReadAim();
+            Tick(dt, aim, AttackPressed(), SwordInput.SkillEPressed(), SwordInput.SkillHPressed());
+        }
+
+        // Same runtime path, with explicit input for replay and Editor regression checks.
+        public void Tick(float dt, Vector2 direction, bool attack, bool whirl, bool dash)
+        {
+            if (dt <= 0 || float.IsNaN(dt) || float.IsInfinity(dt)) return;
+            dt = Mathf.Min(dt, .05f);
+            if (direction.sqrMagnitude > .0001f) aim = direction.normalized;
+            Combo.Tick(dt);
             notifyCool = Mathf.Max(0, notifyCool - dt);
 
             bool dodging = motor.State.Dodging;
@@ -94,9 +102,9 @@ namespace Vadronia
 
             if (mode == Mode.None && !dodging)
             {
-                if (SwordInput.SkillEPressed()) StartWhirl();
-                else if (SwordInput.SkillHPressed()) StartDash();
-                else if (AttackPressed()) Combo.Press();
+                if (whirl) StartWhirl();
+                else if (dash) StartDash();
+                else if (attack) Combo.Press();
             }
 
             if (Combo.Swung) { strikeAim = aim; hits.Clear(); windupFrom = swordAbs; trailT = 0; }
@@ -141,7 +149,10 @@ namespace Vadronia
             hits.Clear();
             lungeMoved = smoothBody = Vector2.zero;
             trailT = ghostT = 0f;
+            lastPhase = SwordPhase.Idle; lastStage = 0; strikeClock = 9f;
+            fx.Clear();
             pose.Reset();
+            UpdateSword(1f, Feet());
         }
 
         // =====================================================================================================
@@ -182,8 +193,10 @@ namespace Vadronia
 
         void TickDash(float dt)
         {
-            dashT += dt;
-            float step = DashSpeed * dt;
+            // Only move for the remaining part of the dash, including its final partial frame.
+            float activeTime = Mathf.Min(dt, Mathf.Max(0f, DashTime - dashT));
+            dashT = Mathf.Min(DashTime, dashT + dt);
+            float step = DashSpeed * activeTime;
             Vector2 before = Feet();
             motor.Lunge(dashAim, step);
             Vector2 pos = Feet();

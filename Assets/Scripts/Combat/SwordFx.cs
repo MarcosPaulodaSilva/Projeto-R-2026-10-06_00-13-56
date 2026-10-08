@@ -62,6 +62,15 @@ namespace Vadronia
             }
         }
 
+        public void Clear()
+        {
+            foreach (var item in items)
+            {
+                item.life = 0f;
+                item.go.SetActive(false);
+            }
+        }
+
         public void Dispose() { if (root != null) UnityEngine.Object.Destroy(root); }
     }
 }
