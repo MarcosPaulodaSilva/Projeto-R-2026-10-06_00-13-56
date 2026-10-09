@@ -24,7 +24,7 @@ namespace Vadronia
         public static bool SpawnTrainingDummy = true;
 
         // ---- ajustes rápidos (unidades de mundo) ----
-        const float HandHeight = .78f, HandSide = .30f, RestAngle = 62f;
+        const float HandHeight = .48f, HandSide = .18f, RestAngle = 62f;
         const float PullBack = .12f, LungeSmooth = .14f, JumpHeight = .26f;
         const float WhirlRadius = 2.1f, WhirlDamage = 11f, WhirlKnock = 3.6f;
         const float WhirlLead = .08f, WhirlPulse = .17f, WhirlTail = .15f;
@@ -390,7 +390,7 @@ namespace Vadronia
             if (!centered) hand += perp * HandSide + refAim * reach;
             swordT.localPosition = new Vector3(hand.x, hand.y, 0);
             swordT.rotation = Quaternion.Euler(0, 0, swordAbs - 90f);
-            swordT.localScale = new Vector3(1f, length, 1f);
+            swordT.localScale = new Vector3(.65f, length * .65f, 1f);
             swordR.sortingOrder = OrderOf(pos) + (refAim.y > .5f ? -1 : 2);
         }
 
