@@ -88,8 +88,8 @@ namespace Vadronia.Editor
                 var npc=game.Conrad;var npcRenderer=npc.Transform.GetComponent<SpriteRenderer>();
                 bool originalNpc=!npc.UsesVideo&&npc.DirectionCount==4;
                 foreach(var d in new[]{Vector2.down,Vector2.right,Vector2.up,Vector2.left})
-                {npc.Face(d);npc.Animate(0);originalNpc&=npcRenderer.sprite.texture==game.characterAtlas;}
-                check(originalNpc,"Konrad conserva o atlas original nas quatro direções");
+                {npc.Face(d);npc.Animate(0);originalNpc&=npcRenderer.sprite.texture.name=="conrad" && npc.UsesReference;}
+                check(originalNpc,"Konrad usa o modelo fornecido nas quatro direções");
                 actor.Place(new FootPoint(0,-.221f));motor.Halt();
                 for(int i=0;i<60;i++)motor.Tick(1f/60,Vector2.up,false,false);
                 float blockedPhase=actor.AnimationPhase;

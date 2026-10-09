@@ -1,0 +1,69 @@
+{
+  "source": "docs/references/gemini_generated_video_b0983924.mp4",
+  "sourceSha256": "026c8693ec2c1a957caddfe771103fff89f4709a08e4bde8758717b758437929",
+  "sourceFps": 24,
+  "frameWidth": 200,
+  "frameHeight": 300,
+  "columns": 8,
+  "pivotX": 0.5,
+  "pivotY": 0.05,
+  "pixelsPerUnit": 260,
+  "clips": [
+    {
+      "name": "south",
+      "sourceStartFrame": 1,
+      "frameCount": 23,
+      "idleFrame": 0,
+      "mirror": false
+    },
+    {
+      "name": "southeast",
+      "sourceStartFrame": 150,
+      "frameCount": 22,
+      "idleFrame": 0,
+      "mirror": false
+    },
+    {
+      "name": "east",
+      "sourceStartFrame": 62,
+      "frameCount": 22,
+      "idleFrame": 0,
+      "mirror": true
+    },
+    {
+      "name": "northeast",
+      "sourceStartFrame": 205,
+      "frameCount": 17,
+      "idleFrame": 0,
+      "mirror": false
+    },
+    {
+      "name": "north",
+      "sourceStartFrame": 31,
+      "frameCount": 23,
+      "idleFrame": 0,
+      "mirror": false
+    },
+    {
+      "name": "northwest",
+      "sourceStartFrame": 205,
+      "frameCount": 17,
+      "idleFrame": 0,
+      "mirror": true
+    },
+    {
+      "name": "west",
+      "sourceStartFrame": 62,
+      "frameCount": 22,
+      "idleFrame": 0,
+      "mirror": false
+    },
+    {
+      "name": "southwest",
+      "sourceStartFrame": 150,
+      "frameCount": 22,
+      "idleFrame": 0,
+      "mirror": true
+    }
+  ]
+}

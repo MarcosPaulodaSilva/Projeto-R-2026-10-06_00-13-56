@@ -17,7 +17,7 @@ namespace Vadronia
                 "A bandeira azul marca a prefeitura. Os comunicados públicos ficam no mural da praça; registros de viajantes e notícias da estrada são tratados na guilda, ao lado."),
             new VillageBuilding(5,"Estalagem de Helga","Descanso e abrigo",12.3f,5.62f,
                 "A estalagem acolhe viajantes. Descanse à entrada para recuperar o fôlego ou converse com Helga."),
-            new VillageBuilding(21,"Ferraria de Bruno","Oficina e treino",9,1.82f,
+            new VillageBuilding(21,"Ferraria de Bruno","Oficina e treino",7.95f,1.82f,
                 "A forja de Bruno atende os moradores e viajantes. Converse com o ferreiro para ouvir dicas e pratique com o boneco na praça. A oficina ainda não oferece compra de equipamento."),
             new VillageBuilding(30,"Casa de Lúcia","Moradia · jardim norte",-7.4f,5.42f,"Esta é a casa de Lúcia. Procure a moradora junto ao jardim a noroeste."),
             new VillageBuilding(31,"Casa do pátio oeste","Moradia",-8,-.08f,"Uma residência do pátio oeste. A passagem pela frente leva à praça e ao mercado."),

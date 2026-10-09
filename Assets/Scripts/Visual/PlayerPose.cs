@@ -5,7 +5,7 @@ namespace Vadronia
 {
     /// <summary>
     /// Pose extra do player aplicada DEPOIS de CharacterView.Animate (os quadros do vídeo continuam os mesmos).
-    /// Corrida: inclinação para a frente, pulinho a cada passada, esmagamento ao pisar e poeira.
+    /// Corrida: poeira por pisada; inclinação e altura vêm dos quadros do vídeo.
     /// Combate: o controlador da espada preenche Offset/Roll/Scale a cada frame.
     /// Chame Apply() uma vez por frame, logo depois de motor.Tick (que reposiciona o root).
     /// </summary>
@@ -23,7 +23,7 @@ namespace Vadronia
         readonly float[] dustLife = new float[DustCount];
         readonly Vector2[] dustVel = new Vector2[DustCount];
         Vector2 lastPos;
-        float lean, runBlend;
+
         int lastStep, nextDust;
 
         public Vector2 Offset;
@@ -52,20 +52,10 @@ namespace Vadronia
             lastPos = pos;
             bool running = wantRun && view.Cycle.Moving && vel.magnitude > RunSpeed;
             Running = running;
-            runBlend = Mathf.MoveTowards(runBlend, running ? 1f : 0f, dt * 7f);
-            lean = Mathf.Lerp(lean, running ? -Mathf.Clamp(vel.x / 4.6f, -1f, 1f) * 10f : 0f, 1f - Mathf.Exp(-14f * dt));
 
             float phase = view.AnimationPhase;
-            float hop = Mathf.Abs(Mathf.Sin(phase * Mathf.PI * 2f));   // 2 pisadas por ciclo
             Vector2 off = Offset, sc = Scale;
-            float roll = Roll + lean;
-            if (runBlend > 0f)
-            {
-                float land = 1f - hop;
-                off.y += hop * .085f * runBlend;
-                sc.x *= 1f + .03f * land * runBlend;
-                sc.y *= 1f - .045f * land * runBlend + .04f * Mathf.Abs(vel.y) / 4.6f * runBlend;
-            }
+            float roll = Roll; // Running video already contains body lean and vertical motion.
 
             var t = view.Transform;
             t.position += new Vector3(off.x, off.y, 0);   // Place() já reposicionou o root neste frame
@@ -83,7 +73,7 @@ namespace Vadronia
         public void Reset()
         {
             Offset = Vector2.zero; Roll = 0; Scale = Vector2.one;
-            lean = 0; runBlend = 0; Running = false;
+            Running = false;
             var pos = view.Position;
             lastPos = new Vector2(pos.X, pos.Y);
             lastStep = Mathf.FloorToInt(view.AnimationPhase * 2f) & 1;

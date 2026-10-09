@@ -1,5 +1,15 @@
 # PROJECT_STATE — Projeto R / Vadronia
 
+## Revisão de personagens e proporções — 09/10/2026
+
+- Projeto real do Editor atualizado com as duas folhas de modelos fornecidas e o vídeo `gemini_generated_video_b0983924.mp4`. Fontes preservadas em `docs/references/`; backup completo anterior em `.local-backups/before-character-scale-20261009` no workspace antigo.
+- Os oito moradores/visitantes existentes usam poses derivadas dos modelos fornecidos: Konrad/Conrad; Helga/Eliza; Bruno/Henning; Maren/Marta; Lúcia/Nicasia; Tomás/Bran; feira/Eliza e Lukas. Nomes, funções, diálogos, rotas e população preservados. Nenhum membro da realeza foi acrescentado como personagem da vila.
+- Protagonista: corrida separada extraída do novo vídeo e idle neutro específico nas oito direções. Leste, noroeste e sudoeste da corrida usam espelhamento explícito. Caminhada continua usando os quadros do vídeo anterior. Idle e poses dos NPCs são derivados por geração de imagem guiada pelas referências, não extrações do vídeo; prompts e procedência em `docs/references/character-generation-prompts.md`.
+- Animação usa distância efetivamente percorrida e para ao colidir; NPCs têm quatro direções, pose neutra e ciclo de quatro quadros. Passada de Konrad ajustada para 0,72 unidade por ciclo. Removidos salto/inclinação/achatamento artificiais sobrepostos à corrida e squash dos NPCs. Os ciclos curtos de NPC continuam sendo uma aproximação artística, não captura de movimento.
+- Corpos próximos de 1,02 unidade; moradias com larguras de 3,85–4,15, guilda 4,7, prefeitura 5 e ferraria 4,45. Portas das fachadas comparadas à altura do personagem. Lanternas maiores, bancos centrais menores, espada e mão recalibradas. Entrada interativa da ferraria deslocada para a porta desenhada à esquerda.
+- Validação nesta revisão: 33 verificações puras; 108 de personagens/escalas em Play, 36 de exploração, 21 de vila/interações e 16 de combate. Compilação corrigida e testes executados no Unity 6000.6.0f1. Revisão de movimento registrada em `docs/references/locomotion-unity-review.mp4` (160 quadros renderizados da cena real, entrada simulada em oito direções). Captura automatizada excedeu a resposta de 5 s da ferramenta, mas finalizou todos os quadros e restaurou a cena.
+- Saves e assets originais preservados; nenhum executável ou pacote Windows gerado. Validação automatizada/inspeção visual não equivale a aprovação artística de Marcos.
+
 ## Operação
 
 - **Repositório oficial:** `MarcosPaulodaSilva/Projeto-R-2026-10-06_00-13-56`
