@@ -8,7 +8,7 @@
   <ui:VisualElement class="equipment-tabs"><ui:Button name="inventoryTab" text="Inventário"/><ui:Button name="loadoutTab" text="Equipamentos"/><ui:Button name="statusTab" text="Status"/></ui:VisualElement>
   <ui:VisualElement class="equipment-columns">
    <ui:VisualElement class="preview-column">
-    <ui:Label text="VISUAL ORIGINAL" class="kicker"/><ui:Image name="characterPreview" class="character-preview"/>
+    <ui:Label text="SEU PERSONAGEM" class="kicker"/><ui:Image name="characterPreview" class="character-preview"/>
     <ui:VisualElement class="rotation"><ui:Button name="rotateLeft" text="◀ Girar"/><ui:Button name="rotateRight" text="Girar ▶"/></ui:VisualElement>
     <ui:Label name="equippedSummary" class="muted wrap"/><ui:Label text="CONJUNTOS DISPONÍVEIS" class="kicker"/>
     <ui:DropdownField name="setPicker"/><ui:Button name="wearSet" text="Equipar conjunto"/>
