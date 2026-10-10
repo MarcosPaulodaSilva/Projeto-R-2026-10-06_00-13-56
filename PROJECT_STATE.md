@@ -1,5 +1,12 @@
 # PROJECT_STATE — Projeto R / Vadronia
 
+## Revisão dos ciclos da espada — 10/10/2026
+
+- Contagem de quadros agora corresponde à animação ativa (corrida ou caminhada), permitindo verificar o ciclo inteiro.
+- Empunhadura usa dimensões, pivô e pixels por unidade do sprite atual; deixa de depender de números fixos na conversão. Espada oculta quando o corpo não tem sprite.
+- Verificação em Play percorreu duas voltas completas de caminhada e corrida nas oito direções, cobrindo todos os quadros, volta ao idle, manutenção da arma equipada, posição dentro da região do braço, ausência de deriva parada e retirada. Mais 70 verificações do inventário passaram. A checagem de limites não substitui revisão artística de cada quadro.
+- Mão esquerda, roupas originais e ausência de combate permanecem como solicitado.
+
 ## Inventário e equipamentos — 09/10/2026
 
 - Implementado no projeto real do Editor: tecla **I** ou botão da HUD abre Inventário, Equipamentos e Status; selecionar e clicar **Equipar**, conforme Marcos pediu. Busca, filtro por espaço, comparação antes da troca, retirada de peças, giro da prévia em oito direções e botão para vestir conjuntos completos.
