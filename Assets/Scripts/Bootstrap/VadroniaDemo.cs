@@ -15,6 +15,8 @@ namespace Vadronia
         public VillageInteraction Interactions => interactions;
         CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;PlayerSword sword;
         AdventureCamera cameraRig;AdventureHud hud;VillageInteraction interactions;VillageAtmosphere atmosphere;VillageNpcs villagers;VillageCrowd crowd;VillageMusic music;
+        HeldSword heldSword;
+        public HeldSword HeldWeapon => heldSword;
         EquipmentArt gearArt;EquipmentWindow gearWindow;
         public EquipmentWindow Equipment => gearWindow;
         int waypoint=1;float wait;bool warnedPatrol;
@@ -33,7 +35,7 @@ namespace Vadronia
                 view.gameObject.AddComponent<AudioListener>();
             cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=null;
             hud=new AdventureHud();interactions=new VillageInteraction(motor,conrad,hud);
-            gearArt=new EquipmentArt();
+            gearArt=new EquipmentArt();heldSword=new HeldSword(player,gearArt);
             gearWindow=new EquipmentWindow(hud.DocumentRoot,motor.State,gearArt,interactions.SaveEquipment);
             hud.DocumentRoot.Q<Button>("openEquipment").clicked+=()=>{if(!hud.Paused&&!hud.DialogOpen)gearWindow.SetOpen(true);};
             view.cullingMask=~(1<<30);
@@ -80,8 +82,8 @@ namespace Vadronia
             if(Vector2.Distance(new Vector2(next.X,next.Y),new Vector2(target.X,target.Y))<.02f){int reached=waypoint;waypoint=(waypoint+1)%TownLayout.Patrol.Length;wait=TownLayout.PatrolPause[reached];}
             else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Konrad encontrou obstáculo na patrulha.");}
         }
-        void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused&&!gearWindow.IsOpen){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
-        void OnDestroy(){gearWindow?.Dispose();gearArt?.Dispose();interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();villagers?.Dispose();crowd?.Dispose();music?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
+        void LateUpdate(){if(heldSword!=null)heldSword.Apply(motor.State.Progress.inventory);if(cameraRig!=null&&hud!=null&&!hud.Paused&&!gearWindow.IsOpen){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
+        void OnDestroy(){gearWindow?.Dispose();heldSword?.Dispose();gearArt?.Dispose();interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();villagers?.Dispose();crowd?.Dispose();music?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
         void OnDrawGizmosSelected()
         {
             Gizmos.color=new Color(1,.5f,0,.7f);

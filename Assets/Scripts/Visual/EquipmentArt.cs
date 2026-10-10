@@ -7,6 +7,7 @@ namespace Vadronia
     {
         readonly List<Sprite> sprites=new List<Sprite>();
         public readonly Sprite[] Icons=new Sprite[40];
+        public readonly Sprite[] Weapons=new Sprite[8];
         public EquipmentArt()
         {
             Load("swords",0);Load("armor",8);Load("accessories",32);
@@ -20,6 +21,12 @@ namespace Vadronia
             for(int i=0;i<data.rects.Length;i++){
                 var r=data.rects[i];var sprite=Sprite.Create(texture,new Rect(r.x,texture.height-r.y-r.h,r.w,r.h),new Vector2(.5f,.13f),r.h,0,SpriteMeshType.FullRect);
                 Icons[offset+i]=sprite;sprites.Add(sprite);
+                if(file=="swords"){
+                    float[] handY={371,373,386,377,882,882,882,879};
+                    float[] handX={194,576,960,1357,195,576,960,1355};
+                    var held=Sprite.Create(texture,sprite.rect,new Vector2((handX[i]-r.x)/r.w,1-(handY[i]-r.y)/r.h),r.h,0,SpriteMeshType.FullRect);
+                    Weapons[i]=held;sprites.Add(held);
+                }
             }
         }
         public void Dispose(){foreach(var sprite in sprites)UnityEngine.Object.Destroy(sprite);}

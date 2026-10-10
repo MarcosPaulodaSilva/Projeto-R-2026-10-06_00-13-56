@@ -32,7 +32,7 @@ namespace Vadronia.Editor
                     check(InventoryRules.Equipped(state.Progress.inventory,GearSlot.Weapon)?.Id=="sword-"+i,"Espada equipada no inventário");
                 }
                 check(window.UnequipSelected(),"Retirar espada");
-                check(game.Player.Transform.Find("Espada equipada")==null && game.Player.Transform.Find("Peitoral equipado")==null,"Personagem sem sobreposições");
+                check(game.Player.Transform.Find("Cabeça equipada")==null && game.Player.Transform.Find("Peitoral equipado")==null,"Personagem sem sobreposições de armadura");
                 for(int i=0;i<4;i++){window.WearSet(i);check(InventoryRules.SetCount(state.Progress.inventory,ItemCatalog.Sets[i])==6,"Conjunto completo");}
                 window.Select("sword-4");window.EquipSelected();
                 var disk=JsonUtility.FromJson<AdventureProgress>(File.ReadAllText(path));

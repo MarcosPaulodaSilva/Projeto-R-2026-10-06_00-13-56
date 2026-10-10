@@ -8,7 +8,7 @@ namespace Vadronia
     {
         readonly AdventureState state;readonly Func<bool> save;readonly EquipmentArt art;
         readonly VisualElement root,grid;readonly TextField search;readonly DropdownField filter,sets;
-        readonly CharacterView preview;readonly Camera camera;readonly RenderTexture target;
+        readonly HeldSword heldSword;readonly CharacterView preview;readonly Camera camera;readonly RenderTexture target;
         string selected="sword-0",page="inventory";int facing;
         public bool IsOpen {get;private set;}
         public string Selected=>selected;
@@ -27,6 +27,7 @@ namespace Vadronia
             root.Q<Button>("rotateLeft").clicked+=()=>Rotate(-1);root.Q<Button>("rotateRight").clicked+=()=>Rotate(1);
             root.Q<Button>("wearSet").clicked+=()=>WearSet(sets.index);
             preview=new CharacterView("Prévia de equipamento",new FootPoint(1000,1000),null,null,false);
+            heldSword=new HeldSword(preview,art);
             foreach(var t in preview.Transform.GetComponentsInChildren<Transform>())t.gameObject.layer=30;
             camera=new GameObject("Câmera do equipamento").AddComponent<Camera>();camera.enabled=false;camera.orthographic=true;camera.orthographicSize=.76f;camera.aspect=.8f;
             camera.transform.position=new Vector3(1000,1000.52f,-10);camera.cullingMask=1<<30;camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.09f,.13f,.19f);camera.allowHDR=false;
@@ -53,7 +54,7 @@ namespace Vadronia
         void Changed(string text){state.ClampStamina();bool saved=save==null||save();Refresh();root.Q<Label>("equipmentMessage").text=text+(saved?"":" Não foi possível salvar; tente F5.");}
         public void ShowPage(string value){page=value;foreach(string p in new[]{"inventory","loadout","status"}){root.Q(p+"Page").EnableInClassList("hidden",p!=page);root.Q<Button>(p+"Tab").EnableInClassList("selected",p==page);}}
         void Rotate(int step){facing=(facing+step+8)%8;RenderPreview();}
-        void RenderPreview(){float angle=facing*Mathf.PI/4;preview.Face(new Vector2(Mathf.Sin(angle),-Mathf.Cos(angle)));preview.Place(preview.Position);preview.Animate(0);camera.Render();}
+        void RenderPreview(){float angle=facing*Mathf.PI/4;preview.Face(new Vector2(Mathf.Sin(angle),-Mathf.Cos(angle)));preview.Place(preview.Position);preview.Animate(0);heldSword.Apply(state.Progress.inventory);camera.Render();}
         void Refresh()
         {
             if(!InventoryRules.Owns(state.Progress.inventory,selected))selected=state.Progress.inventory.items.Count>0?state.Progress.inventory.items[0].id:null;
@@ -96,6 +97,6 @@ namespace Vadronia
             foreach(var set in ItemCatalog.Sets){int count=InventoryRules.SetCount(state.Progress.inventory,set);var label=new Label(set+"  "+count+"/6 · "+(count>=3?"+2 vigor":"3 peças: +2 vigor")+" · "+(count==6?"+5 defesa":"6 peças: +5 defesa"));label.AddToClassList("stat-row");panel.Add(label);}
             var note=new Label("O fôlego já afeta exploração. Vida, poder e defesa estão preparados para a próxima etapa de combate.");note.AddToClassList("muted");note.AddToClassList("wrap");panel.Add(note);
         }
-        public void Dispose(){root.RemoveFromHierarchy();preview.Dispose();camera.targetTexture=null;target.Release();UnityEngine.Object.Destroy(target);UnityEngine.Object.Destroy(camera.gameObject);}
+        public void Dispose(){root.RemoveFromHierarchy();heldSword.Dispose();preview.Dispose();camera.targetTexture=null;target.Release();UnityEngine.Object.Destroy(target);UnityEngine.Object.Destroy(camera.gameObject);}
     }
 }
