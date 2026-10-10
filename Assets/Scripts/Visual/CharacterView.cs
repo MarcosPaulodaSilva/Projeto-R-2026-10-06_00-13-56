@@ -34,7 +34,7 @@ namespace Vadronia
         public bool UsesVideo => fromVideo;
         public bool UsesReference => referenceNpc;
         public float AnimationPhase => phase;
-        public int FrameCount => frames[ClipIndex].Length;
+        public int FrameCount => IsRunningAnimation ? runningFrames[direction].Length : frames[ClipIndex].Length;
         int ClipIndex => fromVideo && direction == 7 ? 1 : direction;
 
         public CharacterView(string name, FootPoint position, Texture2D walking, Texture2D original, bool conrad)

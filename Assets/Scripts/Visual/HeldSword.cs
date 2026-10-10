@@ -63,14 +63,15 @@ namespace Vadronia
         public void Apply(InventoryData inventory)
         {
             var item=InventoryRules.Equipped(inventory,GearSlot.Weapon);
-            ItemId=item?.Id;Renderer.enabled=item!=null;
+            ItemId=item?.Id;Renderer.enabled=item!=null&&body.sprite!=null;
             if(item==null||body.sprite==null)return;
             int d=actor.Facing;
             var sprite=body.sprite;
             if(actor.Cycle.Moving){
                 var point=Sample((actor.IsRunningAnimation?Run:Walk)[d],actor.AnimationFrame);
                 // Points already describe the final visible orientation, including mirrored clips.
-                HandPosition=new Vector2((point.x-100)/260f,(285-point.y)/260f);
+                HandPosition=new Vector2((point.x-sprite.pivot.x)/sprite.pixelsPerUnit,
+                    (sprite.rect.height-point.y-sprite.pivot.y)/sprite.pixelsPerUnit);
             }else{
                 var p=Idle[d];
                 HandPosition=new Vector2((p.x*sprite.rect.width-sprite.pivot.x)/sprite.pixelsPerUnit,
