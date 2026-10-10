@@ -13,6 +13,8 @@ namespace Vadronia
         readonly Label place;
         readonly VisualElement[] segments=new VisualElement[10];
         float toastTime;
+        public VisualElement DocumentRoot => hud.parent;
+        public bool ModalOpen;
         public bool Paused {get;private set;}
         public bool DialogOpen {get;private set;}
         public bool Hidden {get;private set;}
@@ -42,12 +44,12 @@ namespace Vadronia
         }
         public void Tick(AdventureState state,string hint,float dt)
         {
-            if(ExplorerMotor.Pressed(KeyCode.F1)&&!DialogOpen&&!Paused){Hidden=!Hidden;hud.EnableInClassList("hidden",Hidden);}
-            if(ExplorerMotor.Pressed(KeyCode.Escape)){if(DialogOpen)CloseDialog();else SetPause(!Paused);}
+            if(ExplorerMotor.Pressed(KeyCode.F1)&&!DialogOpen&&!Paused&&!ModalOpen){Hidden=!Hidden;hud.EnableInClassList("hidden",Hidden);}
+            if(ExplorerMotor.Pressed(KeyCode.Escape)&&!ModalOpen){if(DialogOpen)CloseDialog();else SetPause(!Paused);}
             if(ExplorerMotor.Pressed(KeyCode.F5))SaveRequested?.Invoke();
             if(Paused||DialogOpen)place.style.display=DisplayStyle.None;
-            stamina.text="FÔLEGO  "+Mathf.RoundToInt(state.Stamina)+" / 100";
-            for(int i=0;i<10;i++)segments[i].EnableInClassList("empty",state.Stamina<(i+1)*10);
+            stamina.text="FÔLEGO  "+Mathf.RoundToInt(state.Stamina)+" / "+state.MaxStamina;
+            for(int i=0;i<10;i++)segments[i].EnableInClassList("empty",state.Stamina<(i+1)*state.MaxStamina/10f);
             coins.text=state.Progress.coins+" moedas  ·  "+(state.Dodging?"Esquiva":"Exploração");
             string title,text;QuestJournal.Describe(state,out title,out text);
             questTitle.text=title;questText.text=text;

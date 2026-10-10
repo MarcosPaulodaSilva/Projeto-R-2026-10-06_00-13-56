@@ -1,5 +1,17 @@
 # PROJECT_STATE — Projeto R / Vadronia
 
+## Inventário e equipamentos — 09/10/2026
+
+- Implementado no projeto real do Editor: tecla **I** ou botão da HUD abre Inventário, Equipamentos e Status; selecionar e clicar **Equipar**, conforme Marcos pediu. Busca, filtro por espaço, comparação antes da troca, retirada de peças, giro da prévia em oito direções e botão para vestir conjuntos completos.
+- **40 itens iniciais disponíveis**: oito espadas, quatro conjuntos de seis peças (Viajante, Batedor, Guarda e Guilda) e oito acessórios. Oito espaços: arma, cabeça, peito, mãos, pernas, pés, capa e acessório. Trocar não consome nem duplica itens.
+- **Correção mais recente de Marcos:** equipamentos ficam somente no inventário e nos atributos. Removidas as sobreposições e a troca de cores no personagem e na prévia. Visual e animações originais preservados; nenhuma espada aparece na mão nesta etapa.
+- Atributos VIT/STR/DEX/INT/VIG, vida máxima, fôlego, poder físico, defesa, peso e bônus de 3/6 peças. Fôlego integrado à exploração; peso é informativo. Vida/dano/defesa aguardam o próximo sistema de combate.
+- Combate e espada antigos desativados na composição da vila; classes antigas mantidas como histórico de implementação. Nesta etapa somente equipar/trocar no inventário: sem golpes, dano ou inimigos novos.
+- Save v1 recebe inventário aditivo, saneamento de IDs/posse/espaços e migração de saves antigos. Inventário explicitamente vazio permanece vazio; kit não é reaplicado a cada abertura. Salvamento ao equipar; falha é indicada na tela. Missões, moedas e relatos preservados.
+- Validação: **125 verificações puras**, **70 de equipamentos em Play**, **36 de exploração** e **21 de vila/interações**. Testes de Play fazem backup e restauram o save real. Tela revisada em Game View 1426×640. Nenhum executável Windows gerado.
+- Arte e método em `docs/references/equipment-art.md`; captura real em `docs/references/inventory-unity.png`. Backup prévio dos scripts/UI no workspace antigo: `.local-backups/before-inventory-20261009`.
+- Próxima etapa solicitada por Marcos: combate, somente após esta entrega de inventário/equipamentos.
+
 ## Revisão de personagens e proporções — 09/10/2026
 
 - Projeto real do Editor atualizado com as duas folhas de modelos fornecidas e o vídeo `gemini_generated_video_b0983924.mp4`. Fontes preservadas em `docs/references/`; backup completo anterior em `.local-backups/before-character-scale-20261009` no workspace antigo.

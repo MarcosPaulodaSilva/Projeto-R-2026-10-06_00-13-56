@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 namespace Vadronia
 {
     /// <summary>Composition root for the village, presentation and exploration systems.</summary>
@@ -14,6 +15,8 @@ namespace Vadronia
         public VillageInteraction Interactions => interactions;
         CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;PlayerSword sword;
         AdventureCamera cameraRig;AdventureHud hud;VillageInteraction interactions;VillageAtmosphere atmosphere;VillageNpcs villagers;VillageCrowd crowd;VillageMusic music;
+        EquipmentArt gearArt;EquipmentWindow gearWindow;
+        public EquipmentWindow Equipment => gearWindow;
         int waypoint=1;float wait;bool warnedPatrol;
         void Start()
         {
@@ -28,8 +31,12 @@ namespace Vadronia
             // A cena de demo não tem AudioListener; a câmera criada em runtime precisa de um.
             if (UnityEngine.Object.FindFirstObjectByType<AudioListener>() == null)
                 view.gameObject.AddComponent<AudioListener>();
-            cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=new PlayerSword(motor,view);
-            hud=new AdventureHud();sword.Notify=hud.Notify;interactions=new VillageInteraction(motor,conrad,hud);
+            cameraRig=new AdventureCamera(view);motor=new ExplorerMotor(player,town);sword=null;
+            hud=new AdventureHud();interactions=new VillageInteraction(motor,conrad,hud);
+            gearArt=new EquipmentArt();
+            gearWindow=new EquipmentWindow(hud.DocumentRoot,motor.State,gearArt,interactions.SaveEquipment);
+            hud.DocumentRoot.Q<Button>("openEquipment").clicked+=()=>{if(!hud.Paused&&!hud.DialogOpen)gearWindow.SetOpen(true);};
+            view.cullingMask=~(1<<30);
             music=new VillageMusic();
             hud.MusicToggleRequested=()=>{music.ToggleMuted();hud.SetMusicMuted(music.Muted);};
             hud.SetMusicMuted(music.Muted);
@@ -42,8 +49,13 @@ namespace Vadronia
         {
             if(motor==null||hud==null)return;
             float dt=Mathf.Min(Time.deltaTime,.05f);
+            bool wasOpen=gearWindow.IsOpen;
+            gearWindow.HandleInput(!hud.Paused&&!hud.DialogOpen);
+            hud.ModalOpen=wasOpen||gearWindow.IsOpen;
             hud.Tick(motor.State,interactions.Hint,Time.unscaledDeltaTime);
-            music?.Tick(Time.unscaledDeltaTime, hud.Paused);
+            hud.ModalOpen=gearWindow.IsOpen;
+            music?.Tick(Time.unscaledDeltaTime, hud.Paused||gearWindow.IsOpen);
+            if(wasOpen||gearWindow.IsOpen){motor.Halt();return;}
             if(hud.Paused){sword?.Interrupt();motor.Halt();return;}
             interactions.Tick(dt);
             if(hud.DialogOpen)
@@ -68,8 +80,8 @@ namespace Vadronia
             if(Vector2.Distance(new Vector2(next.X,next.Y),new Vector2(target.X,target.Y))<.02f){int reached=waypoint;waypoint=(waypoint+1)%TownLayout.Patrol.Length;wait=TownLayout.PatrolPause[reached];}
             else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Konrad encontrou obstáculo na patrulha.");}
         }
-        void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
-        void OnDestroy(){interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();villagers?.Dispose();crowd?.Dispose();music?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
+        void LateUpdate(){if(cameraRig!=null&&hud!=null&&!hud.Paused&&!gearWindow.IsOpen){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
+        void OnDestroy(){gearWindow?.Dispose();gearArt?.Dispose();interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();villagers?.Dispose();crowd?.Dispose();music?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
         void OnDrawGizmosSelected()
         {
             Gizmos.color=new Color(1,.5f,0,.7f);

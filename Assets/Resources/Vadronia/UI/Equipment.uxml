@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+ <ui:Style src="Equipment.uss" />
+ <ui:VisualElement name="equipmentWindow" class="equipment-window hidden">
+  <ui:VisualElement class="equipment-header">
+   <ui:VisualElement class="grow"><ui:Label text="V A D R O N I A   /   PERSONAGEM" class="kicker"/><ui:Label text="Seu equipamento, sua jornada" class="equipment-title"/></ui:VisualElement>
+   <ui:Button name="closeEquipment" text="Fechar · I / ESC"/>
+  </ui:VisualElement>
+  <ui:VisualElement class="equipment-tabs"><ui:Button name="inventoryTab" text="Inventário"/><ui:Button name="loadoutTab" text="Equipamentos"/><ui:Button name="statusTab" text="Status"/></ui:VisualElement>
+  <ui:VisualElement class="equipment-columns">
+   <ui:VisualElement class="preview-column">
+    <ui:Label text="VISUAL ORIGINAL" class="kicker"/><ui:Image name="characterPreview" class="character-preview"/>
+    <ui:VisualElement class="rotation"><ui:Button name="rotateLeft" text="◀ Girar"/><ui:Button name="rotateRight" text="Girar ▶"/></ui:VisualElement>
+    <ui:Label name="equippedSummary" class="muted wrap"/><ui:Label text="CONJUNTOS DISPONÍVEIS" class="kicker"/>
+    <ui:DropdownField name="setPicker"/><ui:Button name="wearSet" text="Equipar conjunto"/>
+    
+   </ui:VisualElement>
+   <ui:VisualElement class="inventory-column grow">
+    <ui:VisualElement name="inventoryPage" class="grow">
+     <ui:TextField name="itemSearch" label="Buscar"/><ui:DropdownField name="slotFilter" label="Tipo"/>
+     <ui:Label name="inventoryCount" class="muted"/><ui:ScrollView name="itemScroll" class="grow"><ui:VisualElement name="itemGrid" class="item-grid"/></ui:ScrollView>
+    </ui:VisualElement>
+    <ui:ScrollView name="loadoutPage" class="grow hidden"/>
+    <ui:ScrollView name="statusPage" class="grow hidden"/>
+   </ui:VisualElement>
+   <ui:VisualElement class="detail-column"><ui:ScrollView class="grow">
+    <ui:Image name="detailIcon" class="detail-icon"/><ui:Label name="detailName" class="detail-title wrap"/>
+    <ui:Label name="detailRarity" class="kicker"/><ui:Label name="detailDescription" class="muted wrap"/>
+    <ui:Label name="detailComparison" class="comparison wrap"/></ui:ScrollView><ui:Button name="equipSelected" text="Equipar"/><ui:Button name="unequipSelected" text="Retirar equipamento"/>
+    <ui:Label name="equipmentMessage" class="feedback wrap"/>
+   </ui:VisualElement>
+  </ui:VisualElement>
+  <ui:Label text="40 itens disponíveis nesta etapa · Alterações salvas ao equipar · O novo combate será desenvolvido depois" class="equipment-footer"/>
+ </ui:VisualElement>
+</ui:UXML>

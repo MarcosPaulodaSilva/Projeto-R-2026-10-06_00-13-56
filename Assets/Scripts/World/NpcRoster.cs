@@ -49,8 +49,8 @@ namespace Vadronia
                 },
                 new[]
                 {
-                    "Espada boa se maneja em sequência. Clique com o botão esquerdo e encadeie até três golpes: o terceiro avança mais.",
-                    "Mire com o mouse. O golpe vai para onde você aponta, não para onde você anda.",
+                    "Prepare seu equipamento antes de partir. Abra o inventário com I e escolha uma espada.",
+                    "Compare os atributos antes de equipar. Você pode combinar roupas e armaduras de conjuntos diferentes.",
                     "Corra com Z, mas cuidado com o fôlego. Quem fica sem ar na estrada não luta nem foge.",
                     "Ainda não há lobos nem bandidos por aqui, mas o ferro não espera a ameaça chegar."
                 }),

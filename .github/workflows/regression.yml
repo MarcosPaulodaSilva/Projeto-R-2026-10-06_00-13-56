@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "Assets/Scripts/Core/**"
+      - "Assets/Scripts/Inventory/**"
+      - "Assets/Editor/Checks/InventoryChecks.cs"
       - "Assets/Scripts/Combat/**"
       - "Assets/Scripts/World/TownLayout.cs"
       - "Assets/Scripts/World/NpcRoster.cs"
@@ -19,6 +21,8 @@ on:
     branches: [main]
     paths:
       - "Assets/Scripts/Core/**"
+      - "Assets/Scripts/Inventory/**"
+      - "Assets/Editor/Checks/InventoryChecks.cs"
       - "Assets/Scripts/Combat/**"
       - "Assets/Scripts/World/TownLayout.cs"
       - "Assets/Scripts/World/NpcRoster.cs"
