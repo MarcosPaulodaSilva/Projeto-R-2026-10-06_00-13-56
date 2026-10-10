@@ -26,8 +26,8 @@ namespace Vadronia.Editor
                 float walk=actor.Position.X;
                 check(walk>2.2f&&walk<2.5f,"Caminhada percorre a distância esperada");
                 actor.Place(new FootPoint(0,-6));motor.Halt();
-                for(int i=0;i<60;i++)motor.Tick(1f/60,Vector2.right,true,false);
-                check(actor.Position.X>walk*1.7f&&motor.State.Stamina<90,"Corrida aumenta velocidade e gasta fôlego");
+                float beforeSprint=motor.State.Stamina;for(int i=0;i<60;i++)motor.Tick(1f/60,Vector2.right,true,false);
+                check(actor.Position.X>walk*1.7f&&motor.State.Stamina<beforeSprint-10,"Corrida aumenta velocidade e gasta fôlego");
                 actor.Place(new FootPoint(0,-.3f));motor.Halt();motor.State.Rest();
                 for(int i=0;i<30;i++)motor.Tick(1f/60,Vector2.up,false,i==0);
                 check(actor.Position.Y<=-.219f&&MovementCore.Clear(actor.Position.X,actor.Position.Y,TownLayout.Blocks()),"Esquiva não atravessa o poço");

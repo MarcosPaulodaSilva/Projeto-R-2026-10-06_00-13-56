@@ -65,7 +65,7 @@ namespace Vadronia
         {
 #if ENABLE_INPUT_SYSTEM
             var k=Keyboard.current; if(k==null)return false;
-            switch(key) {case KeyCode.Space:return k.spaceKey.wasPressedThisFrame;case KeyCode.T:return k.tKey.wasPressedThisFrame;case KeyCode.Escape:return k.escapeKey.wasPressedThisFrame;case KeyCode.F1:return k.f1Key.wasPressedThisFrame;case KeyCode.F5:return k.f5Key.wasPressedThisFrame;}return false;
+            switch(key) {case KeyCode.I:return k.iKey.wasPressedThisFrame;case KeyCode.Space:return k.spaceKey.wasPressedThisFrame;case KeyCode.T:return k.tKey.wasPressedThisFrame;case KeyCode.Escape:return k.escapeKey.wasPressedThisFrame;case KeyCode.F1:return k.f1Key.wasPressedThisFrame;case KeyCode.F5:return k.f5Key.wasPressedThisFrame;}return false;
 #else
             return Input.GetKeyDown(key);
 #endif

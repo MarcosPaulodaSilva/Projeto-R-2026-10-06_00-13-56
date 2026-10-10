@@ -122,20 +122,21 @@ namespace Vadronia
             if(Vozes.Active(motor.State))hud.Notify("Relato ouvido  ·  "+Vozes.Heard(motor.State)+" / "+Vozes.Needed);
         }
         public void Save(){Save(true);}
+        public bool SaveEquipment(){return Save(false);}
         public void RefreshPlants()
         {
             for(int i=0;i<plants.Length;i++)plants[i].SetActive((motor.State.Progress.herbs&(1<<i))==0);
         }
-        void Save(bool notify)
+        bool Save(bool notify)
         {
             try
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(savePath));string temp=savePath+".tmp";
                 File.WriteAllText(temp,JsonUtility.ToJson(motor.State.Progress,true));
                 if(File.Exists(savePath))File.Replace(temp,savePath,savePath+".previous");else File.Move(temp,savePath);
-                if(notify)hud.Notify("Progresso salvo.");
+                if(notify)hud.Notify("Progresso salvo.");return true;
             }
-            catch(Exception e){Debug.LogWarning("Não foi possível salvar: "+e.Message);hud.Notify("Não foi possível salvar o progresso.");}
+            catch(Exception e){Debug.LogWarning("Não foi possível salvar: "+e.Message);hud.Notify("Não foi possível salvar o progresso.");return false;}
         }
         void Load()
         {

@@ -10,6 +10,7 @@ namespace Vadronia
         public int quest; // 0: undiscovered; 1: gather; 2: reward claimed
         public int herbs;
         public int coins;
+        public InventoryData inventory = InventoryRules.Starter();
         // Stable story IDs (see StoryFlags). Added without bumping the version: saves without the field load as empty.
         public List<string> flags = new List<string>();
     }
@@ -22,6 +23,8 @@ namespace Vadronia
         public float DodgeCooldown { get; private set; }
         public AdventureProgress Progress { get; private set; } = new AdventureProgress();
         float recoveryDelay;
+        public int MaxStamina => InventoryRules.Stats(Progress.inventory).Stamina;
+        public void ClampStamina(){Stamina=Math.Min(Stamina,MaxStamina);}
         public bool Dodging => DodgeRemaining > 0;
         public bool TryDodge()
         {
@@ -38,10 +41,10 @@ namespace Vadronia
             bool sprint = wantsSprint && !Dodging && Stamina > 0;
             if (sprint) { Stamina = Math.Max(0, Stamina - 18 * dt); recoveryDelay = .6f; }
             else if (recoveryDelay > 0) recoveryDelay -= dt;
-            else Stamina = Math.Min(100, Stamina + 25 * dt);
+            else Stamina = Math.Min(MaxStamina, Stamina + 25 * dt);
             return sprint;
         }
-        public void Rest() { Stamina = 100; recoveryDelay = 0; }
+        public void Rest() { Stamina = MaxStamina; recoveryDelay = 0; }
         public void AcceptQuest() { if (Progress.quest == 0) Progress.quest = 1; }
         public bool Gather(int index)
         {
@@ -72,7 +75,8 @@ namespace Vadronia
             progress.quest = Math.Max(0, Math.Min(2, progress.quest));
             progress.herbs &= 7; progress.coins = Math.Max(0, Math.Min(999999, progress.coins));
             progress.flags = StoryFlags.Clean(progress.flags);
-            Progress = progress;
+            progress.inventory = InventoryRules.Clean(progress.inventory);
+            Progress = progress;ClampStamina();
         }
     }
 

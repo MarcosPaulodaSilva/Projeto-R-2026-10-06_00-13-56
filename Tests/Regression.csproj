@@ -5,6 +5,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="../Assets/Editor/Checks/InventoryChecks.cs" Link="InventoryChecks.cs" />
+    <Compile Include="../Assets/Scripts/Inventory/InventoryRules.cs" Link="InventoryRules.cs" />
     <Compile Include="../Assets/Scripts/Core/MovementCore.cs" Link="MovementCore.cs" />
     <Compile Include="../Assets/Scripts/Combat/SwordCombo.cs" Link="SwordCombo.cs" />
     <Compile Include="../Assets/Scripts/World/TownLayout.cs" Link="TownLayout.cs" />
