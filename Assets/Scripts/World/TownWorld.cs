@@ -24,6 +24,7 @@ namespace Vadronia
             var ground = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * .5f, texture.width/28f);
             owned.Add(ground);
             var terrain = Add("Chão", ground, Vector2.zero, 1, -20000);
+            terrain.color = new Color(.86f,.86f,.86f,1);
             terrain.transform.localScale = new Vector3(1,22f/ground.bounds.size.y,1);
             // Calçamento coeso, independente dos recortes de terra do terreno anterior.
             if(!blueGround) square = new VillageSquare(root.transform);
@@ -55,7 +56,8 @@ namespace Vadronia
                         new Color(.08f, .1f, .07f, .4f), -18600);
                 var renderer = Add(prop.Name, sprite, new Vector2(prop.X, prop.Y), 1, prop.Flat ? -18000 : -Mathf.RoundToInt(prop.Y * 100)*10);
                 renderer.flipX = prop.Flip;
-                renderer.color = new Color(prop.Red, prop.Green, prop.Blue, 1f);
+                float clarity = prop.Flat || prop.IsTree ? .9f : 1f;
+                renderer.color = new Color(prop.Red*clarity, prop.Green*clarity, prop.Blue*clarity, 1f);
             }
             // A forest border adds depth without adding collision across the plaza patrol.
             // Kinds: 0 carvalho · 1 pinheiro · 2 carvalho dourado · 3 carvalho claro · 4 pinheiro azulado.
@@ -70,7 +72,7 @@ namespace Vadronia
                 var sprite=Sprite.Create(source,bounds,new Vector2(.5f,0),bounds.width/(2.2f+(i%4)*.25f));owned.Add(sprite);
                 float x=i<16?-13.8f+(i%2)*.45f:13.8f-(i%2)*.45f;
                 float y=-10.7f+(i%16)*1.45f;
-                Add("Bosque "+i,sprite,new Vector2(x,y),1,-Mathf.RoundToInt(y*100)*10);
+                Add("Bosque "+i,sprite,new Vector2(x,y),1,-Mathf.RoundToInt(y*100)*10).color=new Color(.9f,.9f,.9f,1);
             }
         }
         SpriteRenderer Add(string name, Sprite sprite, Vector2 position, float scale, int order)

@@ -1,5 +1,14 @@
 # PROJECT_STATE — Projeto R / Vadronia
 
+## Visibilidade e proporções — 18/10/2026
+
+- Concluída a revisão pendente das espadas (PR 28). Na etapa de visibilidade, câmera ortográfica 3,6 em vez de 5,65/6,15: personagens ocupam cerca de 57% mais pixels na mesma janela e não encolhem durante a corrida. Campo de visão menor é o compromisso intencional; imagens originais e dimensões dos personagens preservadas.
+- Terreno com brilho 0,86 e vegetação 0,90 para reduzir competição visual. Texturas continuam Point, sem redução de resolução nova. Não foi instalado pipeline/pixel-perfect de baixa resolução: projeto Built-in com arte detalhada existente.
+- Árvores que cobrem jogador, Konrad ou outros moradores passam gradualmente a 35% de opacidade e voltam ao normal quando deixam de encobrir alguém. Detecção por limites dos sprites e ordem de desenho; copas transparentes não alteram colisão.
+- Bancos da praça: largura 1,35 (antes 1,05). Três bancas com largura 2,5; colisões acompanham o tamanho. Construções mantidas após comparação entre portas e altura dos personagens.
+- Validação no projeto real: 125 verificações puras; suítes Play de exploração, vila/interações e personagens/proporções; sete verificações novas de transparência, zoom estável, leitura em 640 px e limites da câmera. Captura em `docs/references/readability-unity.png`. Console atual sem erros de compilação/execução. Nenhuma distribuição Windows gerada.
+- Esta revisão melhora enquadramento e contraste; não refaz os desenhos nem elimina diferenças de estilo já existentes entre as fontes.
+
 ## Revisão dos ciclos da espada — 10/10/2026
 
 - Contagem de quadros agora corresponde à animação ativa (corrida ou caminhada), permitindo verificar o ciclo inteiro.

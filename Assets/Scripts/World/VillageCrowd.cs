@@ -21,6 +21,8 @@ namespace Vadronia
 
         readonly List<FootBlock> blocks;
         readonly Visitor[] visitors;
+        public int Count => visitors.Length;
+        public SpriteRenderer Renderer(int index) => visitors[index].View.Transform.GetComponent<SpriteRenderer>();
 
         public VillageCrowd(List<FootBlock> blocks)
         {
