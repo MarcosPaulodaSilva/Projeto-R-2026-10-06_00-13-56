@@ -26,6 +26,7 @@ namespace Vadronia
         readonly VisualLibrary art = new VisualLibrary();
         float clock;
         public int Count => npcs.Count;
+        public SpriteRenderer Renderer(int index) => npcs[index].View.Transform.GetComponent<SpriteRenderer>();
         public FootPoint Position(int index) => npcs[index].View.Position;
         public string Hint(int index) => npcs[index].Hint;
 

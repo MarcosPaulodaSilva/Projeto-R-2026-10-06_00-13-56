@@ -15,6 +15,7 @@ namespace Vadronia
         public VillageInteraction Interactions => interactions;
         CharacterView player,conrad;TownWorld town;Camera view;ExplorerMotor motor;PlayerSword sword;
         AdventureCamera cameraRig;AdventureHud hud;VillageInteraction interactions;VillageAtmosphere atmosphere;VillageNpcs villagers;VillageCrowd crowd;VillageMusic music;
+        CharacterVisibility visibility;
         HeldSword heldSword;
         public HeldSword HeldWeapon => heldSword;
         EquipmentArt gearArt;EquipmentWindow gearWindow;
@@ -28,7 +29,7 @@ namespace Vadronia
             town=new TownWorld(scenery);
             player=new CharacterView("Player",new FootPoint(0,-3.9f),null,characterAtlas,false);
             conrad=new CharacterView("Konrad",TownLayout.Patrol[0],null,characterAtlas,true);
-            view=new GameObject("Camera — Grünwald").AddComponent<Camera>();view.tag="MainCamera";view.orthographic=true;view.orthographicSize=5.65f;
+            view=new GameObject("Camera — Grünwald").AddComponent<Camera>();view.tag="MainCamera";view.orthographic=true;view.orthographicSize=3.6f;
             view.clearFlags=CameraClearFlags.SolidColor;view.backgroundColor=new Color32(34,48,35,255);view.allowHDR=view.allowMSAA=view.allowDynamicResolution=false;
             // A cena de demo não tem AudioListener; a câmera criada em runtime precisa de um.
             if (UnityEngine.Object.FindFirstObjectByType<AudioListener>() == null)
@@ -45,6 +46,11 @@ namespace Vadronia
             villagers=new VillageNpcs(town.Blocks);interactions.Npcs=villagers;
             crowd=new VillageCrowd(town.Blocks);
             atmosphere=new VillageAtmosphere(town,player.Position);
+            var visibleActors=new System.Collections.Generic.List<SpriteRenderer>{
+                player.Transform.GetComponent<SpriteRenderer>(),conrad.Transform.GetComponent<SpriteRenderer>()};
+            for(int i=0;i<villagers.Count;i++)visibleActors.Add(villagers.Renderer(i));
+            for(int i=0;i<crowd.Count;i++)visibleActors.Add(crowd.Renderer(i));
+            visibility=new CharacterVisibility(town.Root,visibleActors.ToArray());
             cameraRig.Follow(player.Position,Vector2.zero,false,0,true);
         }
         void Update()
@@ -82,7 +88,7 @@ namespace Vadronia
             if(Vector2.Distance(new Vector2(next.X,next.Y),new Vector2(target.X,target.Y))<.02f){int reached=waypoint;waypoint=(waypoint+1)%TownLayout.Patrol.Length;wait=TownLayout.PatrolPause[reached];}
             else if(!conrad.Cycle.Moving&&!warnedPatrol){warnedPatrol=true;Debug.LogWarning("Konrad encontrou obstáculo na patrulha.");}
         }
-        void LateUpdate(){if(heldSword!=null)heldSword.Apply(motor.State.Progress.inventory);if(cameraRig!=null&&hud!=null&&!hud.Paused&&!gearWindow.IsOpen){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
+        void LateUpdate(){visibility?.Tick(Mathf.Min(Time.unscaledDeltaTime,.05f));if(heldSword!=null)heldSword.Apply(motor.State.Progress.inventory);if(cameraRig!=null&&hud!=null&&!hud.Paused&&!gearWindow.IsOpen){Vector2 look=sword!=null&&sword.Combo.Busy?sword.Aim:motor.Heading;cameraRig.Follow(player.Position,look,motor.IsSprinting,Mathf.Min(Time.deltaTime,.05f));}}
         void OnDestroy(){gearWindow?.Dispose();heldSword?.Dispose();gearArt?.Dispose();interactions?.Dispose();hud?.Dispose();atmosphere?.Dispose();villagers?.Dispose();crowd?.Dispose();music?.Dispose();sword?.Dispose();player?.Dispose();conrad?.Dispose();town?.Dispose();if(view!=null)Destroy(view.gameObject);}
         void OnDrawGizmosSelected()
         {

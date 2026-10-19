@@ -8,7 +8,8 @@ namespace Vadronia
         public AdventureCamera(Camera view){this.view=view;}
         public void Follow(FootPoint position,Vector2 heading,bool sprinting,float dt,bool snap=false)
         {
-            float zoom=sprinting?6.15f:5.65f;
+            // Keep readable character size during walking and running.
+            const float zoom=3.6f;
             view.orthographicSize=snap?zoom:Mathf.Lerp(view.orthographicSize,zoom,1-Mathf.Exp(-dt*4));
             float width=view.orthographicSize*view.aspect;
             float x=position.X+heading.x*.32f,y=position.Y+1+heading.y*.15f;
